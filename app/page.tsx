@@ -4,5 +4,9 @@ import Image from "next/image"
 const inter = Inter({ subsets: ["latin"] })
 
 export default function Home() {
-  return <div></div>
+  return (
+    <>
+      <div>Test</div>
+    </>
+  )
 }
