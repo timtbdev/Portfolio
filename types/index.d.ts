@@ -1,3 +1,5 @@
+import { StaticImageData } from "next/image"
+
 export type SiteConfig = {
   title: string
   keywords: string[]
@@ -21,9 +23,9 @@ export type Menu = {
 
 export type Profile = {
   name: string
-  job: string
-  imageUrl: string
-  imageDescription: string
+  title: string
+  image: StaticImageData
+  description: string
 }
 
 export type Heading = {

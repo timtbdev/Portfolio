@@ -4,7 +4,7 @@ import { Inter } from "next/font/google"
 import { siteConfig } from "@/config/site"
 import { Analytics as VercelAnalytics } from "@vercel/analytics/react"
 
-import { TwIndicators } from "@components/index"
+import { Header, TwIndicators } from "@components/index"
 import { absoluteUrl, cn } from "@libs/utils"
 
 interface RootLayoutProps {
@@ -63,19 +63,19 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
-    <html
-      lang="en"
-      className={cn(
-        "bg-gray-50 font-sans text-gray-600 antialiased dark:bg-neutral-800 dark:text-white",
-        inter.variable
-      )}
-    >
-      <body className={cn("max-w-7x mx-auto")}>
+    <html lang="en">
+      <body
+        className={cn(
+          "max-w-7x mx-auto bg-gray-50 font-sans text-gray-600 antialiased dark:bg-neutral-800 dark:text-white",
+          inter.variable
+        )}
+      >
         <main
           className={cn(
             "mx-auto max-w-5xl border border-gray-50 bg-white shadow-sm shadow-gray-800/20 dark:border-neutral-700/40 dark:bg-neutral-900 dark:shadow-neutral-800/20"
           )}
         >
+          <Header />
           {children}
         </main>
 

@@ -1,3 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+  .focus-visible-base {
+    @apply focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 dark:focus-visible:ring-orange-500;
+  }
+}
