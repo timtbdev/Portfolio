@@ -70,11 +70,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
           inter.variable
         )}
       >
-        <main
-          className={cn(
-            "mx-auto max-w-5xl border border-gray-50 bg-white shadow-sm shadow-gray-800/20 dark:border-neutral-700/40 dark:bg-neutral-900 dark:shadow-neutral-800/20"
-          )}
-        >
+        <main className="mx-auto max-w-5xl border border-gray-50 bg-white shadow-sm shadow-gray-800/20 dark:border-neutral-700/40 dark:bg-neutral-900 dark:shadow-neutral-800/20">
           <Header />
           {children}
         </main>
