@@ -1,11 +1,11 @@
 "use client"
 
 import React from "react"
-import { Switch } from "@headlessui/react"
+import { Switch as Toggle } from "@headlessui/react"
 
 import { cn } from "@libs/utils"
 
-export function DarkModeToggle() {
+export function Switch() {
   const [darkMode, setDarkMode] = React.useState(false)
   React.useEffect(() => {
     if (
@@ -34,7 +34,7 @@ export function DarkModeToggle() {
 
   return (
     <div className="relative flex items-center space-x-4">
-      <Switch
+      <Toggle
         onChange={changeTheme}
         checked={darkMode ? true : false}
         className="relative inline-flex items-center rounded-full bg-white py-1.5 px-2 shadow-md shadow-slate-300 ring-[1.5px] ring-slate-400/40 transition-all hover:shadow-lg hover:shadow-blue-300/40 hover:ring-2 hover:ring-blue-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-orange-500 dark:bg-slate-700/50 dark:shadow-slate-900 dark:ring-slate-400/40 dark:hover:shadow-sky-400/20 dark:hover:ring-sky-500 dark:focus-visible:ring-orange-500"
@@ -142,7 +142,7 @@ export function DarkModeToggle() {
             ></path>
           </svg>
         </span>
-      </Switch>
+      </Toggle>
     </div>
   )
 }

@@ -6,7 +6,7 @@ interface Props {
   open: boolean
 }
 
-export function MobileMenuButton({ open }: Props) {
+export function MobileMenu({ open }: Props) {
   return (
     <>
       <Disclosure.Button

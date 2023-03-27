@@ -13,7 +13,7 @@ const variants: Variants = {
   visible: { opacity: 1 },
 }
 
-export function DesktopNavigation({ path, menu }: Props) {
+export function Navigation({ path, menu }: Props) {
   const [hoveredItem, setHoveredItem] = React.useState("")
   const [hoverArea, setHoverArea] = React.useState(false)
   return (
