@@ -37,14 +37,7 @@ export function DarkModeToggle() {
       <Switch
         onChange={changeTheme}
         checked={darkMode ? true : false}
-        className={cn(
-          "relative inline-flex items-center rounded-full py-1.5 px-2 shadow-sm shadow-gray-400/50 transition-colors duration-500 focus:outline-none focus-visible:ring-2",
-          { "bg-neutral-600 focus-visible:ring-orange-500": darkMode },
-          {
-            "bg-white ring-1 ring-gray-200/50 focus-visible:ring-blue-500":
-              !darkMode,
-          }
-        )}
+        className="relative inline-flex items-center rounded-full bg-white py-1.5 px-2 shadow-md shadow-slate-300 ring-[1.5px] ring-slate-400/40 transition-all hover:shadow-lg hover:shadow-blue-300/40 hover:ring-2 hover:ring-blue-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-orange-500 dark:bg-slate-700/50 dark:shadow-slate-900 dark:ring-slate-400/40 dark:hover:shadow-sky-400/20 dark:hover:ring-sky-500 dark:focus-visible:ring-orange-500"
       >
         <span className="sr-only">Disable dark mode</span>
         <svg
@@ -53,7 +46,7 @@ export function DarkModeToggle() {
           fill="none"
           aria-hidden="true"
           className={cn(
-            "text-white transition-transform duration-500",
+            "text-slate-400 transition-transform duration-500",
             { "scale-100": darkMode },
             { "scale-0": !darkMode }
           )}
@@ -97,7 +90,7 @@ export function DarkModeToggle() {
         </svg>
         <span
           className={cn(
-            "absolute top-0.5 left-0.5 flex h-8 w-8 items-center justify-center rounded-full bg-white shadow-sm shadow-gray-400/80 transition duration-500",
+            "absolute top-0.5 left-0.5 flex h-8 w-8 items-center justify-center rounded-full bg-white shadow-sm shadow-slate-400 ring-1 ring-slate-300/50 transition-all duration-500 dark:bg-slate-100 dark:shadow-slate-900 dark:ring-transparent",
             { "translate-x-[2.625rem]": darkMode }
           )}
         >

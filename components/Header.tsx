@@ -18,12 +18,12 @@ export function Header() {
   return (
     <Disclosure
       as="nav"
-      className="sticky top-0 z-40 border-y border-gray-800/10 opacity-100 backdrop-blur-xl transition-colors duration-500 dark:border-neutral-700/20"
+      className="sticky top-0 z-40 border-[1.5px] border-y border-slate-300 opacity-100 shadow-sm backdrop-blur-xl transition-colors duration-500 dark:border-slate-400/50 dark:bg-slate-800 dark:shadow-slate-900"
     >
       {({ open }) => (
         <>
           <nav
-            className="flex items-center justify-between p-4"
+            className="mx-auto flex max-w-7xl items-center justify-between p-4"
             aria-label="Global"
           >
             {/* Mobile Menu Button */}

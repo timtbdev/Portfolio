@@ -12,12 +12,12 @@ export function Logo({ image, description }: Props) {
     <>
       <Link
         href="/"
-        className="h-13 w-13 focus-visible-base rounded-full bg-gray-100 p-0.5 shadow-sm shadow-gray-800/50 ring-1 ring-gray-900/5 backdrop-blur dark:bg-neutral-800/90 dark:ring-white/10"
+        className="h-13 w-13 rounded-full p-0.5 shadow-md shadow-slate-300 ring-[1.5px] ring-slate-400/40 backdrop-blur transition-all hover:shadow-lg hover:shadow-blue-300/50 hover:ring-2 hover:ring-blue-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-orange-500 dark:bg-slate-800 dark:shadow-slate-900 dark:ring-slate-400/40 dark:hover:shadow-sky-400/20 dark:hover:ring-sky-500 dark:focus-visible:ring-orange-500"
       >
         <Image
           src={image}
           alt={description}
-          className="h-12 w-12 rounded-full bg-gray-100 object-cover dark:bg-neutral-800/90"
+          className="h-12 w-12 rounded-full bg-white object-cover dark:bg-neutral-800"
           priority
         />
       </Link>

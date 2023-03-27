@@ -11,7 +11,7 @@ export function MobileMenuButton({ open }: Props) {
     <>
       <Disclosure.Button
         className={cn(
-          "focus-visible-base inline-flex h-10 w-10 items-center justify-center rounded-md bg-white text-gray-500 shadow-sm shadow-gray-400/50 ring-1 ring-gray-200/50 hover:text-gray-900 dark:bg-neutral-700 dark:text-neutral-400 dark:ring-neutral-600"
+          "inline-flex h-10 w-10 items-center justify-center rounded-md bg-white text-slate-600 shadow-md ring-[1.5px] ring-slate-400/40 transition-all hover:bg-gray-100 hover:shadow-md hover:shadow-blue-300/50 hover:ring-2 hover:ring-blue-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-orange-500 dark:bg-slate-700 dark:text-slate-200 dark:shadow-slate-900 dark:ring-slate-400/40 dark:hover:bg-slate-600 dark:hover:ring-sky-500 dark:focus-visible:ring-orange-500"
         )}
       >
         <span

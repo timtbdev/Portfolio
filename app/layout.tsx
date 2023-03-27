@@ -66,14 +66,12 @@ export default function RootLayout({ children }: RootLayoutProps) {
     <html lang="en">
       <body
         className={cn(
-          "max-w-7x mx-auto bg-gray-50 font-sans text-gray-600 antialiased dark:bg-neutral-800 dark:text-white",
+          "bg-white font-sans antialiased dark:bg-slate-900",
           inter.variable
         )}
       >
-        <main className="mx-auto max-w-5xl border border-gray-50 bg-white shadow-sm shadow-gray-800/20 dark:border-neutral-700/40 dark:bg-neutral-900 dark:shadow-neutral-800/20">
-          <Header />
-          {children}
-        </main>
+        <Header />
+        {children}
 
         <VercelAnalytics />
         <TwIndicators />

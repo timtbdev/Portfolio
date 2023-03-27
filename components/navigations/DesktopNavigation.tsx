@@ -1,7 +1,6 @@
 import React from "react"
 import Link from "next/link"
 import { Menu } from "@/types"
-import { clsx } from "clsx"
 import { AnimatePresence, Variants, motion } from "framer-motion"
 
 interface Props {
@@ -30,13 +29,13 @@ export function DesktopNavigation({ path, menu }: Props) {
             key={idx}
             onMouseEnter={() => setHoveredItem(title)}
             onMouseLeave={() => setHoveredItem("")}
-            className="focus-visible-base relative inline-flex items-center rounded-full bg-transparent px-4 py-1 text-base font-medium text-gray-600 ring-1 ring-transparent dark:text-gray-400"
+            className="relative inline-flex items-center rounded-full bg-transparent px-4 py-1 text-base font-medium text-slate-600 ring-1 ring-transparent focus:outline-none focus-visible:ring-2 focus-visible:ring-orange-500 dark:text-slate-200 dark:focus-visible:ring-orange-500"
           >
             <AnimatePresence>
               {((title === hoveredItem && hoverArea) ||
                 (path === url && !hoverArea)) && (
                 <motion.div
-                  className="focus-visible-base absolute top-0 left-0 mx-auto h-full w-full rounded-full bg-gray-100 px-4 text-gray-600 ring-1 ring-gray-200 dark:bg-neutral-800 dark:text-white dark:ring-neutral-700/50"
+                  className="absolute top-0 left-0 mx-auto h-full w-full rounded-full bg-gray-50 px-4 shadow-md shadow-blue-300 ring-2 ring-blue-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-orange-500 dark:bg-slate-700/50 dark:shadow-sky-400/50 dark:ring-sky-500 dark:focus-visible:ring-orange-500"
                   layoutId="menu"
                   key={title + idx}
                   variants={variants}
