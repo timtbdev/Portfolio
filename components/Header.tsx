@@ -18,7 +18,7 @@ export function Header() {
   return (
     <Disclosure
       as="nav"
-      className="sticky top-0 z-40 border-[1.5px] border-y border-slate-300 opacity-100 shadow-sm backdrop-blur-xl transition-colors duration-500 dark:border-slate-400/50 dark:bg-slate-800 dark:shadow-slate-900"
+      className="sticky top-0 z-40 border-y border-slate-300 border-y-[1.5] opacity-100 shadow-sm backdrop-blur-xl transition-colors duration-500 dark:border-slate-400/50 dark:bg-slate-800 dark:shadow-slate-900"
     >
       {({ open }) => (
         <>
