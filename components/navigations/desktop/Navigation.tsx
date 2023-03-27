@@ -3,7 +3,7 @@ import Link from "next/link"
 import { Menu } from "@/types"
 import { AnimatePresence, Variants, motion } from "framer-motion"
 
-interface Props {
+interface IProps {
   path: string | null
   menu: Menu[]
 }
@@ -13,7 +13,7 @@ const variants: Variants = {
   visible: { opacity: 1 },
 }
 
-export function Navigation({ path, menu }: Props) {
+export default function Navigation({ path, menu }: IProps) {
   const [hoveredItem, setHoveredItem] = React.useState("")
   const [hoverArea, setHoverArea] = React.useState(false)
   return (

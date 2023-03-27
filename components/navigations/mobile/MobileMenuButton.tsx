@@ -2,11 +2,11 @@ import { Disclosure } from "@headlessui/react"
 
 import { cn } from "@libs/utils"
 
-interface Props {
+interface IProps {
   open: boolean
 }
 
-export function MobileMenu({ open }: Props) {
+export default function MobileMenuButton({ open }: IProps) {
   return (
     <>
       <Disclosure.Button

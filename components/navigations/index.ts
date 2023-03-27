@@ -1,6 +1,3 @@
 "use client"
-export * from "./Navigation"
-export * from "./MobileNavigation"
-export * from "./MobileMenu"
-export * from "./Switch"
-export * from "./Logo"
+export * from "./mobile"
+export * from "./desktop"

@@ -7,18 +7,18 @@ import { Disclosure } from "@headlessui/react"
 import { menu, profile } from "@config/index"
 import {
   Logo,
-  MobileMenu,
+  MobileMenuButton,
   MobileNavigation,
   Navigation,
   Switch,
-} from "./navigations/index"
+} from "./navigations"
 
 export function Header() {
   const currentPath = usePathname()
   return (
     <Disclosure
       as="nav"
-      className="sticky top-0 z-40 border-[1.5px] border-y border-slate-300 opacity-100 shadow-sm backdrop-blur-xl transition-colors duration-500 dark:border-slate-400/50 dark:bg-slate-800 dark:shadow-slate-900"
+      className="sticky top-0 z-40 border-y-[1.5px] border-slate-300 opacity-100 shadow-sm backdrop-blur-xl transition-colors duration-500 dark:border-slate-400/50 dark:bg-slate-800 dark:shadow-slate-900"
     >
       {({ open }) => (
         <>
@@ -28,7 +28,7 @@ export function Header() {
           >
             {/* Mobile Menu */}
             <div className="flex flex-1 justify-start lg:hidden">
-              <MobileMenu open={open} />
+              <MobileMenuButton open={open} />
             </div>
 
             {/* Logo */}
