@@ -6,11 +6,11 @@ import { Disclosure } from "@headlessui/react"
 
 import { menu, profile } from "@config/index"
 import {
-  DarkModeToggle,
-  DesktopNavigation,
   Logo,
-  MobileMenuButton,
+  MobileMenu,
   MobileNavigation,
+  Navigation,
+  Switch,
 } from "./navigations/index"
 
 export function Header() {
@@ -26,9 +26,9 @@ export function Header() {
             className="mx-auto flex max-w-7xl items-center justify-between p-4"
             aria-label="Global"
           >
-            {/* Mobile Menu Button */}
+            {/* Mobile Menu */}
             <div className="flex flex-1 justify-start lg:hidden">
-              <MobileMenuButton open={open} />
+              <MobileMenu open={open} />
             </div>
 
             {/* Logo */}
@@ -36,14 +36,14 @@ export function Header() {
               <Logo image={profile.image} description={profile.description} />
             </div>
 
-            {/* Desktop Navigation */}
+            {/* Navigation */}
             <div className="hidden gap-x-6 lg:flex lg:flex-1">
-              <DesktopNavigation path={currentPath} menu={menu} />
+              <Navigation path={currentPath} menu={menu} />
             </div>
 
-            {/* Dark Mode Toggle Button */}
+            {/* Dark Mode */}
             <div className="flex flex-1 justify-end">
-              <DarkModeToggle />
+              <Switch />
             </div>
           </nav>
 
