@@ -1,3 +1,3 @@
 "use client"
-export * from "./Header"
-export * from "./TwIndicators"
+export { default as Header } from "./Header"
+export { default as TwIndicators } from "./TwIndicators"
