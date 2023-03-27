@@ -1,4 +1,4 @@
-export function TwIndicators() {
+export default function TwIndicators() {
   if (process.env.NODE_ENV === "production") return null
 
   return (

@@ -13,7 +13,7 @@ import {
   Switch,
 } from "./navigations"
 
-export function Header() {
+export default function Header() {
   const currentPath = usePathname()
   return (
     <Disclosure
