@@ -37,7 +37,7 @@ export default function Switch() {
       <Toggle
         onChange={changeTheme}
         checked={darkMode ? true : false}
-        className="relative inline-flex items-center rounded-full bg-white py-1.5 px-2 shadow-md shadow-slate-300 ring-[1.5px] ring-slate-400/40 transition-all hover:shadow-lg hover:shadow-blue-300/40 hover:ring-2 hover:ring-blue-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-orange-500 dark:bg-slate-700/50 dark:shadow-slate-900 dark:ring-slate-400/40 dark:hover:shadow-sky-400/20 dark:hover:ring-sky-500 dark:focus-visible:ring-orange-500"
+        className="relative inline-flex items-center rounded-full bg-gray-100 py-1.5 px-2 shadow-md shadow-slate-500/40 ring-[1.5px] ring-slate-500/40 transition-all hover:shadow-lg hover:shadow-blue-300/40 hover:ring-2 hover:ring-blue-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-orange-500 dark:bg-slate-700/50 dark:shadow-slate-900 dark:ring-slate-500 dark:hover:shadow-sky-400/20 dark:hover:ring-sky-500 dark:focus-visible:ring-orange-500"
       >
         <span className="sr-only">Disable dark mode</span>
         <svg
