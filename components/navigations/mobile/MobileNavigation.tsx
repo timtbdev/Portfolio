@@ -4,7 +4,7 @@ import { motion } from "framer-motion"
 
 import { Menu } from "types"
 
-interface Props {
+interface IProps {
   fragment: ExoticComponent<{
     children?: ReactNode | undefined
   }>
@@ -31,7 +31,7 @@ const itemVariants = {
   },
 }
 
-export function MobileNavigation({ fragment, menu }: Props) {
+export default function MobileNavigation({ fragment, menu }: IProps) {
   return (
     <>
       <Transition
@@ -53,7 +53,7 @@ export function MobileNavigation({ fragment, menu }: Props) {
             {menu.map((item) => (
               <Disclosure.Button key={item.idx} as="a" href={item.url}>
                 <motion.div
-                  className="group -mx-3 flex items-center gap-x-6 border-b border-dashed border-gray-400/40 bg-white p-3 text-base font-semibold leading-7 text-gray-600 hover:bg-gray-50 dark:border-slate-400/40 dark:bg-slate-800 dark:text-slate-200 dark:hover:bg-slate-700"
+                  className="group -mx-3 flex items-center gap-x-6 border-b border-dashed border-gray-400/40 bg-white p-3 text-base font-semibold leading-7 text-gray-600 transition-colors hover:bg-gray-50 dark:border-slate-400/40 dark:bg-slate-800 dark:text-slate-200 dark:hover:bg-slate-700"
                   variants={itemVariants}
                 >
                   <div className="flex h-11 w-11 flex-none items-center justify-center rounded-lg border border-gray-400/40 bg-gray-100 transition-colors group-hover:border-2 group-hover:border-blue-400 group-hover:bg-gray-50 dark:border-slate-400/40 dark:bg-slate-600 dark:group-hover:border-sky-500 dark:group-hover:bg-slate-500">

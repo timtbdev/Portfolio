@@ -5,7 +5,7 @@ import { Switch as Toggle } from "@headlessui/react"
 
 import { cn } from "@libs/utils"
 
-export function Switch() {
+export default function Switch() {
   const [darkMode, setDarkMode] = React.useState(false)
   React.useEffect(() => {
     if (

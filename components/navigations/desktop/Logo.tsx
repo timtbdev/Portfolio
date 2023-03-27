@@ -2,12 +2,12 @@ import React from "react"
 import Image, { StaticImageData } from "next/image"
 import Link from "next/link"
 
-interface Props {
+interface IProps {
   image: string | StaticImageData
   description: string
 }
 
-export function Logo({ image, description }: Props) {
+export default function Logo({ image, description }: IProps) {
   return (
     <>
       <Link
