@@ -4,8 +4,8 @@ import { BottomNavigation, MobileBottomNavigation } from "./navigations"
 const Footer = () => {
   return (
     <>
-      <MobileBottomNavigation menu={menu} />
       <BottomNavigation footer={footer} />
+      <MobileBottomNavigation menu={menu} />
     </>
   )
 }
