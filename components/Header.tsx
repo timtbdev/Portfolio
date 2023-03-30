@@ -53,7 +53,6 @@ export default function Header() {
               <Switch />
             </div>
           </nav>
-
           {/* <!-- Mobile Navigation --> */}
           <MobileNavigation fragment={Fragment} menu={menu} />
         </>
