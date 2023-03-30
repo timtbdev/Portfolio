@@ -1,43 +1,27 @@
 "use client"
 
-import React from "react"
+import { useEffect, useState } from "react"
 import { Switch as Toggle } from "@headlessui/react"
+import { useTheme } from "next-themes"
 
 import { cn } from "@libs/utils"
 
 export default function Switch() {
-  const [darkMode, setDarkMode] = React.useState(false)
-  React.useEffect(() => {
-    if (
-      localStorage.theme === "dark" ||
-      (!("theme" in localStorage) &&
-        window.matchMedia("(prefers-color-scheme:dark)").matches)
-    ) {
-      document.documentElement.classList.add("dark")
-      localStorage.theme = "dark"
-      setDarkMode(!darkMode)
-    } else {
-      document.documentElement.classList.remove("dark")
-      localStorage.theme = "light"
-    }
-  }, [])
+  const { theme, setTheme } = useTheme()
+  const [mounted, setMounted] = useState(false)
+  useEffect(() => setMounted(true), [])
+  if (!mounted) return null
 
   const changeTheme = () => {
-    localStorage.theme = darkMode ? "light" : "dark"
-    setDarkMode(!darkMode)
-    if (darkMode) {
-      document.documentElement.classList.remove("dark")
-    } else {
-      document.documentElement.classList.add("dark")
-    }
+    setTheme(theme === "light" ? "dark" : "light")
   }
 
   return (
     <div className="relative flex items-center space-x-4">
       <Toggle
         onChange={changeTheme}
-        checked={darkMode ? true : false}
-        className="relative inline-flex items-center rounded-full bg-white py-1.5 px-2 shadow-md shadow-slate-300 ring-[1.5px] ring-slate-400/40 transition-all hover:shadow-lg hover:shadow-blue-300/40 hover:ring-2 hover:ring-blue-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-orange-500 dark:bg-slate-700/50 dark:shadow-slate-900 dark:ring-slate-400/40 dark:hover:shadow-sky-400/20 dark:hover:ring-sky-500 dark:focus-visible:ring-orange-500"
+        checked={theme === "dark" ? true : false}
+        className="relative inline-flex items-center rounded-full bg-white px-2 py-1.5 shadow-md shadow-slate-300 ring-[1.5px] ring-slate-400/40 transition-all hover:shadow-lg hover:shadow-blue-300/40 hover:ring-2 hover:ring-blue-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-orange-500 dark:bg-slate-700/50 dark:shadow-slate-900 dark:ring-slate-400/40 dark:hover:shadow-sky-400/20 dark:hover:ring-sky-500 dark:focus-visible:ring-orange-500"
       >
         <span className="sr-only">Disable dark mode</span>
         <svg
@@ -47,8 +31,8 @@ export default function Switch() {
           aria-hidden="true"
           className={cn(
             "text-slate-400 transition-transform duration-500",
-            { "scale-100": darkMode },
-            { "scale-0": !darkMode }
+            { "scale-100": theme === "dark" },
+            { "scale-0": theme === "light" }
           )}
         >
           <path
@@ -75,8 +59,8 @@ export default function Switch() {
           aria-hidden="true"
           className={cn(
             "ml-3.5 text-gray-400 transition-transform duration-500",
-            { "scale-0": darkMode },
-            { "scale-100": !darkMode }
+            { "scale-0": theme === "dark" },
+            { "scale-100": theme === "light" }
           )}
         >
           <path
@@ -90,8 +74,8 @@ export default function Switch() {
         </svg>
         <span
           className={cn(
-            "absolute top-0.5 left-0.5 flex h-8 w-8 items-center justify-center rounded-full bg-white shadow-sm shadow-slate-400 ring-1 ring-slate-300/50 transition-all duration-500 dark:bg-slate-100 dark:shadow-slate-900 dark:ring-transparent",
-            { "translate-x-[2.625rem]": darkMode }
+            "absolute left-0.5 top-0.5 flex h-8 w-8 items-center justify-center rounded-full bg-white shadow-sm shadow-slate-400 ring-1 ring-slate-300/50 transition-all duration-500 dark:bg-slate-100 dark:shadow-slate-900 dark:ring-transparent",
+            { "translate-x-[2.625rem]": theme === "dark" }
           )}
         >
           <svg
@@ -101,8 +85,8 @@ export default function Switch() {
             aria-hidden="true"
             className={cn(
               "flex-none text-gray-500 transition duration-300",
-              { "scale-0 opacity-0": darkMode },
-              { "scale-100 opacity-100": !darkMode }
+              { "scale-0 opacity-0": theme === "dark" },
+              { "scale-100 opacity-100": theme === "light" }
             )}
           >
             <path
@@ -128,8 +112,8 @@ export default function Switch() {
             aria-hidden="true"
             className={cn(
               "-ml-6 flex-none text-neutral-600 transition duration-500",
-              { "scale-100 opacity-100": darkMode },
-              { "scale-0 opacity-0": !darkMode }
+              { "scale-100 opacity-100": theme === "dark" },
+              { "scale-0 opacity-0": theme === "light" }
             )}
           >
             <path

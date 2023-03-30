@@ -1,10 +1,11 @@
 import "@styles/tailwind.css"
 import type { Metadata } from "next"
 import { Inter } from "next/font/google"
-import { siteConfig } from "@/config/site"
+import localFont from "next/font/local"
+import { Footer, Header, ThemeProvider, TwIndicator } from "@/components"
 import { Analytics as VercelAnalytics } from "@vercel/analytics/react"
 
-import { Header, TwIndicators } from "@components/index"
+import { siteConfig } from "@config/site"
 import { absoluteUrl, cn } from "@libs/utils"
 
 interface RootLayoutProps {
@@ -16,6 +17,10 @@ const inter = Inter({
   variable: "--font-inter",
 })
 
+const calSans = localFont({
+  src: "../public/fonts/CalSans-SemiBold.woff2",
+  variable: "--font-sans",
+})
 export const metadata: Metadata = {
   title: {
     default: siteConfig.title,
@@ -63,18 +68,20 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body
         className={cn(
           "bg-white font-sans antialiased dark:bg-slate-900",
           inter.variable
         )}
       >
-        <Header />
-        {children}
-
-        <VercelAnalytics />
-        <TwIndicators />
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+          <Header />
+          {children}
+          <Footer />
+          <VercelAnalytics />
+          <TwIndicator />
+        </ThemeProvider>
       </body>
     </html>
   )

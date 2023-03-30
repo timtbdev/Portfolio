@@ -1,4 +1,6 @@
+import { ForwardRefExoticComponent, SVGProps } from "react"
 import { StaticImageData } from "next/image"
+import { Icon } from "@heroicons/react"
 
 export type SiteConfig = {
   title: string
@@ -18,7 +20,7 @@ export type Menu = {
   title: string
   url: string
   idx: number
-  icon: React.ForwardRefExoticComponent<React.SVGProps<SVGSVGElement>>
+  icon: Icon
 }
 
 export type Profile = {
@@ -53,10 +55,11 @@ export type Project = {
 }
 export type Footer = {
   socials: Social[]
-  lastUpdated: string
+  copyright: string
 }
 
 export type Social = {
-  title: string
-  url: string
+  name: string
+  href: string
+  icon: Icon
 }
