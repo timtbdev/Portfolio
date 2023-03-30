@@ -1,9 +1,11 @@
+import { FC } from "react"
+
 import { Footer } from "types"
 
-interface IProps {
+interface BottomNavigationProps {
   footer: Footer
 }
-export default function BottomNavigation({ footer }: IProps) {
+const BottomNavigation: FC<BottomNavigationProps> = ({ footer }) => {
   return (
     <>
       <div className="border-t-[1.5px] border-slate-300/50 bg-gray-50 shadow-t-sm dark:border-slate-600/50 dark:bg-slate-800 dark:shadow-slate-900 md:sticky md:bottom-0 md:left-0">
@@ -30,3 +32,5 @@ export default function BottomNavigation({ footer }: IProps) {
     </>
   )
 }
+
+export default BottomNavigation

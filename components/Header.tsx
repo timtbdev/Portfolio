@@ -19,7 +19,7 @@ const variants = {
   hidden: { opacity: 0, y: -25 },
 }
 
-export default function Header() {
+const Header = () => {
   const currentPath = usePathname()
 
   return (
@@ -60,3 +60,5 @@ export default function Header() {
     </Disclosure>
   )
 }
+
+export default Header

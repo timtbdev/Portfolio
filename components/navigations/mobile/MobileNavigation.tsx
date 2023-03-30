@@ -1,10 +1,10 @@
-import { ExoticComponent, ReactNode } from "react"
+import { ExoticComponent, FC, ReactNode } from "react"
 import { Disclosure, Transition } from "@headlessui/react"
 import { motion } from "framer-motion"
 
 import { Menu } from "types"
 
-interface IProps {
+interface MobileNavigationProps {
   fragment: ExoticComponent<{
     children?: ReactNode | undefined
   }>
@@ -38,7 +38,7 @@ const itemVariants = {
   },
 }
 
-export default function MobileNavigation({ fragment, menu }: IProps) {
+const MobileNavigation: FC<MobileNavigationProps> = ({ fragment, menu }) => {
   return (
     <>
       <Transition
@@ -81,3 +81,5 @@ export default function MobileNavigation({ fragment, menu }: IProps) {
     </>
   )
 }
+
+export default MobileNavigation

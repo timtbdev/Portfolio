@@ -1,4 +1,4 @@
-export default function TwIndicator() {
+const TwIndicator = () => {
   if (process.env.NODE_ENV === "production") return null
 
   return (
@@ -14,3 +14,5 @@ export default function TwIndicator() {
     </div>
   )
 }
+
+export default TwIndicator

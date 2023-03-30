@@ -1,13 +1,13 @@
 "use client"
 
-import { useEffect, useState } from "react"
+import { FC, useEffect, useState } from "react"
 import { motion } from "framer-motion"
 import { useMediaQuery } from "react-responsive"
 
 import { Menu } from "types"
 import { useScrollListener } from "@hooks/useScrollListener"
 
-interface IProps {
+interface MobileBottomNavigationProps {
   menu: Menu[]
 }
 
@@ -17,7 +17,7 @@ const variants = {
   hidden: { opacity: 0, y: 50 },
 }
 
-export default function MobileBottomNavigation({ menu }: IProps) {
+const MobileBottomNavigation: FC<MobileBottomNavigationProps> = ({ menu }) => {
   const isMobile = useMediaQuery({ query: "(max-width: 768px)" })
   const [showNavBar, setShowNavBar] = useState(false)
   const scroll = useScrollListener()
@@ -70,3 +70,5 @@ export default function MobileBottomNavigation({ menu }: IProps) {
     </>
   )
 }
+
+export default MobileBottomNavigation

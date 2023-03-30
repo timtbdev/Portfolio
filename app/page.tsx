@@ -3,7 +3,7 @@ import Image from "next/image"
 
 const inter = Inter({ subsets: ["latin"] })
 
-export default function Home() {
+const Home = () => {
   return (
     <>
       <main>
@@ -196,3 +196,5 @@ export default function Home() {
     </>
   )
 }
+
+export default Home

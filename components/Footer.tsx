@@ -1,7 +1,7 @@
 import { footer, menu } from "../config"
 import { BottomNavigation, MobileBottomNavigation } from "./navigations"
 
-export default function Footer() {
+const Footer = () => {
   return (
     <>
       <MobileBottomNavigation menu={menu} />
@@ -9,3 +9,5 @@ export default function Footer() {
     </>
   )
 }
+
+export default Footer

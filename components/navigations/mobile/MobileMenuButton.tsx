@@ -1,12 +1,13 @@
+import { FC } from "react"
 import { Disclosure } from "@headlessui/react"
 
 import { cn } from "@libs/utils"
 
-interface IProps {
+interface MobileMenuButtonProps {
   open: boolean
 }
 
-export default function MobileMenuButton({ open }: IProps) {
+const MobileMenuButton: FC<MobileMenuButtonProps> = ({ open }) => {
   return (
     <>
       <Disclosure.Button
@@ -41,3 +42,5 @@ export default function MobileMenuButton({ open }: IProps) {
     </>
   )
 }
+
+export default MobileMenuButton

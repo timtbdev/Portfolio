@@ -1,10 +1,10 @@
-import React, { useState } from "react"
+import { FC, useState } from "react"
 import Link from "next/link"
 import { Menu } from "@/types"
 import { AnimatePresence, Variants, motion } from "framer-motion"
 
-interface IProps {
-  path: string | null
+interface NavigationProps {
+  path?: string
   menu: Menu[]
 }
 
@@ -13,7 +13,7 @@ const variants: Variants = {
   visible: { opacity: 1 },
 }
 
-export default function Navigation({ path, menu }: IProps) {
+const Navigation: FC<NavigationProps> = ({ path, menu }) => {
   const [hoveredItem, setHoveredItem] = useState("")
   const [hoverArea, setHoverArea] = useState(false)
 
@@ -63,3 +63,5 @@ export default function Navigation({ path, menu }: IProps) {
     </>
   )
 }
+
+export default Navigation

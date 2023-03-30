@@ -1,12 +1,12 @@
 "use client"
 
-import { useEffect, useState } from "react"
+import { FC, useEffect, useState } from "react"
 import { Switch as Toggle } from "@headlessui/react"
 import { useTheme } from "next-themes"
 
 import { cn } from "@libs/utils"
 
-export default function Switch() {
+const Switch = () => {
   const { theme, setTheme } = useTheme()
   const [mounted, setMounted] = useState(false)
   useEffect(() => setMounted(true), [])
@@ -130,3 +130,5 @@ export default function Switch() {
     </div>
   )
 }
+
+export default Switch

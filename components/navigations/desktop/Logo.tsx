@@ -1,13 +1,13 @@
-import React from "react"
+import { FC } from "react"
 import Image, { StaticImageData } from "next/image"
 import Link from "next/link"
 
-interface IProps {
+interface LogoProps {
   image: string | StaticImageData
   description: string
 }
 
-export default function Logo({ image, description }: IProps) {
+const Logo: FC<LogoProps> = ({ image, description }) => {
   return (
     <>
       <Link
@@ -24,3 +24,4 @@ export default function Logo({ image, description }: IProps) {
     </>
   )
 }
+export default Logo
