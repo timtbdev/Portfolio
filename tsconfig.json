@@ -26,6 +26,7 @@
       "@components/*": ["components/*"],
       "@config/*": ["config/*"],
       "@hooks/*": ["hooks/*"],
+      "@icons/*": ["icons/*"],
       "@libs/*": ["libs/*"],
       "@styles/*": ["styles/*"],
       "@types/*": ["types/*"]

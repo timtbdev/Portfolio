@@ -12,22 +12,29 @@ interface IProps {
 }
 
 const containerVariants = {
-  hidden: { opacity: 1, scale: 0 },
+  hidden: {
+    transition: { staggerChildren: 0.07, delayChildren: 0.2 },
+  },
   visible: {
-    opacity: 1,
-    scale: 1,
-    transition: {
-      delayChildren: 0.3,
-      staggerChildren: 0.2,
-    },
+    transition: { staggerChildren: 0.05, staggerDirection: -1 },
   },
 }
 
 const itemVariants = {
-  hidden: { y: 20, opacity: 0 },
+  hidden: {
+    y: 20,
+    opacity: 0,
+    transition: {
+      y: { stiffness: 1000, velocity: -100 },
+    },
+  },
+
   visible: {
     y: 0,
     opacity: 1,
+    transition: {
+      y: { stiffness: 1000 },
+    },
   },
 }
 
@@ -52,7 +59,9 @@ export default function MobileNavigation({ fragment, menu }: IProps) {
             {menu.map((item) => (
               <Disclosure.Button key={item.idx} as="a" href={item.url}>
                 <motion.div
-                  className="group flex items-center gap-x-6 border-b border-dashed border-slate-400 bg-white p-4 text-base font-semibold leading-7 text-slate-600 transition-colors hover:bg-gray-50 dark:border-slate-500 dark:bg-slate-800 dark:text-slate-200 dark:hover:bg-slate-700"
+                  whileHover={{ scale: 1.01 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="group -mx-3 flex items-center gap-x-6 border-b border-dashed border-gray-400/40 bg-white p-3 text-base font-semibold leading-7 text-gray-600 transition-colors hover:bg-gray-50 dark:border-slate-400/40 dark:bg-slate-800 dark:text-slate-200 dark:hover:bg-slate-700"
                   variants={itemVariants}
                 >
                   <div className="flex h-11 w-11 flex-none items-center justify-center rounded-lg border border-slate-400 bg-gray-100 shadow-md transition-colors group-hover:border-2 group-hover:border-blue-400 group-hover:bg-gray-50 dark:border-slate-500 dark:bg-slate-700 dark:shadow-slate-900 dark:group-hover:border-sky-500 dark:group-hover:bg-slate-700">
