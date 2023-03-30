@@ -4,8 +4,8 @@ import { BottomNavigation, MobileBottomNavigation } from "./navigations"
 export default function Footer() {
   return (
     <>
-      <BottomNavigation />
       <MobileBottomNavigation menu={menu} />
+      <BottomNavigation footer={footer} />
     </>
   )
 }
