@@ -17,7 +17,7 @@ const BottomNavigation: FC<BottomNavigationProps> = ({ footer }) => {
             <a
               key={idx + item.name}
               href={item.href}
-              className="text-slate-400 hover:text-slate-500 dark:text-slate-500 dark:hover:text-slate-400"
+              className="text-slate-400 hover:text-slate-500 focus-visible:border-blue-500 dark:text-slate-500 dark:hover:text-slate-400 dark:focus-visible:border-orange-500"
             >
               <span className="sr-only">{item.name}</span>
               <item.icon className="h-6 w-6" aria-hidden="true" />

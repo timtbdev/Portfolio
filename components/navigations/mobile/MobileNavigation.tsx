@@ -59,12 +59,11 @@ const MobileNavigation: FC<MobileNavigationProps> = ({ fragment, menu }) => {
             {menu.map((item) => (
               <Disclosure.Button key={item.idx} as="a" href={item.url}>
                 <motion.div
-                  whileHover={{ scale: 1.01 }}
                   whileTap={{ scale: 0.95 }}
-                  className="group flex items-center gap-x-6 border-b border-dashed border-gray-400/40 bg-white p-3 text-base font-semibold leading-7 text-gray-600 transition-colors hover:bg-gray-50 dark:border-slate-400/40 dark:bg-slate-800 dark:text-slate-200 dark:hover:bg-slate-700"
+                  className="group flex items-center gap-x-6 border-b border-dashed border-gray-400 bg-white p-3 text-base font-semibold leading-7 text-gray-600 transition-colors hover:bg-gray-50 dark:border-slate-400/40 dark:bg-slate-800 dark:text-slate-200 dark:hover:bg-slate-700"
                   variants={itemVariants}
                 >
-                  <div className="flex h-11 w-11 flex-none items-center justify-center rounded-lg border border-slate-400 bg-gray-100 shadow-md transition-colors group-hover:border-2 group-hover:border-blue-400 group-hover:bg-gray-50 dark:border-slate-500 dark:bg-slate-700 dark:shadow-slate-900 dark:group-hover:border-sky-500 dark:group-hover:bg-slate-700">
+                  <div className="flex h-11 w-11 flex-none items-center justify-center rounded-lg border border-slate-400 bg-gray-100 shadow-md transition-colors group-hover:border-2 group-hover:border-orange-500 group-hover:bg-gray-50 dark:border-slate-500 dark:bg-slate-700 dark:shadow-slate-900 dark:group-hover:border-sky-500 dark:group-hover:bg-slate-700">
                     <item.icon
                       className="h-6 w-6 text-slate-600 dark:text-slate-200"
                       aria-hidden="true"
