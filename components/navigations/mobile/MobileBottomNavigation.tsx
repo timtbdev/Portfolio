@@ -9,7 +9,7 @@ interface MobileBottomNavigationProps {
 const MobileBottomNavigation: FC<MobileBottomNavigationProps> = ({ menu }) => {
   return (
     <>
-      <div className="sticky bottom-0 left-0 z-50 h-16 w-full border-t border-gray-200 bg-white dark:border-gray-600 dark:bg-gray-700 md:hidden">
+      <div className="sticky bottom-0 left-0 z-40 h-16 w-full border-t border-gray-200 bg-white dark:border-gray-600 dark:bg-gray-700">
         <div className="mx-auto grid h-full max-w-lg grid-cols-4 font-medium">
           {menu.slice(0, 4).map((item) => (
             <button

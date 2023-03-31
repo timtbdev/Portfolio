@@ -69,7 +69,11 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html
+      lang="en"
+      className="h-full scroll-smooth antialiased selection:bg-orange-500/10 selection:text-orange-500"
+      suppressHydrationWarning
+    >
       <body
         className={cn(
           "bg-white font-sans antialiased dark:bg-slate-900",
