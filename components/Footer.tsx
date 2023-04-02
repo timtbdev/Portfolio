@@ -9,13 +9,13 @@ const Footer = () => {
     <>
       <footer className="sticky bottom-0 z-40 border-y-[1.2px] border-slate-300 bg-gray-50 shadow-t-sm dark:border-slate-600/50 dark:bg-slate-800 dark:shadow-slate-900">
         <nav
-          className="mx-auto hidden max-w-7xl items-center justify-between px-4 md:flex"
+          className="mx-auto hidden max-w-5xl items-center justify-between md:flex"
           aria-label="Global"
         >
           <BottomNavigation footer={footer} />
         </nav>
         <nav
-          className="mx-auto max-w-7xl items-center justify-between px-4 md:hidden"
+          className="mx-auto max-w-5xl items-center justify-between md:hidden"
           aria-label="Global"
         >
           <MobileBottomNavigation menu={menu} path={currentPath} />

@@ -3,7 +3,57 @@
 @tailwind utilities;
 
 @layer components {
-  .focus-visible-base {
-    @apply focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-500;
+  .text-highlight-sky {
+    display: inline-block;
+    padding-right: 0.25rem;
+    padding-left: 0.25rem;
+    border-left: 4px solid #0ea5e9;
+    border-radius: 0;
+    background-image: linear-gradient(
+      90deg,
+      rgba(56, 189, 248, 0.2),
+      rgba(125, 211, 252, 0.05)
+    );
+    line-height: 1;
+  }
+  .text-highlight-orange {
+    display: inline-block;
+    padding-right: 0.25rem;
+    padding-left: 0.25rem;
+    border-left: 4px solid #ff7448;
+    border-radius: 0;
+    background-image: linear-gradient(
+      90deg,
+      rgba(251, 146, 60, 0.2),
+      rgba(253, 186, 116, 0.05)
+    );
+    line-height: 1;
+  }
+  .text-highlight-rose {
+    display: inline-block;
+    padding-right: 0.25rem;
+    padding-left: 0.25rem;
+    border-left: 4px solid #f43f5e;
+    border-radius: 0;
+    background-image: linear-gradient(
+      90deg,
+      rgba(251, 113, 133, 0.2),
+      rgba(254, 205, 211, 0.05)
+    );
+    line-height: 1;
+  }
+
+  .text-highlight-green {
+    display: inline-block;
+    padding-right: 0.25rem;
+    padding-left: 0.25rem;
+    border-left: 4px solid #22c55e;
+    border-radius: 0;
+    background-image: linear-gradient(
+      90deg,
+      rgba(74, 222, 128, 0.2),
+      rgba(134, 239, 172, 0.05)
+    );
+    line-height: 1;
   }
 }

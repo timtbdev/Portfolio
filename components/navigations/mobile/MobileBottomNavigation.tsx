@@ -23,7 +23,7 @@ const MobileBottomNavigation: FC<MobileBottomNavigationProps> = ({
               key={item.idx + item.title}
               className={cn(
                 "group inline-flex flex-col items-center justify-center px-5",
-                { "bg-orange-100/50 dark:bg-slate-900": path === item.url }
+                { "bg-orange-100 dark:bg-sky-100": path === item.url }
               )}
             >
               <item.icon

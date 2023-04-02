@@ -1,5 +1,8 @@
 "use client"
 export { default as Header } from "./Header"
+export { default as Grid } from "./Grid"
+export { default as Avatar } from "./Avatar"
+export { default as Heading } from "./Heading"
 export { default as Footer } from "./Footer"
 export { default as ThemeProvider } from "./ThemeProvider"
 export { default as TwIndicator } from "./TwIndicator"

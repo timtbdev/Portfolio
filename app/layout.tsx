@@ -1,9 +1,8 @@
 import "@styles/tailwind.css"
-import { FC } from "react"
 import type { Metadata } from "next"
-import { Inter } from "next/font/google"
+import { Inter as FontSans } from "next/font/google"
 import localFont from "next/font/local"
-import { Footer, Header, ThemeProvider, TwIndicator } from "@/components"
+import { Footer, Grid, Header, ThemeProvider, TwIndicator } from "@/components"
 import { Analytics as VercelAnalytics } from "@vercel/analytics/react"
 
 import { siteConfig } from "@config/site"
@@ -13,15 +12,18 @@ interface RootLayoutProps {
   children: React.ReactNode
 }
 
-const inter = Inter({
+const fontSans = FontSans({
   subsets: ["latin"],
-  variable: "--font-inter",
+  variable: "--font-sans",
+  display: "swap",
 })
 
 const calSans = localFont({
   src: "../public/fonts/CalSans-SemiBold.woff2",
-  variable: "--font-sans",
+  variable: "--font-calsans",
+  display: "swap",
 })
+
 export const metadata: Metadata = {
   title: {
     default: siteConfig.title,
@@ -71,21 +73,24 @@ export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html
       lang="en"
-      className="h-full scroll-smooth antialiased selection:bg-orange-500/10 selection:text-orange-500"
+      className={cn(
+        "h-full scroll-smooth font-sans antialiased",
+        fontSans.variable,
+        calSans.variable
+      )}
       suppressHydrationWarning
     >
-      <body
-        className={cn(
-          "bg-white font-sans antialiased dark:bg-slate-900",
-          inter.variable
-        )}
-      >
+      <body className={cn("bg-white font-sans antialiased dark:bg-slate-900")}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          <Header />
-          {children}
-          <Footer />
-          <VercelAnalytics />
-          <TwIndicator />
+          <div className="selection:bg-orange-500/10 selection:text-orange-500 dark:selection:bg-sky-500/10 dark:selection:text-sky-500">
+            <Header />
+            <main className="mx-auto max-w-5xl">
+              <Grid>{children}</Grid>
+            </main>
+            <Footer />
+            <VercelAnalytics />
+            <TwIndicator />
+          </div>
         </ThemeProvider>
       </body>
     </html>

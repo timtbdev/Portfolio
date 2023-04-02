@@ -11,7 +11,7 @@ const BottomNavigation: FC<BottomNavigationProps> = ({ footer }) => {
   const isTablet = useMediaQuery({ query: "(min-width: 640px)" })
   return (
     <>
-      <div className="mx-auto w-full max-w-7xl px-4 py-3 md:flex md:items-center md:justify-between">
+      <div className="mx-auto w-full max-w-7xl px-2 py-3 md:flex md:items-center md:justify-between">
         <div className="flex justify-center space-x-6 md:order-2">
           {footer.socials.map((item, idx) => (
             <a

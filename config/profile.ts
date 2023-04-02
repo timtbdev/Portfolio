@@ -7,4 +7,9 @@ export const profile: Profile = {
   title: "Android Developer",
   image: ProfileImage,
   description: "Profile picture",
+  bio: {
+    title: "Hello",
+    intro: "I'm Tim and, an San Francisco based Android developer.",
+    portfolio: "This is my portfolio.",
+  },
 }

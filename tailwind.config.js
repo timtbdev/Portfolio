@@ -15,7 +15,8 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ["var(--font-inter)", ...fontFamily.sans],
+        sans: ["var(--font-sans)", ...fontFamily.sans],
+        calsans: ["var(--font-calsans)"],
       },
       boxShadow: {
         "t-sm": "0 -1px 2px 0 rgba(0, 0, 0, 0.05)",

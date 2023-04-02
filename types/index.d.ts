@@ -28,6 +28,11 @@ export type Profile = {
   title: string
   image: StaticImageData
   description: string
+  bio: {
+    title: string
+    intro: string
+    portfolio: string
+  }
 }
 
 export type Heading = {
