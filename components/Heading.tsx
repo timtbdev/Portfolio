@@ -19,20 +19,19 @@ const Heading = () => {
           </h2>
           <h2 className="mx-auto max-w-3xl px-4 text-center text-2xl font-semibold text-slate-600 dark:text-slate-400">
             <p>
-              I&apos;m{" "}
+              I&apos;m
               <span className="text-highlight-orange dark:text-highlight-sky text-slate-800 dark:text-slate-200">
                 Tim
-              </span>{" "}
-              and, an{" "}
+              </span>
+              and, an
               <span className="text-highlight-rose text-slate-800 dark:text-slate-200">
                 San Francisco
-              </span>{" "}
-              based{" "}
+              </span>
+              based
               <span className="text-highlight-green text-slate-800 dark:text-slate-200">
-                Android developer
+                Android developer.
               </span>
             </p>
-            <p>This is my latest project.</p>
           </h2>
         </div>
       </>

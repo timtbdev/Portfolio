@@ -56,4 +56,14 @@
     );
     line-height: 1;
   }
+  .ring-trisma {
+    box-shadow: 0 0 0 0.5px #e4e4e7, 0 0 0 1px hsla(240, 6%, 90%, 0.5),
+      0 0 0 3.5px #f4f4f5, 0 0 0 4px #efeff4,
+      0 20px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.005);
+  }
+  .ring-dark-trisma {
+    box-shadow: 0 0 0 0.5px #1e293b, 0 0 0 1px hsla(223, 36%, 17%, 0.5),
+      0 0 0 3.5px #29364a, 0 0 0 4px #28364e,
+      0 20px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.005);
+  }
 }
