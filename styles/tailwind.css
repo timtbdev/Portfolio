@@ -66,4 +66,17 @@
       0 0 0 3.5px #29364a, 0 0 0 4px #28364e,
       0 20px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.005);
   }
+
+  .layout {
+    display: block;
+    position: fixed;
+    height: 100vh;
+    width: 100vw;
+    max-height: 100%;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    overflow-x: hidden;
+  }
 }

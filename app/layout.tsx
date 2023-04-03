@@ -74,13 +74,17 @@ export default function RootLayout({ children }: RootLayoutProps) {
     <html
       lang="en"
       className={cn(
-        "fixed h-full scroll-smooth font-sans antialiased",
+        "layout scroll-smooth font-sans antialiased",
         fontSans.variable,
         calSans.variable
       )}
       suppressHydrationWarning
     >
-      <body className={cn(" bg-white font-sans antialiased dark:bg-slate-900")}>
+      <body
+        className={cn(
+          "layout bg-white font-sans antialiased dark:bg-slate-900"
+        )}
+      >
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <div className="selection:bg-orange-500/10 selection:text-orange-500 dark:selection:bg-sky-500/10 dark:selection:text-sky-500">
             <Header />
