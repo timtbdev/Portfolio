@@ -12,7 +12,7 @@ const MobileMenuButton: FC<MobileMenuButtonProps> = ({ open }) => {
     <>
       <Disclosure.Button
         className={cn(
-          "inline-flex h-10 w-10 items-center justify-center rounded-md bg-gray-100 text-slate-600 shadow-md shadow-slate-500/40 ring-[1.5px] ring-slate-500/40 hover:bg-gray-100 hover:shadow-md hover:shadow-slate-500 hover:ring-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 active:ring-orange-500 dark:bg-slate-700 dark:text-slate-200 dark:shadow-slate-900 dark:ring-slate-500 dark:hover:bg-slate-700 dark:hover:ring-sky-500 dark:focus-visible:ring-orange-500"
+          "inline-flex h-10 w-10 items-center justify-center rounded-md bg-gradient-to-t from-gray-100 via-gray-50 to-white text-gray-500 shadow-md shadow-black/5 ring-1 ring-black/10 transition duration-200 hover:bg-gradient-to-tr hover:from-gray-100 hover:via-gray-100 hover:to-gray-50 active:scale-[96%] active:ring-black/20 dark:bg-gradient-to-tl dark:from-slate-600 dark:via-slate-700 dark:to-slate-800 dark:text-slate-400 dark:ring-white/10 dark:hover:bg-gradient-to-tr dark:hover:from-slate-800 dark:hover:via-slate-700 dark:hover:to-slate-700 dark:active:ring-white/20"
         )}
       >
         <span
