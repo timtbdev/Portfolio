@@ -1,11 +1,8 @@
-import { Inter } from "next/font/google"
 import { Heading, Project } from "@/components"
 
 import { projects } from "../config/projects"
 
-const inter = Inter({ subsets: ["latin"] })
-
-const Home = () => {
+const HomePage = () => {
   return (
     <>
       <div className="relative isolate">
@@ -19,4 +16,4 @@ const Home = () => {
   )
 }
 
-export default Home
+export default HomePage

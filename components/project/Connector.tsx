@@ -1,7 +1,7 @@
 const Connector = () => {
   return (
     <>
-      <div className="mx-auto -mt-5 mb-8 max-w-7xl px-4 sm:px-8">
+      <div className="mx-auto -mt-20 max-w-7xl p-4 text-center sm:px-8">
         <div className="mx-auto w-fit">
           <svg
             width="75"
@@ -94,8 +94,12 @@ const Connector = () => {
                 y2="268"
                 gradientUnits="userSpaceOnUse"
               >
-                <stop stop-color="currentColor"></stop>
-                <stop offset="1" stop-color="currentColor" stop-opacity="0"></stop>
+                <stop stopColor="currentColor"></stop>
+                <stop
+                  offset="1"
+                  stopColor="currentColor"
+                  stopOpacity="0"
+                ></stop>
               </linearGradient>
               <linearGradient
                 id="paint1_linear_4764_1450"
@@ -106,7 +110,11 @@ const Connector = () => {
                 gradientUnits="userSpaceOnUse"
               >
                 <stop stop-color="currentColor"></stop>
-                <stop offset="1" stop-color="currentColor" stop-opacity="0"></stop>
+                <stop
+                  offset="1"
+                  stop-color="currentColor"
+                  stop-opacity="0"
+                ></stop>
               </linearGradient>
               <linearGradient
                 id="paint2_linear_4764_1450"
@@ -117,7 +125,11 @@ const Connector = () => {
                 gradientUnits="userSpaceOnUse"
               >
                 <stop stop-color="currentColor"></stop>
-                <stop offset="1" stop-color="currentColor" stop-opacity="0"></stop>
+                <stop
+                  offset="1"
+                  stop-color="currentColor"
+                  stop-opacity="0"
+                ></stop>
               </linearGradient>
             </defs>
           </svg>

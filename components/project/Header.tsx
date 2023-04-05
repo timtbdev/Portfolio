@@ -20,7 +20,7 @@ const Header: FC<HeaderProps> = ({
   return (
     <>
       <div
-        className="border-b border-zinc-200 pb-3
+        className="border-b border-slate-200 pb-3
        dark:border-slate-700/40"
       >
         <div className="sm:mt-10 sm:flex sm:items-center sm:justify-between">
@@ -38,14 +38,14 @@ const Header: FC<HeaderProps> = ({
             </div>
 
             <div className="mt-4 text-center sm:mt-0 sm:pt-1 sm:text-left">
-              <p className="inline-flex text-sm font-medium text-gray-500 dark:text-zinc-400">
+              <p className="inline-flex text-sm font-medium text-slate-500 dark:text-slate-400">
                 {type}
               </p>
-              <p className="font-calsans text-xl text-gray-900 dark:text-zinc-100 sm:text-2xl">
+              <p className="font-calsans text-xl text-slate-900 dark:text-slate-200 sm:text-2xl">
                 {title}
               </p>
 
-              <p className="text-sm font-medium text-gray-500 dark:text-zinc-400">
+              <p className="text-sm font-medium text-slate-500 dark:text-slate-400">
                 {dateFormat(new Date(releaseDate), "MMMM yyyy")}
               </p>
             </div>

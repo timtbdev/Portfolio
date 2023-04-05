@@ -2,6 +2,7 @@
 
 import React, { FC, useState } from "react"
 import Image from "next/image"
+import { motion } from "framer-motion"
 import { useKeenSlider } from "keen-slider/react"
 
 import "keen-slider/keen-slider.min.css"
@@ -52,19 +53,23 @@ const Slider: FC<SliderProps> = ({ images }) => {
                   e.stopPropagation() || instanceRef.current?.prev()
                 }
                 disabled={currentSlide === 0}
-                className="group inline-flex h-9 items-center whitespace-nowrap rounded-full bg-zinc-100 px-3 py-1 text-sm font-medium text-zinc-900 transition hover:bg-zinc-200 dark:bg-zinc-800/40 dark:text-zinc-400 dark:ring-1 dark:ring-inset dark:ring-zinc-800 dark:hover:bg-zinc-800 dark:hover:text-zinc-300"
+                className="group relative inline-flex h-9 items-center overflow-hidden whitespace-nowrap rounded-full bg-gradient-to-t from-slate-100 via-slate-50 to-white px-4 py-2 font-medium text-slate-600 shadow-md shadow-black/5 ring-1 ring-black/10 duration-200 hover:bg-gradient-to-b hover:from-slate-50 hover:via-slate-100/50 hover:to-slate-50 active:scale-[99%] active:ring-black/20"
               >
                 <svg
-                  viewBox="0 0 20 20"
+                  className="-ml-1 mr-2 rotate-180 stroke-slate-500 stroke-2 dark:stroke-slate-200"
                   fill="none"
+                  width="11"
+                  height="11"
+                  viewBox="0 0 10 10"
                   aria-hidden="true"
-                  className="-ml-1 mt-0.5 h-5 w-5 rotate-180"
                 >
                   <path
-                    stroke="currentColor"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="m11.5 6.5 3 3.5m0 0-3 3.5m3-3.5h-9"
+                    className="opacity-0 transition group-hover:opacity-100"
+                    d="M0 5h7"
+                  ></path>
+                  <path
+                    className="transition group-hover:translate-x-[3px]"
+                    d="M1 1l4 4-4 4"
                   ></path>
                 </svg>
                 Prev<span className="sr-only">Previous screenshot</span>

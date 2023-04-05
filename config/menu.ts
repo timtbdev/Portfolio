@@ -16,27 +16,21 @@ export const menu: Menu[] = [
     icon: BoltIcon,
   },
   {
-    title: "Project",
-    url: "/project",
-    idx: 2,
-    icon: BriefcaseIcon,
-  },
-  {
     title: "About",
     url: "/about",
-    idx: 3,
+    idx: 2,
     icon: UserCircleIcon,
   },
   {
     title: "Blog",
     url: "/blog",
-    idx: 4,
+    idx: 3,
     icon: Squares2X2Icon,
   },
   {
     title: "Contact",
     url: "/contact",
-    idx: 5,
+    idx: 4,
     icon: PaperAirplaneIcon,
   },
 ]

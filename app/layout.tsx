@@ -82,7 +82,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
     >
       <body
         className={cn(
-          "layout bg-white font-sans antialiased dark:bg-slate-900"
+          "layout bg-white font-sans antialiased dark:bg-slate-800/90"
         )}
       >
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>

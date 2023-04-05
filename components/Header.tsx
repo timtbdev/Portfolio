@@ -25,7 +25,7 @@ const Header = () => {
   return (
     <Disclosure
       as="nav"
-      className="sticky top-0 z-40 border-y-[1.5px] border-slate-300 bg-gray-50/30 shadow-sm backdrop-blur-lg dark:border-slate-600/50 dark:bg-slate-800 dark:shadow-slate-900"
+      className="border-y-1 sticky top-0 z-40 border-black/5 bg-gray-50 shadow-sm shadow-gray-300 backdrop-blur-lg dark:border-white/10 dark:bg-slate-800 dark:shadow-slate-900/60"
     >
       {({ open }) => (
         <>

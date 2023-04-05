@@ -3,7 +3,7 @@ import { Project } from "types"
 export const projects: Project[] = [
     {
         id: 1,
-        title: "Mongolian Sign Language",
+        title: "Sign Language",
         releaseDate: "2022-12-26",
         icon: "/placeholder/sign_icon.png",
         iconDescription: "App icon",
@@ -26,7 +26,7 @@ export const projects: Project[] = [
             },
         ],
         images: ["/placeholder/s.png", "/placeholder/s.png", "/placeholder/s.png"],
-        text: "This app aims to promote MSL learning in the hearing community to improve everyday communication accessibility between the Deaf and hearing",
+        text: "",
     },
     {
         id: 2,
@@ -51,7 +51,7 @@ export const projects: Project[] = [
             },
         ],
         images: ["/app-1/s01.png", "/app-1/s02.png", "/app-1/s03.png", "/app-1/s04.png", "/app-1/s05.png"],
-        text: "It's the second version of my portfolio app. It was written in Kotlin and built with Android Jetpack components and MVVM design architecture, and applied several best practices.",
+        text: "",
     },
     {
         id: 3,

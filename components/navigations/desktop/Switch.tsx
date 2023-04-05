@@ -21,7 +21,7 @@ const Switch = () => {
       <Toggle
         onChange={changeTheme}
         checked={theme === "dark" ? true : false}
-        className="relative inline-flex items-center rounded-full bg-white px-2 py-1.5 shadow-md shadow-slate-300 ring-[1.5px] ring-slate-400/40 transition hover:shadow-md hover:shadow-slate-500 hover:ring-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 dark:bg-slate-700/50 dark:shadow-slate-900 dark:ring-slate-400/40 dark:hover:shadow-sky-400/20 dark:hover:ring-sky-500 dark:focus-visible:ring-orange-500"
+        className="relative inline-flex items-center rounded-full bg-gradient-to-t from-gray-100 via-gray-50 to-white px-2 py-1.5 shadow-md shadow-black/5 ring-1 ring-black/10 transition duration-200 hover:bg-gradient-to-tr hover:from-gray-100 hover:via-gray-100 hover:to-gray-50 active:scale-[99%] active:ring-black/20 dark:bg-gradient-to-t dark:from-slate-600 dark:via-slate-700 dark:to-slate-800 dark:ring-white/10 dark:hover:bg-gradient-to-br dark:hover:from-slate-800 dark:hover:via-slate-700 dark:hover:to-slate-600 dark:active:ring-white/20"
       >
         <span className="sr-only">Disable dark mode</span>
         <svg
@@ -30,7 +30,7 @@ const Switch = () => {
           fill="none"
           aria-hidden="true"
           className={cn(
-            "text-slate-400 transition-transform duration-500",
+            "text-gray-400 transition-transform duration-500",
             { "scale-100": theme === "dark" },
             { "scale-0": theme === "light" }
           )}
@@ -74,7 +74,7 @@ const Switch = () => {
         </svg>
         <span
           className={cn(
-            "absolute left-0.5 top-0.5 flex h-8 w-8 items-center justify-center rounded-full bg-white shadow-sm shadow-slate-400 ring-1 ring-slate-300/50 transition-all duration-500 dark:bg-slate-100 dark:shadow-slate-900 dark:ring-transparent",
+            "absolute left-0.5 top-0.5 flex h-8 w-8 items-center justify-center rounded-full bg-gray-50 shadow-sm shadow-black/5 ring-1 ring-black/10 transition duration-500 dark:bg-slate-300 dark:shadow-slate-900 dark:ring-black/10",
             { "translate-x-[2.625rem]": theme === "dark" }
           )}
         >
@@ -111,7 +111,7 @@ const Switch = () => {
             fill="none"
             aria-hidden="true"
             className={cn(
-              "-ml-6 flex-none text-neutral-600 transition duration-500",
+              "-ml-6 flex-none text-gray-600 transition duration-500",
               { "scale-100 opacity-100": theme === "dark" },
               { "scale-0 opacity-0": theme === "light" }
             )}

@@ -30,12 +30,12 @@ const Navigation: FC<NavigationProps> = ({ path, menu }) => {
             key={idx}
             onMouseEnter={() => setHoveredItem(title)}
             onMouseLeave={() => setHoveredItem("")}
-            className="relative inline-flex items-center rounded-full bg-transparent px-4 py-1 text-base font-medium text-slate-600 ring-1 ring-transparent focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 dark:text-slate-200 dark:focus-visible:ring-orange-500"
+            className="group relative inline-flex items-center rounded-full bg-transparent px-4 py-1 text-base font-medium text-gray-600 ring-1 ring-transparent transition duration-200 active:scale-[99%] active:ring-black/20 dark:text-slate-400 dark:active:ring-white/20"
           >
             <AnimatePresence>
               {title === hoveredItem && hoverArea && (
                 <motion.div
-                  className="absolute left-0 top-0 mx-auto h-full w-full rounded-full bg-orange-100 px-4 shadow-md shadow-orange-300 ring-2 ring-orange-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 dark:bg-slate-700/50 dark:shadow-sky-400/50 dark:ring-sky-500 dark:focus-visible:ring-orange-500"
+                  className="absolute left-0 top-0 mx-auto h-full w-full rounded-full bg-gradient-to-tr from-gray-200 via-gray-100 to-gray-50 px-4 shadow-md shadow-black/5 ring-1 ring-black/10 dark:bg-gradient-to-tl dark:from-slate-700 dark:via-slate-700 dark:to-slate-800 dark:ring-white/10"
                   layoutId="menu"
                   key={title + idx}
                   variants={variants}
@@ -46,7 +46,7 @@ const Navigation: FC<NavigationProps> = ({ path, menu }) => {
               )}
               {path === url && !hoverArea && (
                 <motion.div
-                  className="absolute left-0 top-0 mx-auto h-full w-full rounded-full bg-gray-50 px-4 shadow-md shadow-slate-300 ring-[1.5px] ring-slate-400/40 focus:outline-none focus-visible:ring-2 focus-visible:ring-orange-500 dark:bg-slate-700/50 dark:shadow-slate-900 dark:ring-slate-400/40 dark:focus-visible:ring-orange-500"
+                  className="absolute left-0 top-0 mx-auto h-full w-full rounded-full bg-gradient-to-t from-gray-100 via-gray-50 to-gray-50 px-4 shadow-md shadow-black/5 ring-1 ring-black/10 dark:bg-gradient-to-t dark:from-slate-700 dark:via-slate-700 dark:to-slate-800 dark:ring-white/10"
                   layoutId="menu"
                   key={title + idx}
                   variants={variants}
@@ -56,7 +56,7 @@ const Navigation: FC<NavigationProps> = ({ path, menu }) => {
                 />
               )}
             </AnimatePresence>
-            <div className="relative z-10">{title}</div>
+            <div className="relative">{title}</div>
           </Link>
         ))}
       </div>
