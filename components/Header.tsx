@@ -1,9 +1,12 @@
 "use client"
 
-import { Fragment } from "react"
+import { Fragment, useEffect, useRef, useState } from "react"
 import { usePathname } from "next/navigation"
 import { Disclosure } from "@headlessui/react"
-
+import {
+  motion
+} from "framer-motion"
+import useScroll from "@/hooks/useScroll"
 import { menu, profile } from "@config/index"
 import {
   Logo,
@@ -13,19 +16,29 @@ import {
   Switch,
 } from "./navigations"
 
-const variants = {
-  visible: { opacity: 1, y: 0 },
-  initial: { opacity: 0, y: -75 },
-  hidden: { opacity: 0, y: -25 },
-}
 
 const Header = () => {
   const currentPath = usePathname()
+  const [hideNavBar, setHideNavBar] = useState(false)
+  const scroll = useScroll()
+
+  useEffect(() => {
+    console.log(scroll.y)
+    if (scroll.y > 150 && scroll.y - scroll.lastY > 0) {
+      setHideNavBar(true)
+    } else if (
+      scroll.y < 150 &&
+      scroll.y - scroll.lastY < 0
+    ) {
+      setHideNavBar(false)
+    }
+  }, [scroll.y, scroll.lastY, hideNavBar])
+ 
 
   return (
     <Disclosure
       as="nav"
-      className="border-y-1 sticky top-0 z-50 border-black/5 bg-gray-50 shadow-sm shadow-gray-300 dark:border-white/10 dark:bg-slate-800 dark:shadow-slate-900/60 dark:backdrop-blur-lg"
+      className="border-y-1 sticky top-0 z-50 border-black/5 bg-gray-50/50 shadow-sm shadow-gray-300 backdrop-blur dark:border-white/10 dark:bg-slate-800 dark:shadow-slate-900/60"
     >
       {({ open }) => (
         <>

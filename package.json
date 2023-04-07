@@ -11,18 +11,19 @@
   },
   "dependencies": {
     "@headlessui/react": "^1.7.13",
-    "@heroicons/react": "^2.0.16",
-    "@tailwindcss/container-queries": "^0.1.0",
+    "@heroicons/react": "^2.0.17",
+    "@n8tb1t/use-scroll-position": "^2.0.3",
+    "@tailwindcss/container-queries": "^0.1.1",
     "@types/node": "18.15.11",
-    "@types/react": "18.0.31",
+    "@types/react": "18.0.33",
     "@types/react-dom": "18.0.11",
     "@vercel/analytics": "^0.1.11",
-    "@vercel/og": "^0.4.2",
+    "@vercel/og": "^0.5.0",
     "autoprefixer": "10.4.14",
     "clsx": "^1.2.1",
     "date-fns": "^2.29.3",
     "eslint-config-next": "13.2.4",
-    "framer-motion": "^10.9.2",
+    "framer-motion": "^10.10.0",
     "keen-slider": "^6.8.5",
     "next": "13.2.4",
     "next-themes": "^0.2.1",
@@ -30,9 +31,9 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-responsive": "^9.0.2",
-    "tailwind-merge": "^1.10.0",
-    "tailwindcss": "3.3.0",
-    "typescript": "5.0.2"
+    "tailwind-merge": "^1.12.0",
+    "tailwindcss": "3.3.1",
+    "typescript": "5.0.3"
   },
   "devDependencies": {
     "@commitlint/cli": "^17.5.1",
@@ -44,10 +45,10 @@
     "eslint": "^8.37.0",
     "eslint-config-prettier": "^8.8.0",
     "eslint-plugin-react": "^7.32.2",
-    "eslint-plugin-tailwindcss": "^3.10.1",
+    "eslint-plugin-tailwindcss": "^3.11.0",
     "husky": "^8.0.3",
     "prettier": "^2.8.7",
-    "prettier-plugin-tailwindcss": "^0.2.5",
+    "prettier-plugin-tailwindcss": "^0.2.7",
     "pretty-quick": "^3.1.3"
   }
 }

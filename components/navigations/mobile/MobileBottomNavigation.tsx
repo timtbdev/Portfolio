@@ -4,6 +4,7 @@ import Link from "next/link"
 import { Menu } from "types"
 import { cn } from "@libs/utils"
 
+
 interface MobileBottomNavigationProps {
   path?: string
   menu: Menu[]
