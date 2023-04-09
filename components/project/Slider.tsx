@@ -28,9 +28,9 @@ const Slider: FC<SliderProps> = ({ images }) => {
   return (
     <>
       <div ref={sliderRef} className="keen-slider">
-        {images.map((image) => (
+        {images.map((image, idx) => (
           <div
-            key={image}
+            key={image + idx}
             className="keen-slider__slide relative mx-auto w-9/12"
           >
             <span className="sr-only">Screenshot</span>

@@ -109,11 +109,11 @@ const Connector = () => {
                 y2="154"
                 gradientUnits="userSpaceOnUse"
               >
-                <stop stop-color="currentColor"></stop>
+                <stop stopColor="currentColor"></stop>
                 <stop
                   offset="1"
-                  stop-color="currentColor"
-                  stop-opacity="0"
+                  stopColor="currentColor"
+                  stopOpacity="0"
                 ></stop>
               </linearGradient>
               <linearGradient
@@ -124,11 +124,11 @@ const Connector = () => {
                 y2="158"
                 gradientUnits="userSpaceOnUse"
               >
-                <stop stop-color="currentColor"></stop>
+                <stop stopColor="currentColor"></stop>
                 <stop
                   offset="1"
-                  stop-color="currentColor"
-                  stop-opacity="0"
+                  stopColor="currentColor"
+                  stopOpacity="0"
                 ></stop>
               </linearGradient>
             </defs>

@@ -1,15 +1,14 @@
 import { FC } from "react"
 
 interface FeatureProps {
-  key: number
   title: string
   description: string
 }
 
-const Feature: FC<FeatureProps> = ({ key, title, description }) => {
+const Feature: FC<FeatureProps> = ({ title, description }) => {
   return (
     <>
-      <div key={key} className="flex flex-col gap-0.5">
+      <div className="flex flex-col gap-0.5">
         <p className="font-calsans text-lg leading-6 text-slate-800 dark:text-slate-200">
           {title}
         </p>

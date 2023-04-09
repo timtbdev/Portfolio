@@ -41,7 +41,8 @@ const Project: FC<ProjectProps> = ({
 
                 {project.features.map((feature, idx) => (
                   <Feature
-                    key={idx}
+                  key = {idx + feature.title}
+                  
                     title={feature.title}
                     description={feature.description}
                   />
