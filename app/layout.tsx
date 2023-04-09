@@ -74,7 +74,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
     <html
       lang="en"
       className={cn(
-        "h-screen scroll-smooth font-sans antialiased",
+        "absolute inset-0 scroll-smooth font-sans antialiased",
         fontSans.variable,
         calSans.variable
       )}
@@ -82,7 +82,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
     >
       <body
         className={cn(
-          "absolute inset-0 bg-white font-sans antialiased dark:bg-slate-800/90"
+          "bg-white font-sans antialiased dark:bg-slate-800/90"
         )}
       >
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
