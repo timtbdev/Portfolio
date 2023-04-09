@@ -4,7 +4,6 @@ import { Fragment, useEffect, useRef, useState } from "react"
 import { usePathname } from "next/navigation"
 import useScroll from "@/hooks/useScroll"
 import { Disclosure } from "@headlessui/react"
-import { useScrollPosition } from "@n8tb1t/use-scroll-position"
 import { motion } from "framer-motion"
 
 import { menu, profile } from "@config/index"
@@ -20,11 +19,6 @@ const Header = () => {
   const currentPath = usePathname()
   const [hideNavBar, setHideNavBar] = useState(false)
   const scroll = useScroll()
-
-  useScrollPosition(({ prevPos, currPos }) => {
-    console.log(currPos.x)
-    console.log(currPos.y)
-  })
 
   const scrolled50Ref = useRef(false)
 
