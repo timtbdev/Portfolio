@@ -74,7 +74,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
     <html
       lang="en"
       className={cn(
-        "h-screen scroll-smooth font-sans antialiased",
+        "h-full scroll-smooth font-sans antialiased",
         fontSans.variable,
         calSans.variable
       )}
@@ -82,11 +82,11 @@ export default function RootLayout({ children }: RootLayoutProps) {
     >
       <body
         className={cn(
-          "bg-white font-sans antialiased dark:bg-slate-800/90"
+          "h-full bg-white font-sans antialiased dark:bg-slate-800/90"
         )}
       >
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          <div className="selection:bg-orange-500/10 selection:text-orange-500 dark:selection:bg-sky-500/10 dark:selection:text-sky-500">
+          <div className="min-h-full selection:bg-orange-500/10 selection:text-orange-500 dark:selection:bg-sky-500/10 dark:selection:text-sky-500">
             <Header />
             <main className="mx-auto max-w-5xl">
               <Grid>{children}</Grid>
