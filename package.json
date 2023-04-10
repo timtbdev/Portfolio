@@ -12,6 +12,7 @@
   "dependencies": {
     "@headlessui/react": "^1.7.13",
     "@heroicons/react": "^2.0.17",
+    "@n8tb1t/use-scroll-position": "^2.0.3",
     "@tailwindcss/container-queries": "^0.1.1",
     "@types/node": "18.15.11",
     "@types/react": "18.0.33",
