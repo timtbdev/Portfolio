@@ -74,7 +74,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
     <html
       lang="en"
       className={cn(
-        "absolute inset-0 scroll-smooth font-sans antialiased",
+        "h-screen scroll-smooth font-sans antialiased",
         fontSans.variable,
         calSans.variable
       )}
