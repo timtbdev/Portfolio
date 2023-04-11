@@ -15,7 +15,7 @@ const Project: FC<ProjectProps> = ({
   return (
     <>
       <div className="mx-auto max-w-5xl px-4 sm:px-8">
-        <Connector />
+        {idx != 0 && (<Connector />) }
         {/* Body */}
         <Browser key={project.url + idx} url={project.url}>
           <div

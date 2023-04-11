@@ -2,9 +2,10 @@
 
 import React, { FC, useState } from "react"
 import Image from "next/image"
-import { motion } from "framer-motion"
+import { AnimatePresence, Variants, motion } from "framer-motion"
 import { useKeenSlider } from "keen-slider/react"
 
+import { cn } from "@libs/utils"
 import "keen-slider/keen-slider.min.css"
 import { clsx } from "clsx"
 
@@ -46,17 +47,17 @@ const Slider: FC<SliderProps> = ({ images }) => {
       </div>
       {loaded && instanceRef.current && (
         <>
-          <nav className="flex items-center justify-between border-t border-zinc-200 px-4 dark:border-zinc-700/40 sm:px-0">
+          <nav className="flex items-center justify-between border-t border-black/5 px-4 dark:border-white/10 sm:px-0">
             <div className="mt-6 flex w-0 flex-1">
               <button
                 onClick={(e: any) =>
                   e.stopPropagation() || instanceRef.current?.prev()
                 }
                 disabled={currentSlide === 0}
-                className="group relative inline-flex h-9 items-center overflow-hidden whitespace-nowrap rounded-full bg-gradient-to-t from-slate-100 via-slate-50 to-white px-4 py-2 font-medium text-slate-600 shadow-md shadow-black/5 ring-1 ring-black/10 duration-200 hover:bg-gradient-to-b hover:from-slate-50 hover:via-slate-100/50 hover:to-slate-50 active:scale-[99%] active:ring-black/20"
+                className="group relative inline-flex h-9 items-center overflow-hidden whitespace-nowrap rounded-full bg-gradient-to-t from-gray-100 via-gray-50 to-gray-50 px-4 text-base font-medium text-gray-600 shadow-md shadow-black/5 ring-1 ring-black/10 transition duration-200 hover:bg-gradient-to-tr hover:from-gray-200 hover:via-gray-100 hover:to-gray-50 active:scale-[96%] active:ring-black/20 dark:bg-gradient-to-tl dark:from-slate-700 dark:via-slate-700 dark:to-slate-800 dark:text-slate-400 dark:ring-white/10 hover:dark:bg-gradient-to-t hover:dark:from-slate-700 hover:dark:via-slate-700 hover:dark:to-slate-800 dark:active:ring-white/20"
               >
                 <svg
-                  className="-ml-1 mr-2 rotate-180 stroke-slate-500 stroke-2 dark:stroke-slate-200"
+                  className="-ml-1 mr-2 rotate-180 stroke-slate-500 stroke-2 dark:stroke-slate-400"
                   fill="none"
                   width="11"
                   height="11"
@@ -84,33 +85,39 @@ const Slider: FC<SliderProps> = ({ images }) => {
                 ].map((idx) => {
                   return (
                     <li key={idx}>
-                      <button
+                      <motion.button
                         key={idx}
                         onClick={() => {
                           instanceRef.current?.moveToIdx(idx)
                         }}
                         className="relative flex items-center justify-center"
+                        initial={false}
+                        animate={{
+                          scale: currentSlide === idx ? 1.1 : 1,
+                          opacity: currentSlide === idx ? 1 : 0.8,
+                        }}
+                        transition={{ type: "spring", stiffness: 100 }}
                       >
                         <span
                           className="absolute flex h-5 w-5 p-px"
                           aria-hidden="true"
                         >
                           <span
-                            className={clsx("h-full w-full rounded-full", {
-                              "bg-zinc-200 transition duration-500 ease-in-out dark:bg-zinc-700":
+                            className={cn("h-full w-full rounded-full", {
+                              "bg-gradient-to-t from-gray-100 via-gray-50 to-white shadow-md shadow-black/5 ring-1 ring-black/5 transition duration-200 ease-in-out hover:bg-gradient-to-tr hover:from-gray-100 hover:via-gray-100 hover:to-gray-50 active:scale-[96%] active:ring-black/20 dark:bg-gradient-to-t dark:from-slate-600 dark:via-slate-700 dark:to-slate-800 dark:ring-white/10 dark:hover:bg-gradient-to-br dark:hover:from-slate-800 dark:hover:via-slate-700 dark:hover:to-slate-600 dark:active:ring-white/20":
                                 currentSlide === idx,
-                              "bg-zinc-100 dark:bg-transparent":
+                              "bg-gray-100 ring-1 ring-black/5 active:scale-[96%] active:ring-black/20 dark:bg-slate-50/5 dark:active:ring-white/20":
                                 currentSlide != idx,
                             })}
                           ></span>
                         </span>
                         <span
-                          className={clsx(
+                          className={cn(
                             "relative block h-2.5 w-2.5 rounded-full",
                             {
-                              "bg-zinc-500/40 transition duration-500 ease-in-out dark:bg-zinc-500":
+                              "bg-gray-400/80 transition duration-200 ease-in-out dark:bg-slate-500":
                                 currentSlide === idx,
-                              "bg-zinc-300 dark:bg-zinc-600":
+                              "bg-gray-300 dark:bg-slate-600":
                                 currentSlide != idx,
                             }
                           )}
@@ -118,7 +125,7 @@ const Slider: FC<SliderProps> = ({ images }) => {
                         ></span>
 
                         <span className="sr-only">Screenshot {idx + 1}</span>
-                      </button>
+                      </motion.button>
                     </li>
                   )
                 })}
@@ -133,20 +140,24 @@ const Slider: FC<SliderProps> = ({ images }) => {
                   currentSlide ===
                   instanceRef.current.track.details.slides.length - 1
                 }
-                className="group inline-flex h-9 items-center whitespace-nowrap rounded-full bg-zinc-100 px-3 py-1 text-sm font-medium text-zinc-900 transition hover:bg-zinc-200 dark:bg-zinc-800/40 dark:text-zinc-400 dark:ring-1 dark:ring-inset dark:ring-zinc-800 dark:hover:bg-zinc-800 dark:hover:text-zinc-300"
+                className="group relative inline-flex h-9 items-center overflow-hidden whitespace-nowrap rounded-full bg-gradient-to-t from-gray-100 via-gray-50 to-gray-50 px-4 text-base font-medium text-gray-600 shadow-md shadow-black/5 ring-1 ring-black/10 transition duration-200 hover:bg-gradient-to-tr hover:from-gray-200 hover:via-gray-100 hover:to-gray-50 active:scale-[96%] active:ring-black/20 dark:bg-gradient-to-tl dark:from-slate-700 dark:via-slate-700 dark:to-slate-800 dark:text-slate-400 dark:ring-white/10 hover:dark:bg-gradient-to-t hover:dark:from-slate-700 hover:dark:via-slate-700 hover:dark:to-slate-800 dark:active:ring-white/20"
               >
                 Next<span className="sr-only">Next screenshot</span>
                 <svg
-                  viewBox="0 0 20 20"
+                  className="-mr-1 ml-2 stroke-slate-500 stroke-2 dark:stroke-slate-400"
                   fill="none"
+                  width="11"
+                  height="11"
+                  viewBox="0 0 10 10"
                   aria-hidden="true"
-                  className="-mr-1 mt-0.5 h-5 w-5"
                 >
                   <path
-                    stroke="currentColor"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="m11.5 6.5 3 3.5m0 0-3 3.5m3-3.5h-9"
+                    className="opacity-0 transition group-hover:opacity-100"
+                    d="M0 5h7"
+                  ></path>
+                  <path
+                    className="transition group-hover:translate-x-[3px]"
+                    d="M1 1l4 4-4 4"
                   ></path>
                 </svg>
               </button>

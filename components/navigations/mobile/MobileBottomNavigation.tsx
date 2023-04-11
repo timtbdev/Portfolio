@@ -4,7 +4,6 @@ import Link from "next/link"
 import { Menu } from "types"
 import { cn } from "@libs/utils"
 
-
 interface MobileBottomNavigationProps {
   path?: string
   menu: Menu[]
@@ -24,22 +23,25 @@ const MobileBottomNavigation: FC<MobileBottomNavigationProps> = ({
               key={item.idx + item.title}
               className={cn(
                 "group inline-flex flex-col items-center justify-center px-5",
-                { "bg-orange-100 dark:bg-sky-100": path === item.url }
+                {
+                  "bg-gradient-to-bl from-gray-300 via-gray-200 to-gray-100 dark:bg-gradient-to-t dark:from-slate-700 dark:via-slate-700 dark:to-slate-800":
+                    path === item.url,
+                }
               )}
             >
               <item.icon
                 className={cn(
                   "h-6 w-6",
-                  { "text-orange-500 dark:text-sky-500": path === item.url },
-                  { "text-slate-600 dark:text-slate-200": path != item.url }
+                  { "text-slate-700 dark:text-slate-300": path === item.url },
+                  { "text-slate-600 dark:text-slate-400": path != item.url }
                 )}
                 aria-hidden="true"
               />
               <span
                 className={cn(
                   "font-regular text-base",
-                  { "text-orange-500 dark:text-sky-500": path === item.url },
-                  { "text-slate-600 dark:text-slate-200": path != item.url }
+                  { "text-slate-700 dark:text-slate-300": path === item.url },
+                  { "text-slate-600 dark:text-slate-400": path != item.url }
                 )}
               >
                 {item.title}

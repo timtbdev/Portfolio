@@ -1,12 +1,12 @@
 "use client"
 
+import { Fragment, useEffect, useState } from "react"
 import { usePathname } from "next/navigation"
+import useBoundedScroll from "@/hooks/useBoundedScroll"
+import { motion, useTransform } from "framer-motion"
 
 import { footer, menu } from "../config"
 import { BottomNavigation, MobileBottomNavigation } from "./navigations"
-import { Fragment, useEffect, useState } from "react"
-import useBoundedScroll from "@/hooks/useBoundedScroll"
-import { motion, useTransform } from "framer-motion"
 
 const variants = {
   visible: { opacity: 1, y: 0 },
@@ -31,14 +31,7 @@ const Footer = () => {
   }, [scrollYBoundedProgressThrottled, hidden])
   return (
     <>
-      <motion.footer
-        className="sticky bottom-0 z-40 border-y-[1.2px] border-slate-300 bg-gray-50 shadow-t-sm dark:border-slate-600/50 dark:bg-slate-800 dark:shadow-slate-900"
-        initial="hidden"
-        animate={hidden ? "visible" : "hidden"}
-        variants={variants}
-        onHoverStart={() => setHidden(false)}
-        transition={{ ease: [0.1, 0.25, 0.3, 1], duration: 0.6 }}
-      >
+      <footer className="sticky bottom-0 z-40 border-y-[1.2px] border-slate-300 bg-gray-50 shadow-t-sm dark:border-slate-600/50 dark:bg-slate-800 dark:shadow-slate-900">
         <nav
           className="mx-auto hidden max-w-5xl items-center justify-between md:flex"
           aria-label="Global"
@@ -51,7 +44,7 @@ const Footer = () => {
         >
           <MobileBottomNavigation menu={menu} path={currentPath} />
         </nav>
-      </motion.footer>
+      </footer>
     </>
   )
 }

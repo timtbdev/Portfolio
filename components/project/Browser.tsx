@@ -23,7 +23,7 @@ const Browser: FC<BrowserProps> = ({ children, url }) => {
                     </div>
                     <div>
                       <div className="group mx-auto flex w-4/5 items-center justify-center rounded-md border-slate-200 bg-white py-1 text-sm font-medium leading-6 ring-1 ring-inset ring-slate-900/5 dark:border-zinc-700/40 dark:bg-slate-800 dark:text-slate-200">
-                        <span className="mr-1.5 hidden h-4 w-4 text-slate-600 group-hover:text-orange-500 dark:text-slate-500 dark:group-hover:text-sky-500 md:block">
+                        <span className="mr-1.5 hidden h-4 w-4 text-slate-600 group-hover:text-blue-500 dark:text-slate-500 dark:group-hover:text-sky-500 md:block">
                           <svg
                             viewBox="0 0 16 16"
                             fill="currentColor"
@@ -33,7 +33,7 @@ const Browser: FC<BrowserProps> = ({ children, url }) => {
                           </svg>
                         </span>
                         <a
-                          className="truncate text-slate-600 group-hover:text-orange-500 dark:text-slate-500 dark:group-hover:text-sky-500"
+                          className="truncate text-slate-600 group-hover:text-blue-500 dark:text-slate-500 dark:group-hover:text-sky-500"
                           href={url}
                           target="_blank"
                           rel="noreferrer"
