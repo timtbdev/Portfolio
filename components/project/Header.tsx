@@ -19,10 +19,7 @@ const Header: FC<HeaderProps> = ({
 }) => {
   return (
     <>
-      <div
-        className="border-b border-slate-200 pb-3
-       dark:border-slate-700/40"
-      >
+      <div className="border-b border-dashed border-black/5 pb-3 dark:border-white/10">
         <div className="sm:mt-10 sm:flex sm:items-center sm:justify-between">
           <div className="sm:flex sm:space-x-5">
             <div className="mx-auto h-20 w-20 shrink-0 rounded-full">

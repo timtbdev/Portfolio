@@ -29,6 +29,19 @@
     );
     line-height: 1;
   }
+  .text-highlight-blue {
+    display: inline-block;
+    padding-right: 0.25rem;
+    padding-left: 0.25rem;
+    border-left: 4px solid #3b82f6;
+    border-radius: 0;
+    background-image: linear-gradient(
+      90deg,
+      rgba(59, 130, 246, 0.2),
+      rgba(125, 171, 245, 0.05)
+    );
+    line-height: 1;
+  }
   .text-highlight-rose {
     display: inline-block;
     padding-right: 0.25rem;

@@ -47,7 +47,7 @@ const Slider: FC<SliderProps> = ({ images }) => {
       </div>
       {loaded && instanceRef.current && (
         <>
-          <nav className="flex items-center justify-between border-t border-black/5 px-4 dark:border-white/10 sm:px-0">
+          <nav className="flex items-center justify-between border-t border-dashed border-black/5 px-4 dark:border-white/10 sm:px-0">
             <div className="mt-6 flex w-0 flex-1">
               <button
                 onClick={(e: any) =>

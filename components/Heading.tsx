@@ -20,7 +20,7 @@ const Heading = () => {
           <h2 className="mx-auto max-w-3xl px-4 text-center text-2xl font-semibold text-slate-600 dark:text-slate-400">
             <p className="mb-2">
               My name is
-              <span className="text-highlight-orange dark:text-highlight-sky text-slate-800 dark:text-slate-200">
+              <span className="text-highlight-blue dark:text-highlight-sky text-slate-800 dark:text-slate-200">
                 Tim.
               </span>
             </p>
@@ -36,7 +36,7 @@ const Heading = () => {
             </p>
             <p className="mb-2">
               This is my{" "}
-              <span className="text-slate-800 line-through decoration-orange-500 dark:text-slate-200">
+              <span className="text-highlight-orange text-slate-800 dark:text-slate-200">
                 Portfolio.
               </span>
             </p>

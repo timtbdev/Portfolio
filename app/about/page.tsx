@@ -1,4 +1,6 @@
 import Image from "next/image"
+import { Number } from "@/components/blog"
+import Connector from "@/components/project/Connector"
 
 const AboutPage = () => {
   return (
@@ -6,22 +8,22 @@ const AboutPage = () => {
       <div className="relative overflow-hidden py-16">
         <div className="relative px-6 lg:px-8">
           <div className="mx-auto max-w-prose text-center text-lg ">
-            <div className="mx-auto flex h-10 w-10 items-center justify-center rounded-full bg-blue-100 align-middle text-lg font-bold uppercase text-blue-500 ring-1 ring-blue-500/30">
-              <span>1</span>
-            </div>
+            <Number number={1} />
             <h1>
-              <span className="mt-6 block font-calsans text-6xl tracking-tight text-slate-900 dark:text-slate-200 md:mt-8">
+              <span className="mt-6 block font-calsans text-6xl tracking-tight text-slate-900 dark:text-slate-100 md:mt-8">
                 Oh{" "}
-                <span className="line-through decoration-blue-500">Hello</span>{" "}
+                <span className="line-through decoration-blue-500 dark:decoration-sky-500">
+                  Hello
+                </span>{" "}
                 there,
               </span>
             </h1>
-            <p className="mx-auto mt-6 max-w-2xl text-lg leading-8 text-slate-600 dark:text-slate-400 md:mt-8">
+            <p className="mx-auto mt-6 max-w-2xl text-lg leading-8 text-slate-600 dark:text-slate-500 md:mt-8">
               My name is Tim, and I&apos;m and Android developer based in San
               Francisco. I was born and grew up in Mongolia, and studied
               Computer Science in Germany.
             </p>
-            <div className="ring-trisma dark:ring-trisma-dark mx-auto mt-6 max-w-3xl overflow-hidden rounded-xl md:mt-8">
+            <div className="ring-trisma dark:ring-trisma-dark mx-auto my-6 max-w-3xl overflow-hidden rounded-xl md:mt-8">
               <Image
                 className="w-full rounded-lg"
                 src="/me.jpg"
@@ -31,9 +33,8 @@ const AboutPage = () => {
                 priority
               />
             </div>
-            <div className="mx-auto mt-6 flex h-10 w-10 items-center justify-center rounded-full bg-blue-100 align-middle text-lg font-bold uppercase text-blue-500 ring-1 ring-blue-500/30 dark:bg-sky-100 dark:text-sky-500 dark:ring-sky-500/30 md:mt-8">
-              <span>2</span>
-            </div>
+            <Connector />
+            <Number number={2} />
             <h1>
               <span className="mt-6 block font-calsans text-6xl tracking-tight text-slate-900 dark:text-slate-200 md:mt-8">
                 <p className="line-through decoration-blue-500">Build.</p>

@@ -25,7 +25,7 @@ const BottomNavigation: FC<BottomNavigationProps> = ({ footer }) => {
           ))}
         </div>
         <div className="mt-4 md:order-1 md:mt-0">
-          <p className="text-center text-sm text-slate-500 dark:text-slate-400">
+          <p className="text-center text-base text-slate-500 dark:text-slate-400">
             &copy; {footer.copyright}
           </p>
         </div>

@@ -10,33 +10,6 @@ interface MobileNavigationProps {
   menu: Menu[]
 }
 
-const containerVariants = {
-  hidden: {
-    transition: { staggerChildren: 0.07, delayChildren: 0.2 },
-  },
-  visible: {
-    transition: { staggerChildren: 0.05, staggerDirection: -1 },
-  },
-}
-
-const itemVariants = {
-  hidden: {
-    y: 20,
-    opacity: 0,
-    transition: {
-      y: { stiffness: 1000, velocity: -100 },
-    },
-  },
-
-  visible: {
-    y: 0,
-    opacity: 1,
-    transition: {
-      y: { stiffness: 1000 },
-    },
-  },
-}
-
 const MobileNavigation: FC<MobileNavigationProps> = ({ fragment, menu }) => {
   return (
     <>

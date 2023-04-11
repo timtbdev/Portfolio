@@ -8,9 +8,9 @@ interface BrowserProps {
 const Browser: FC<BrowserProps> = ({ children, url }) => {
   return (
     <>
-      <div className="relative mb-20 px-5 pt-10 md:pt-0">
+      <div className="relative mb-20 px-0 pt-10 sm:px-5 md:pt-0">
         <div className="absolute inset-x-0 top-0 bg-top bg-no-repeat xl:top-14"></div>
-        <div className="mx-auto max-w-7xl sm:px-10 md:px-8">
+        <div className="mx-auto max-w-7xl sm:px-5 md:px-8">
           <div className="sm:px-2 xl:mt-0">
             <div className="relative">
               <div className="width: 1200px ring-trisma dark:ring-dark-trisma min-w-full max-w-full rounded-xl">
@@ -33,7 +33,7 @@ const Browser: FC<BrowserProps> = ({ children, url }) => {
                           </svg>
                         </span>
                         <a
-                          className="truncate text-slate-600 group-hover:text-blue-500 dark:text-slate-500 dark:group-hover:text-sky-500"
+                          className="overflow-hidden truncate text-slate-600 group-hover:text-blue-500 dark:text-slate-500 dark:group-hover:text-sky-500"
                           href={url}
                           target="_blank"
                           rel="noreferrer"
