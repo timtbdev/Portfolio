@@ -1,6 +1,5 @@
 import { FC } from "react"
 import Image, { StaticImageData } from "next/image"
-import clsx from "clsx"
 
 interface AvatarProps {
   image: StaticImageData

@@ -1,4 +1,5 @@
 import { ExoticComponent, FC, ReactNode } from "react"
+import { useRouter } from "next/navigation"
 import { Disclosure, Transition } from "@headlessui/react"
 
 import { Menu } from "types"
@@ -11,6 +12,8 @@ interface MobileNavigationProps {
 }
 
 const MobileNavigation: FC<MobileNavigationProps> = ({ fragment, menu }) => {
+  const router = useRouter()
+
   return (
     <>
       <Transition
@@ -24,7 +27,11 @@ const MobileNavigation: FC<MobileNavigationProps> = ({ fragment, menu }) => {
       >
         <Disclosure.Panel className="border-t border-dashed border-slate-400 dark:border-slate-400/40 lg:hidden">
           {menu.map((item) => (
-            <Disclosure.Button key={item.idx} as="a" href={item.url}>
+            <Disclosure.Button
+              key={item.idx}
+              as="a"
+              onClick={() => router.push(item.url)}
+            >
               <div className="group flex items-center gap-x-6 border-b border-dashed border-black/30 bg-gray-50 p-3 text-base font-semibold leading-7 text-gray-600 transition-colors hover:bg-gray-200 dark:border-slate-400/40 dark:bg-slate-800 dark:text-slate-400 dark:hover:bg-slate-700">
                 <div className="flex h-11 w-11 flex-none items-center justify-center rounded-lg border border-black/10 bg-gray-100 shadow-md shadow-black/5 transition duration-200 group-hover:bg-gray-50 dark:border-white/10 dark:bg-slate-700 dark:shadow-slate-900/80  dark:group-hover:bg-slate-700">
                   <item.icon

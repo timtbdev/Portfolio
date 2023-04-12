@@ -1,4 +1,5 @@
 import { Avatar } from "@/components"
+import { MouseIcon } from "@/icons"
 
 import { profile } from "@config/index"
 
@@ -6,7 +7,7 @@ const Heading = () => {
   return (
     <>
       <>
-        <div className="flex flex-col place-items-center gap-6 py-8">
+        <div className="flex flex-col place-items-center gap-6 py-2 md:py-8">
           <div className="flex justify-center">
             <Avatar
               image={profile.image}
@@ -34,13 +35,9 @@ const Heading = () => {
                 San Francisco.
               </span>
             </p>
-            <p className="mb-2">
-              This is my{" "}
-              <span className="text-highlight-orange text-slate-800 dark:text-slate-200">
-                Portfolio.
-              </span>
-            </p>
+            <p className="mb-2">This is my Portfolio.</p>
           </h2>
+          <MouseIcon className="h-9 w-9 animate-bounce text-slate-500 opacity-50 dark:text-slate-500" />
         </div>
       </>
     </>
