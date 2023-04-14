@@ -19,7 +19,6 @@ export default function icon() {
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          color: "white",
         }}
       >
         <svg
@@ -28,7 +27,6 @@ export default function icon() {
           height="48"
           viewBox="0 0 48 48"
         >
-          <title>circle-09</title>
           <g>
             <circle fill="#d5d6d6" cx="24" cy="24" r="23"></circle>{" "}
             <rect
