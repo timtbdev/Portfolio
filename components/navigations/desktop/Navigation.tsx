@@ -4,7 +4,7 @@ import { Menu } from "@/types"
 import { AnimatePresence, Variants, motion } from "framer-motion"
 
 interface NavigationProps {
-  path?: string
+  path?: string | null
   menu: Menu[]
 }
 

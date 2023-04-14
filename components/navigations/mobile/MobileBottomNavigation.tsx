@@ -5,7 +5,7 @@ import { Menu } from "types"
 import { cn } from "@libs/utils"
 
 interface MobileBottomNavigationProps {
-  path?: string
+  path?: string | null
   menu: Menu[]
 }
 

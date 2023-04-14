@@ -5,8 +5,15 @@ import localFont from "next/font/local"
 import { Footer, Grid, Header, ThemeProvider, TwIndicator } from "@/components"
 import { Analytics as VercelAnalytics } from "@vercel/analytics/react"
 
-import { siteConfig } from "@config/site"
 import { absoluteUrl, cn } from "@libs/utils"
+import {
+  Site,
+  SiteAppleIcons,
+  SiteAuthor,
+  SiteIcons,
+  SiteKeywords,
+  SiteScreenShots,
+} from "../config/meta/"
 
 interface RootLayoutProps {
   children: React.ReactNode
@@ -25,48 +32,50 @@ const calSans = localFont({
 })
 
 export const metadata: Metadata = {
-  title: {
-    default: siteConfig.title,
-    template: `%s | ${siteConfig.title}`,
-  },
-  description: siteConfig.description,
-  keywords: siteConfig.keywords,
+  title: Site.title,
+  applicationName: Site.title,
+  description: Site.description,
+  keywords: SiteKeywords,
   authors: [
     {
-      name: "Tim",
-      url: "https://timtb.dev",
+      name: SiteAuthor.name,
+      url: SiteAuthor.url,
     },
   ],
-  creator: "Tim",
+  creator: SiteAuthor.name,
+  publisher: SiteAuthor.name,
+  viewport: Site.viewport,
+  robots: "index, follow",
+
+  manifest: Site.manifest,
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: siteConfig.url,
-    title: siteConfig.title,
-    description: siteConfig.description,
-    siteName: siteConfig.title,
+    url: Site.url,
+    title: Site.title,
+    description: Site.description,
+    siteName: Site.title,
     images: [
       {
         url: absoluteUrl("/og.png"),
         width: 1200,
         height: 630,
-        alt: siteConfig.title,
+        alt: Site.title,
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: siteConfig.title,
-    description: siteConfig.description,
-    images: [`${siteConfig.url}/og.png`],
-    creator: "@timtbdev",
+    title: Site.title,
+    description: Site.description,
+    images: [`${Site.url}/og.png`],
+    creator: SiteAuthor.twitter,
   },
-  icons: {
-    icon: "/favicon-16x16.png",
-    shortcut: "/favicon-32x32.png",
-    apple: "/apple-touch-icon.png",
+  appleWebApp: {
+    capable: true,
+    title: Site.title,
+    statusBarStyle: "black-translucent",
   },
-  manifest: `${siteConfig.url}/site.webmanifest`,
 }
 
 export default function RootLayout({ children }: RootLayoutProps) {
@@ -81,9 +90,8 @@ export default function RootLayout({ children }: RootLayoutProps) {
       suppressHydrationWarning
     >
       <body
-        className={cn(
-          "layout h-full bg-white font-sans antialiased dark:bg-slate-800/90"
-        )}
+        className="layout h-full bg-white font-sans antialiased dark:bg-slate-800/90"
+        style={{ WebkitTapHighlightColor: "transparent" }}
       >
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <div className="min-h-full selection:bg-blue-500/10 selection:text-blue-500 dark:selection:bg-sky-500/10 dark:selection:text-sky-500">

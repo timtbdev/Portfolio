@@ -68,3 +68,19 @@ export type Social = {
   href: string
   icon: Icon
 }
+
+export type ScreenShot = {
+  media: string
+  url: string
+}
+
+export type Icon = {
+  type: string
+  sizes: string
+  url: string
+}
+
+export type AppleIcon = {
+  sizes: string
+  url: string
+}

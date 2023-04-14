@@ -1,6 +1,5 @@
 "use client"
 export * from "./menu"
-export * from "./menuBottom"
 export * from "./profile"
 export * from "./site"
 export * from "./footer"

@@ -1,0 +1,15 @@
+export const SiteKeywords = [
+  "Tim",
+  "Tumur",
+  "Bazarragchaa",
+  "San Francisco",
+  "Bay Area",
+  "Android Developer",
+  "Kotlin",
+  "Android Jetpack",
+  "Jetpack Compose",
+  "NextJs",
+  "TailwindCss",
+  "React",
+  "ExpressJs",
+]
