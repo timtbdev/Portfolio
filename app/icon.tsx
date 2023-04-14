@@ -23,9 +23,9 @@ export default function icon() {
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          width="48"
-          height="48"
-          viewBox="0 0 48 48"
+          width="32"
+          height="32"
+          viewBox="0 0 32 32"
         >
           <g>
             <circle fill="#d5d6d6" cx="24" cy="24" r="23"></circle>{" "}
