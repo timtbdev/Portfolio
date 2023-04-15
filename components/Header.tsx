@@ -1,5 +1,3 @@
-"use client"
-
 import { Fragment } from "react"
 import { usePathname } from "next/navigation"
 import { Disclosure } from "@headlessui/react"

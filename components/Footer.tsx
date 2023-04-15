@@ -1,9 +1,4 @@
-"use client"
-
-import { Fragment, useEffect, useState } from "react"
 import { usePathname } from "next/navigation"
-import useBoundedScroll from "@/hooks/useBoundedScroll"
-import { motion, useTransform } from "framer-motion"
 
 import { footer, menu } from "../config"
 import { BottomNavigation, MobileBottomNavigation } from "./navigations"
@@ -16,19 +11,7 @@ const variants = {
 
 const Footer = () => {
   const currentPath = usePathname()
-  let { scrollYBoundedProgress } = useBoundedScroll(300)
-  let scrollYBoundedProgressThrottled = useTransform(
-    scrollYBoundedProgress,
-    [0, 0.75, 1],
-    [0, 0, 1]
-  )
-  const [hidden, setHidden] = useState(false)
 
-  useEffect(() => {
-    return scrollYBoundedProgressThrottled.onChange((current) => {
-      current == 1 ? setHidden(true) : setHidden(false)
-    })
-  }, [scrollYBoundedProgressThrottled, hidden])
   return (
     <>
       <footer className="sticky bottom-0 z-40 border-y-[1.2px] border-slate-300 bg-gray-50 shadow-t-sm dark:border-slate-600/50 dark:bg-slate-800 dark:shadow-slate-900">
