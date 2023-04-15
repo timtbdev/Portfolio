@@ -1,6 +1,5 @@
 import {
   BoltIcon,
-  BriefcaseIcon,
   PaperAirplaneIcon,
   Squares2X2Icon,
   UserCircleIcon,

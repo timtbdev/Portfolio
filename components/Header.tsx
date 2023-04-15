@@ -4,7 +4,7 @@ import { Fragment } from "react"
 import { usePathname } from "next/navigation"
 import { Disclosure } from "@headlessui/react"
 
-import { menu, profile } from "@config/index"
+import { menu } from "@config/index"
 import {
   Logo,
   MobileMenuButton,
@@ -27,7 +27,7 @@ const Header = () => {
             >
               {/* Logo */}
               <div className="flex flex-1 justify-start pl-2">
-                <Logo image={profile.image} description={profile.description} />
+                <Logo />
               </div>
 
               {/* Navigation */}

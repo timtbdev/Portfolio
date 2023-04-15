@@ -1,7 +1,6 @@
 import { Avatar } from "@/components"
 import { MouseIcon } from "@/icons"
-
-import { profile } from "@config/index"
+import ProfileImage from "@/public/profile.jpg"
 
 const Heading = () => {
   return (
@@ -10,8 +9,8 @@ const Heading = () => {
         <div className="flex flex-col place-items-center gap-6 py-2 md:py-8">
           <div className="flex justify-center">
             <Avatar
-              image={profile.image}
-              description={profile.description}
+              image={ProfileImage}
+              description="Profile image"
               large={true}
             />
           </div>
