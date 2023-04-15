@@ -5,15 +5,7 @@ import localFont from "next/font/local"
 import { Footer, Grid, Header, ThemeProvider, TwIndicator } from "@/components"
 import { Analytics as VercelAnalytics } from "@vercel/analytics/react"
 
-import { absoluteUrl, cn } from "@libs/utils"
-import {
-  Site,
-  SiteAppleIcons,
-  SiteAuthor,
-  SiteIcons,
-  SiteKeywords,
-  SiteScreenShots,
-} from "../config/meta/"
+import { absoluteUrl, cn, getUrl } from "@libs/utils"
 
 interface RootLayoutProps {
   children: React.ReactNode
@@ -32,48 +24,128 @@ const calSans = localFont({
 })
 
 export const metadata: Metadata = {
-  title: Site.title,
-  applicationName: Site.title,
-  description: Site.description,
-  keywords: SiteKeywords,
+  title: {
+    default: "Tim | Portfolio",
+    template: "%s | Portfolio",
+  },
+  generator: "Tim",
+  applicationName: "Tim | Portfolio",
+  description:
+    "Tim is an web and mobile developer based in Hayward, California.",
+  referrer: "origin-when-cross-origin",
+  keywords: [
+    "Tim",
+    "Tumur",
+    "Bazarragchaa",
+    "Hayward",
+    "San Francisco",
+    "Bay Area",
+    "California",
+    "Android Developer",
+    "Web Developer",
+    "Kotlin",
+    "Typescript",
+    "Android Jetpack",
+    "Jetpack Compose",
+    "NextJs",
+    "TailwindCss",
+    "React",
+  ],
   authors: [
     {
-      name: SiteAuthor.name,
-      url: SiteAuthor.url,
+      name: "Tim",
+      url: "https://twitter.com/timtbdev",
     },
   ],
-  creator: SiteAuthor.name,
-  publisher: SiteAuthor.name,
-  viewport: Site.viewport,
-  robots: "index, follow",
+  creator: "Tim",
+  publisher: "Tim",
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
+  metadataBase: new URL("https://timtb.dev"),
+  alternates: {
+    canonical: "/",
+    languages: {
+      "en-US": "/en-US",
+      "de-DE": "/de-DE",
+    },
+  },
+  viewport: {
+    width: "device-width",
+    initialScale: 1,
+    maximumScale: 1,
+    userScalable: false,
+    viewportFit: "cover",
+  },
+  robots: {
+    index: false,
+    follow: true,
+    nocache: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      noimageindex: false,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
 
-  manifest: Site.manifest,
+  icons: {
+    icon: [
+      { url: "/favicons/favicon-16x16.png", sizes: "16x16", type: "image/png" },
+      { url: "/favicons/favicon-32x32.png", sizes: "32x32", type: "image/png" },
+      {
+        url: "/favicons/android-icon-192x192.png",
+        sizes: "192x192",
+        type: "image/png",
+      },
+    ],
+    shortcut: ["/favicons/favicon-32x32.png"],
+    apple: [
+      { url: "/favicons/apple-icon.png" },
+      { url: "/apple-icon-180x180.png", sizes: "180x180", type: "image/png" },
+    ],
+    other: [
+      {
+        rel: "apple-touch-icon-precomposed",
+        url: "/favicons/apple-icon-precomposed.png",
+      },
+    ],
+  },
+
+  manifest: absoluteUrl("/favicons/manifest.json"),
+
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: Site.url,
-    title: Site.title,
-    description: Site.description,
-    siteName: Site.title,
+    url: getUrl(),
+    title: "Tim | Portfolio",
+    description:
+      "Tim is an web and mobile developer based in Hayward, California.",
+    siteName: "Tim's Portfolio",
     images: [
       {
         url: absoluteUrl("/og.png"),
         width: 1200,
         height: 630,
-        alt: Site.title,
+        alt: "Tim's Portfolio",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: Site.title,
-    description: Site.description,
-    images: [`${Site.url}/og.png`],
-    creator: SiteAuthor.twitter,
+    title: "Tim | Portfolio",
+    description:
+      "Tim is an web and mobile developer based in Hayward, California.",
+    images: [absoluteUrl("/og.png")],
+    creator: "@timtbdev",
   },
   appleWebApp: {
     capable: true,
-    title: Site.title,
+    title: "Tim | Portfolio",
     statusBarStyle: "black-translucent",
   },
 }
