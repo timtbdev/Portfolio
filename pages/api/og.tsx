@@ -6,7 +6,7 @@ import * as z from "zod"
 /* eslint-disable @next/next/no-img-element */
 
 export const ogImageSchema = z.object({
-  caption: z.string(),
+  subTitle: z.string(),
   title: z.string(),
   description: z.string(),
   slug: z.string()
@@ -32,12 +32,12 @@ export default async function handler(req: NextRequest) {
     const url = new URL(req.url)
     const values = ogImageSchema.parse(Object.fromEntries(url.searchParams))
 
-    const { caption, title, slug, description } = values
+    const { subTitle, title, slug, description } = values
 
     return new ImageResponse(
       (
         <OgImage
-          subTitle={caption}
+          subTitle={subTitle}
           title={title}
           slug={slug}
           description={description}
