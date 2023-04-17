@@ -18,21 +18,17 @@ const Heading = () => {
             Hello
           </h2>
           <h2 className="mx-auto max-w-3xl px-4 text-center text-2xl font-semibold text-slate-600 dark:text-slate-400">
-            <p className="mb-2">
-              My name is
-              <span className="text-highlight-blue dark:text-highlight-sky text-slate-800 dark:text-slate-200">
-                Tim.
-              </span>
-            </p>
+            <p className="mb-2">My name is Tim.</p>
             <p className="mb-2">
               I am an
               <span className="text-highlight-green text-slate-800 dark:text-slate-200">
-                Android developer
+                Android
               </span>{" "}
-              based in
-              <span className="text-highlight-rose text-slate-800 dark:text-slate-200">
-                San Francisco.
+              &{" "}
+              <span className="text-highlight-blue dark:text-highlight-sky text-slate-800 dark:text-slate-200">
+                Frontend
               </span>
+              Developer based in Hayward, CA.
             </p>
             <p className="mb-2">This is my Portfolio.</p>
           </h2>
