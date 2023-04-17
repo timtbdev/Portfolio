@@ -88,7 +88,7 @@ export type AppleIcon = {
 export type OgImagePageAttributes = {
   title: string
   description: string
-  caption?: string
+  caption: string
   author: { name: string; image: string };
 };
 

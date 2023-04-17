@@ -1,15 +1,11 @@
 import type { NextApiRequest } from "next"
 import { OgImagePage as Page } from "@/components/meta/OgImagePage"
-import { ImageResponse } from "@vercel/og"
+import { ImageResponse } from "next/server"
 import type { SatoriOptions } from "satori"
 import { z } from "zod"
 
 const interFont = fetch(
   new URL("../../public/fonts/Inter-Regular.ttf", import.meta.url)
-).then((res) => res.arrayBuffer())
-
-const interFontMedium = fetch(
-  new URL("../../public/fonts/Inter-Medium.ttf", import.meta.url)
 ).then((res) => res.arrayBuffer())
 
 export const config = {
@@ -28,16 +24,14 @@ export default async function handler(req: NextApiRequest) {
   try {
     const { searchParams } = new URL(`${req.url}`)
 
-    const [interFontData, interFontMediumData] = await Promise.all([
-      interFont,
-      interFontMedium,
+    const [interFontData] = await Promise.all([
+      interFont
     ])
     const ogConfig = {
       width: 1200,
       height: 630,
       fonts: [
-        { name: "inter", data: interFontData, weight: 400 },
-        { name: "inter", data: interFontMediumData, weight: 500 },
+        { name: "inter", data: interFontData, weight: 400 }
       ] as SatoriOptions["fonts"],
     }
 
