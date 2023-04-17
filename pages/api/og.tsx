@@ -4,16 +4,12 @@ import { ImageResponse } from "@vercel/og"
 import type { SatoriOptions } from "satori"
 import { z } from "zod"
 
-const calFont = fetch(
-  new URL("../../public/fonts/cal.ttf", import.meta.url)
-).then((res) => res.arrayBuffer())
-
 const interFont = fetch(
   new URL("../../public/fonts/Inter-Regular.ttf", import.meta.url)
 ).then((res) => res.arrayBuffer())
 
 const interFontMedium = fetch(
-  new URL("../../public/fonts/Inter-Medium.ttf", import.meta.url)
+  new URL("../../public/fonts/Inter-Bold.ttf", import.meta.url)
 ).then((res) => res.arrayBuffer())
 
 export const config = {
@@ -30,8 +26,7 @@ export default async function handler(req: NextApiRequest) {
   const { searchParams } = new URL(`${req.url}`)
   const imageType = searchParams.get("type")
 
-  const [calFontData, interFontData, interFontMediumData] = await Promise.all([
-    calFont,
+  const [interFontData, interFontMediumData] = await Promise.all([
     interFont,
     interFontMedium,
   ])
@@ -41,8 +36,6 @@ export default async function handler(req: NextApiRequest) {
     fonts: [
       { name: "inter", data: interFontData, weight: 400 },
       { name: "inter", data: interFontMediumData, weight: 500 },
-      { name: "cal", data: calFontData, weight: 400 },
-      { name: "cal", data: calFontData, weight: 600 },
     ] as SatoriOptions["fonts"],
   }
 
