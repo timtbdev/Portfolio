@@ -1,7 +1,5 @@
-import type { CSSProperties } from "react"
 import { ImageResponse, NextRequest } from "next/server"
 import OgImage from "@/components/ogImage/OgImage"
-import { absoluteUrl } from "@/libs/utils"
 import * as z from "zod"
 
 /* eslint-disable jsx-a11y/alt-text */
@@ -10,7 +8,8 @@ import * as z from "zod"
 export const ogImageSchema = z.object({
   caption: z.string(),
   title: z.string(),
-  author: z.string(),
+  description: z.string(),
+  slug: z.string()
 })
 
 export const config = {
@@ -33,11 +32,17 @@ export default async function handler(req: NextRequest) {
     const url = new URL(req.url)
     const values = ogImageSchema.parse(Object.fromEntries(url.searchParams))
 
-    const { caption, title, author } = values
+    const { caption, title, slug, description } = values
 
     return new ImageResponse(
-      <OgImage caption={caption} title={title} author={author} />,
-
+      (
+        <OgImage
+          subTitle={caption}
+          title={title}
+          slug={slug}
+          description={description}
+        />
+      ),
       {
         width: 1200,
         height: 630,

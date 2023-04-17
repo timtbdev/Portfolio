@@ -14,7 +14,7 @@ export function formatDate(input: string | number): string {
   })
 }
 
-export function absoluteUrl(path: string) {
+export function absoluteUrl(path: string = "") {
   return `${process.env.NEXT_PUBLIC_APP_URL}${path}`
 }
 
@@ -22,21 +22,19 @@ export function getUrl() {
   return process.env.NEXT_PUBLIC_APP_URL
 }
 
-export function constructOgImagePageUri(
-  caption: string,
+export function constructOgImageUri(
+  subTitle: string,
   title: string,
   description: string,
-  authorName: string,
-  authorImageUrl: string
+  slug: string,
 ) {
-  const attributes = [
-    `?caption=${encodeURIComponent(caption)}`,
+  const uri = [
+    `?subTitle=${encodeURIComponent(subTitle)}`,
     `&title=${encodeURIComponent(title)}`,
     `&description=${encodeURIComponent(description)}`,
-    `&authorName=${encodeURIComponent(authorName)}`,
-    `&authorImageUrl=${encodeURIComponent(authorImageUrl)}`,
+    `&slug=${encodeURIComponent(slug)}`,
     // Joining a multiline string for readability.
   ].join("")
 
-  return absoluteUrl(`api/og-page${attributes}`)
+  return absoluteUrl(`/api/og${uri}`)
 }

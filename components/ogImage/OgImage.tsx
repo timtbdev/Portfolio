@@ -1,24 +1,22 @@
+import { absoluteUrl } from "@/libs/utils"
+
 import { Wrapper } from "./Wrappter"
 
 /* eslint-disable jsx-a11y/alt-text */
 /* eslint-disable @next/next/no-img-element */
 
 interface OgImageProps {
-  caption: string
+  subTitle: string
   title: string
-  description?: string
-  website?: string
-  author: string
-  avatar?: string
+  description: string
+  slug: string
 }
 
 export default function OgImage({
-  caption,
+  subTitle,
   title,
   description,
-  website,
-  author,
-  avatar,
+  slug,
 }: OgImageProps) {
   return (
     <>
@@ -34,17 +32,26 @@ export default function OgImage({
                 marginBottom: 8,
               }}
             >
-              {caption}
+              {subTitle}
             </div>
             <div
               tw="flex leading-[1.1] text-[80px] font-bold tracking-tighter"
               style={{
                 fontFamily: "Inter",
                 fontWeight: "bolder",
-                marginLeft: "-3px",
+                marginBottom: 16,
               }}
             >
               {title}
+            </div>
+            <div
+              tw="flex leading-[1.1] text-gray-600 text-[30px] tracking-tighter"
+              style={{
+                fontFamily: "Inter",
+                fontWeight: "normal",
+              }}
+            >
+              {description}
             </div>
           </div>
           <div tw="flex w-full justify-between">
@@ -53,7 +60,7 @@ export default function OgImage({
                 tw="flex items-center font-bold text-3xl"
                 style={{ fontFamily: "Inter", fontWeight: "bolder" }}
               >
-                {author}
+                {absoluteUrl(slug)}
               </div>
             </div>
           </div>
