@@ -84,18 +84,3 @@ export type AppleIcon = {
   sizes: string
   url: string
 }
-
-export type OgImagePageAttributes = {
-  title: string
-  description: string
-  caption: string
-  author: { name: string; image: string };
-};
-
-export type OgImagePostAttributes = {
-  title: string
-  category: string
-  tags: Array<string>
-  date: string
-  author: { name: string; image: string };
-}

@@ -6,10 +6,10 @@ import * as z from "zod"
 /* eslint-disable @next/next/no-img-element */
 
 export const ogImageSchema = z.object({
-  subTitle: z.string(),
   title: z.string(),
-  description: z.string(),
-  slug: z.string()
+  subTitle: z.string(),
+  tags: z.string().array(),
+  slug: z.string(),
 })
 
 export const config = {
@@ -26,23 +26,19 @@ const interBold = fetch(
 
 export default async function handler(req: NextRequest) {
   try {
+    const { searchParams } = new URL(`${req.url}`)
     const fontRegular = await interRegular
     const fontBold = await interBold
 
-    const url = new URL(req.url)
-    const values = ogImageSchema.parse(Object.fromEntries(url.searchParams))
-
-    const { subTitle, title, slug, description } = values
+    const { title, subTitle, tags, slug } = ogImageSchema.parse({
+      title: searchParams.get("title"),
+      subTitle: searchParams.get("subTitle"),
+      tags: searchParams.getAll("tags"),
+      slug: searchParams.get("slug"),
+    })
 
     return new ImageResponse(
-      (
-        <OgImage
-          subTitle={subTitle}
-          title={title}
-          slug={slug}
-          description={description}
-        />
-      ),
+      <OgImage title={title} subTitle={subTitle} tags={tags} slug={slug} />,
       {
         width: 1200,
         height: 630,

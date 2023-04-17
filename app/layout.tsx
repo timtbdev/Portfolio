@@ -124,14 +124,14 @@ export const metadata: Metadata = {
     url: getUrl(),
     title: "Tim | Portfolio",
     description:
-      "Tim is an web and mobile developer based in Hayward, California.",
+      "Tim is an Android and Frontend developer based in Hayward, California.",
     siteName: "Tim's Portfolio",
     images: [
       {
         url: constructOgImageUri(
-          "Home",
           "Tim / Portfolio",
-          "Tim is an web and mobile developer based in Hayward, California.",
+          "Home",
+          ["Android", "Frontend", "Developer", "Hawyard-CA"],
           "/"
         ),
         width: 1200,
@@ -144,12 +144,12 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Tim | Portfolio",
     description:
-      "Tim is an web and mobile developer based in Hayward, California.",
+      "Tim is an Android and Frontend developer based in Hayward, California.",
     images: [
       constructOgImageUri(
-        "Home",
         "Tim / Portfolio",
-        "Tim is an web and mobile developer based in Hayward, California.",
+        "Home",
+        ["Android", "Frontend", "Developer", "Hawyard-CA"],
         "/"
       ),
     ],

@@ -6,18 +6,13 @@ import { Wrapper } from "./Wrappter"
 /* eslint-disable @next/next/no-img-element */
 
 interface OgImageProps {
-  subTitle: string
   title: string
-  description: string
+  subTitle: string
+  tags: Array<string>
   slug: string
 }
 
-export default function OgImage({
-  subTitle,
-  title,
-  description,
-  slug,
-}: OgImageProps) {
+export default function OgImage({ title, subTitle, tags, slug }: OgImageProps) {
   return (
     <>
       <Wrapper>
@@ -44,14 +39,27 @@ export default function OgImage({
             >
               {title}
             </div>
-            <div
-              tw="flex leading-[1.1] text-gray-600 text-[30px] tracking-tighter"
-              style={{
-                fontFamily: "Inter",
-                fontWeight: "normal",
-              }}
-            >
-              {description}
+            <div tw="flex">
+              {tags.slice(0, 3).map((tag) => (
+                <div
+                  tw="flex bg-blue-500 text-[30px] text-white"
+                  style={{
+                    fontFamily: "Inter",
+                    fontWeight: "normal",
+                    alignItems: "center",
+                    borderRadius: 100,
+                    display: "flex",
+                    height: 48,
+                    marginRight: 16,
+                    paddingLeft: 16,
+                    paddingRight: 20,
+                  }}
+                  key={tag}
+                >
+                  <div tw="flex mr-2 text-gray-300">#</div>
+                  <div tw="flex">{tag}</div>
+                </div>
+              ))}
             </div>
           </div>
           <div tw="flex w-full justify-between">

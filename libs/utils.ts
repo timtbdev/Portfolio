@@ -25,13 +25,13 @@ export function getUrl() {
 export function constructOgImageUri(
   subTitle: string,
   title: string,
-  description: string,
+  tags: Array<string>,
   slug: string,
 ) {
   const uri = [
-    `?subTitle=${encodeURIComponent(subTitle)}`,
     `&title=${encodeURIComponent(title)}`,
-    `&description=${encodeURIComponent(description)}`,
+    `?subTitle=${encodeURIComponent(subTitle)}`,
+    `${tags.map((tag) => `&tags=${encodeURIComponent(tag)}`).join("")}`,
     `&slug=${encodeURIComponent(slug)}`,
     // Joining a multiline string for readability.
   ].join("")
