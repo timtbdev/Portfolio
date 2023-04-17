@@ -29,8 +29,8 @@ export function constructOgImageUri(
   slug: string,
 ) {
   const uri = [
-    `&title=${encodeURIComponent(title)}`,
-    `?subTitle=${encodeURIComponent(subTitle)}`,
+    `?title=${encodeURIComponent(title)}`,
+    `&subTitle=${encodeURIComponent(subTitle)}`,
     `${tags.map((tag) => `&tags=${encodeURIComponent(tag)}`).join("")}`,
     `&slug=${encodeURIComponent(slug)}`,
     // Joining a multiline string for readability.
