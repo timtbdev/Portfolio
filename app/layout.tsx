@@ -116,7 +116,7 @@ export const metadata: Metadata = {
     ],
   },
 
-  manifest: absoluteUrl("/favicons/manifest.json"),
+  manifest: absoluteUrl("favicons/manifest.json"),
 
   openGraph: {
     type: "website",
