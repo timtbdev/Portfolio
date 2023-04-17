@@ -5,7 +5,7 @@ import localFont from "next/font/local"
 import { Footer, Grid, Header, ThemeProvider, TwIndicator } from "@/components"
 import { Analytics as VercelAnalytics } from "@vercel/analytics/react"
 
-import { absoluteUrl, cn, getPageOgImageUrl, getUrl } from "@libs/utils"
+import { absoluteUrl, cn, constructOgImagePageUri as constructOgImageUri, getUrl } from "@libs/utils"
 
 interface RootLayoutProps {
   children: React.ReactNode
@@ -128,7 +128,7 @@ export const metadata: Metadata = {
     siteName: "Tim's Portfolio",
     images: [
       {
-        url: getPageOgImageUrl("Tim", "Portfolio"),
+        url: constructOgImageUri("Home", "Portfolio", "This is Tim's Portfolio.", "Tim", "https://avatars.githubusercontent.com/u/25026241?v=4"),
         width: 1200,
         height: 630,
         alt: "Tim's Portfolio",
@@ -140,7 +140,7 @@ export const metadata: Metadata = {
     title: "Tim | Portfolio",
     description:
       "Tim is an web and mobile developer based in Hayward, California.",
-    images: [getPageOgImageUrl("Tim", "Portfolio")],
+    images: [constructOgImageUri("Home", "Portfolio", "This is Tim's Portfolio.", "Tim", "https://avatars.githubusercontent.com/u/25026241?v=4")],
     creator: "@timtbdev",
   },
   appleWebApp: {

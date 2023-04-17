@@ -22,18 +22,21 @@ export function getUrl() {
   return process.env.NEXT_PUBLIC_APP_URL
 }
 
-interface PageAttributes {
-  title: string
-  description: string
-}
-
-export function getPageOgImageUrl(title: string, description: string) {
+export function constructOgImagePageUri(
+  caption: string,
+  title: string,
+  description: string,
+  authorName: string,
+  authorImageUrl: string
+) {
   const attributes = [
-    `?type=page`,
+    `?caption=${encodeURIComponent(caption)}`,
     `&title=${encodeURIComponent(title)}`,
     `&description=${encodeURIComponent(description)}`,
+    `&authorName=${encodeURIComponent(authorName)}`,
+    `&authorImageUrl=${encodeURIComponent(authorImageUrl)}`,
     // Joining a multiline string for readability.
   ].join("")
 
-  return absoluteUrl(`api/og${attributes}`)
+  return absoluteUrl(`api/og-page${attributes}`)
 }
