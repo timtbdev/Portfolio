@@ -1,5 +1,5 @@
 import type { NextApiRequest } from "next"
-import { Page, Post, ScreenShot } from "@/components/social/og/"
+import { Page } from "@/components/social/og/"
 import { ImageResponse } from "@vercel/og"
 import type { SatoriOptions } from "satori"
 import { z } from "zod"
@@ -22,18 +22,6 @@ export const config = {
 
 const pageSchema = z.object({
   imageType: z.literal("page"),
-  title: z.string(),
-  description: z.string(),
-})
-
-const postSchema = z.object({
-  imageType: z.literal("generic"),
-  title: z.string(),
-  description: z.string(),
-})
-
-const screenShotSchema = z.object({
-  imageType: z.literal("generic"),
   title: z.string(),
   description: z.string(),
 })
