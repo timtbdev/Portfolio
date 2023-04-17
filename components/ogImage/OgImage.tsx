@@ -49,12 +49,6 @@ export default function OgImage({
           </div>
           <div tw="flex w-full justify-between">
             <div tw="flex justify-start">
-              <img
-                width="64"
-                height="64"
-                src="https://github.com/timtbdev.png?size=64"
-                style={{ borderRadius: "100%", marginRight: 10 }}
-              />
               <div
                 tw="flex items-center font-bold text-3xl"
                 style={{ fontFamily: "Inter", fontWeight: "bolder" }}
