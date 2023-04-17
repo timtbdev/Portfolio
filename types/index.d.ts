@@ -84,3 +84,11 @@ export type AppleIcon = {
   sizes: string
   url: string
 }
+
+export type MetaAttributes = {
+  title: string
+  ogTitle: string
+  author: { name: string; twitterUrl: string; twitterAddress: string }
+  description: string
+  tags: Array<string>
+}

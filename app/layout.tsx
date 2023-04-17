@@ -3,6 +3,7 @@ import type { Metadata } from "next"
 import { Inter as FontSans } from "next/font/google"
 import localFont from "next/font/local"
 import { Footer, Grid, Header, ThemeProvider, TwIndicator } from "@/components"
+import { metaData } from "@/config/meta"
 import { Analytics as VercelAnalytics } from "@vercel/analytics/react"
 
 import { absoluteUrl, cn, constructOgImageUri, getUrl } from "@libs/utils"
@@ -25,46 +26,45 @@ const calSans = localFont({
 
 export const metadata: Metadata = {
   title: {
-    default: "Tim | Portfolio",
+    default: metaData.title,
     template: "%s | Portfolio",
   },
-  generator: "Tim",
-  applicationName: "Tim | Portfolio",
-  description:
-    "Tim is an web and mobile developer based in Hayward, California.",
+  generator: metaData.author.name,
+  applicationName: metaData.title,
+  description: metaData.description,
   referrer: "origin-when-cross-origin",
   keywords: [
     "Tim",
     "Tumur",
     "Bazarragchaa",
     "Hayward",
+    "California",
     "San Francisco",
     "Bay Area",
-    "California",
     "Android Developer",
-    "Web Developer",
+    "Frontend Developer",
     "Kotlin",
     "Typescript",
     "Android Jetpack",
     "Jetpack Compose",
-    "NextJs",
-    "TailwindCss",
+    "Next.js",
+    "Tailwind Css",
     "React",
   ],
   authors: [
     {
-      name: "Tim",
-      url: "https://twitter.com/timtbdev",
+      name: metaData.author.name,
+      url: metaData.author.twitterUrl,
     },
   ],
-  creator: "Tim",
-  publisher: "Tim",
+  creator: metaData.author.name,
+  publisher: metaData.author.name,
   formatDetection: {
     email: false,
     address: false,
     telephone: false,
   },
-  metadataBase: new URL("https://timtb.dev"),
+  metadataBase: new URL(absoluteUrl()),
   alternates: {
     canonical: "/",
     languages: {
@@ -122,42 +122,28 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_US",
     url: getUrl(),
-    title: "Tim | Portfolio",
-    description:
-      "Tim is an Android and Frontend developer based in Hayward, California.",
-    siteName: "Tim's Portfolio",
+    title: metaData.title,
+    description: metaData.description,
+    siteName: metaData.title,
     images: [
       {
-        url: constructOgImageUri(
-          "Tim / Portfolio",
-          "Home",
-          ["Android", "Frontend", "Developer", "Hawyard-CA"],
-          "/"
-        ),
+        url: constructOgImageUri(metaData.ogTitle, "Home", metaData.tags, "/"),
         width: 1200,
         height: 630,
-        alt: "Tim's Portfolio",
+        alt: metaData.title,
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Tim | Portfolio",
-    description:
-      "Tim is an Android and Frontend developer based in Hayward, California.",
-    images: [
-      constructOgImageUri(
-        "Tim / Portfolio",
-        "Home",
-        ["Android", "Frontend", "Developer", "Hawyard-CA"],
-        "/"
-      ),
-    ],
-    creator: "@timtbdev",
+    title: metaData.ogTitle,
+    description: metaData.description,
+    images: [constructOgImageUri(metaData.ogTitle, "Home", metaData.tags, "/")],
+    creator: metaData.author.twitterAddress,
   },
   appleWebApp: {
     capable: true,
-    title: "Tim | Portfolio",
+    title: metaData.title,
     statusBarStyle: "black-translucent",
   },
 }
