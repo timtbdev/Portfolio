@@ -25,8 +25,7 @@ const Wrapper = ({ children, rotateBackground }: WrapperProps) => (
   <div tw="flex w-full h-full">
     <img
       tw="flex absolute left-0 top-0 w-full h-[110%]"
-      style={rotateBackground ? { transform: "rotate(180deg)" } : undefined}
-      src={absoluteUrl("static/social-bg-dark-lines.jpg")}
+      src="https://timtb.dev/static/social-bg-dark-lines.jpg"
       alt="background"
       width="1200"
       height="600"
