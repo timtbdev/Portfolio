@@ -35,5 +35,5 @@ export function getPageOgImageUrl(title: string, description: string) {
     // Joining a multiline string for readability.
   ].join("")
 
-  return absoluteUrl(`api/og${encodeURIComponent(attributes)}`)
+  return absoluteUrl(`api/og${attributes}`)
 }
