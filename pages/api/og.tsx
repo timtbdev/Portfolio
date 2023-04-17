@@ -1,82 +1,86 @@
-import { NextRequest } from "next/server"
-import ProfileImage from "@/public/profile.jpg"
+import type { NextApiRequest } from "next"
+import { Page, Post, ScreenShot } from "@/components/social/og/"
 import { ImageResponse } from "@vercel/og"
+import type { SatoriOptions } from "satori"
+import { z } from "zod"
+
+const calFont = fetch(
+  new URL("../../public/fonts/cal.ttf", import.meta.url)
+).then((res) => res.arrayBuffer())
+
+const interFont = fetch(
+  new URL("../../public/fonts/Inter-Regular.ttf", import.meta.url)
+).then((res) => res.arrayBuffer())
+
+const interFontMedium = fetch(
+  new URL("../../public/fonts/Inter-Medium.ttf", import.meta.url)
+).then((res) => res.arrayBuffer())
 
 export const config = {
   runtime: "edge",
 }
 
-const image = fetch(new URL(ProfileImage.src, import.meta.url)).then((res) =>
-  res.arrayBuffer()
-)
+const pageSchema = z.object({
+  imageType: z.literal("page"),
+  title: z.string(),
+  description: z.string(),
+})
 
-export default function handler(request: NextRequest) {
-  try {
-    const { searchParams } = new URL(request.url)
+const postSchema = z.object({
+  imageType: z.literal("generic"),
+  title: z.string(),
+  description: z.string(),
+})
 
-    // ?title=<title>
-    const hasTitle = searchParams.has("title")
-    const title = hasTitle
-      ? searchParams.get("title")?.slice(0, 100)
-      : "My default title"
+const screenShotSchema = z.object({
+  imageType: z.literal("generic"),
+  title: z.string(),
+  description: z.string(),
+})
 
-    return new ImageResponse(
-      (
-        <div
-          style={{
-            backgroundColor: "black",
-            backgroundSize: "150px 150px",
-            height: "100%",
-            width: "100%",
-            display: "flex",
-            textAlign: "center",
-            alignItems: "center",
-            justifyContent: "center",
-            flexDirection: "column",
-            flexWrap: "nowrap",
-          }}
-        >
-          <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              justifyItems: "center",
-            }}
-          >
-            <img
-              alt="Vercel"
-              height={200}
-              src="data:image/svg+xml,%3Csvg width='116' height='100' fill='white' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M57.5 0L115 100H0L57.5 0z' /%3E%3C/svg%3E"
-              style={{ margin: "0 30px" }}
-              width={232}
-            />
-          </div>
-          <div
-            style={{
-              fontSize: 60,
-              fontStyle: "normal",
-              letterSpacing: "-0.025em",
-              color: "white",
-              marginTop: 30,
-              padding: "0 120px",
-              lineHeight: 1.4,
-              whiteSpace: "pre-wrap",
-            }}
-          >
-            {title}
-          </div>
-        </div>
-      ),
-      {
-        width: 1200,
-        height: 630,
+export default async function handler(req: NextApiRequest) {
+  const { searchParams } = new URL(`${req.url}`)
+  const imageType = searchParams.get("type")
+
+  const [calFontData, interFontData, interFontMediumData] = await Promise.all([
+    calFont,
+    interFont,
+    interFontMedium,
+  ])
+  const ogConfig = {
+    width: 1200,
+    height: 630,
+    fonts: [
+      { name: "inter", data: interFontData, weight: 400 },
+      { name: "inter", data: interFontMediumData, weight: 500 },
+      { name: "cal", data: calFontData, weight: 400 },
+      { name: "cal", data: calFontData, weight: 600 },
+    ] as SatoriOptions["fonts"],
+  }
+
+  switch (imageType) {
+    case "page": {
+      const { title, description } = pageSchema.parse({
+        title: searchParams.get("title"),
+        description: searchParams.get("description"),
+        imageType,
+      })
+      const img = new ImageResponse(
+        <Page title={title} description={description} />,
+        ogConfig
+      ) as {
+        body: Buffer
       }
-    )
-  } catch (e: any) {
-    console.log(`${e.message}`)
-    return new Response(`Failed to generate the image`, {
-      status: 500,
-    })
+
+      return new Response(img.body, {
+        status: 200,
+        headers: { "Content-Type": "image/png" },
+      })
+    }
+
+    default:
+      return new Response("What you're looking for is not here..", {
+        status: 404,
+      })
   }
 }

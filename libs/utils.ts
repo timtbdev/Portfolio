@@ -21,3 +21,19 @@ export function absoluteUrl(path: string) {
 export function getUrl() {
   return process.env.NEXT_PUBLIC_APP_URL
 }
+
+interface PageAttributes {
+  title: string
+  description: string
+}
+
+export function getPageOgImageUrl(title: string, description: string) {
+  const attributes = [
+    `?type=page`,
+    `&title=${encodeURIComponent(title)}`,
+    `&description=${encodeURIComponent(description)}`,
+    // Joining a multiline string for readability.
+  ].join("")
+
+  return absoluteUrl(`api/og${encodeURIComponent(attributes)}`)
+}
