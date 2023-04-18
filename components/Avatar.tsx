@@ -14,7 +14,8 @@ const Avatar: FC<AvatarProps> = ({ large = false, image, description }) => {
         src={image}
         alt={description}
         className="h-[92px] w-[92px] rounded-full bg-gray-100 object-cover dark:bg-neutral-800/90"
-        priority
+        placeholder="blur"
+        priority={true}
       />
     </div>
   )
