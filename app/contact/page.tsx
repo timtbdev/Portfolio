@@ -58,7 +58,7 @@ const ContactPage = () => {
             <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:col-span-2 lg:gap-8">
               {contact.map((item) => (
                 <Address
-                  id={item.title}
+                  id={item.id}
                   title={item.title}
                   href={item.href}
                   address={item.address}
