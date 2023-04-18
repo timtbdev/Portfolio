@@ -7,7 +7,7 @@ const Heading = () => {
     <>
       <>
         <div className="flex flex-col place-items-center gap-6 py-2 md:py-8">
-          <div className="flex justify-center">
+          <div className="mt-6 flex justify-center sm:mt-8">
             <Avatar
               image={ProfileImage}
               description="Profile image"

@@ -13,7 +13,7 @@ const Photo: FC<PhotoProps> = ({ image, description = "", className = "" }) => {
     <>
       <div
         className={cn(
-          "relative mx-auto max-w-xl overflow-hidden rounded-xl bg-gray-50 p-3 shadow-sm shadow-black/5 ring-1 ring-black/10 dark:bg-slate-800",
+          "relative mx-auto h-[500px] w-full max-w-2xl overflow-hidden rounded-xl bg-gray-50 p-3 shadow-sm shadow-black/5 ring-1 ring-black/10 dark:bg-slate-800",
           className
         )}
       >
@@ -21,8 +21,8 @@ const Photo: FC<PhotoProps> = ({ image, description = "", className = "" }) => {
           className="relative rounded-lg"
           src={image}
           alt={description}
-          width={600}
-          height={600}
+          fill={true}
+          objectFit="cover"
           placeholder="blur"
           priority={true}
         />

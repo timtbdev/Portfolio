@@ -1,10 +1,10 @@
 import { FC, ReactNode } from "react"
 import Image from "next/image"
+import { shimmer, toBase64 } from "@/libs/utils"
 
-import { Blog } from "types"
+import { BlogAttributes } from "types"
 
-/* eslint-disable @next/next/no-img-element */
-type PostListProps = Blog
+type PostListProps = BlogAttributes
 
 const PostList: FC<PostListProps> = ({
   id,
@@ -30,6 +30,10 @@ const PostList: FC<PostListProps> = ({
               alt=""
               fill={true}
               priority={true}
+              placeholder="blur"
+              blurDataURL={`data:image/svg+xml;base64,${toBase64(
+                shimmer(256, 256)
+              )}`}
               className="absolute inset-0 h-full w-full rounded-2xl bg-gray-50 object-cover"
             />
             <div className="absolute inset-0 rounded-2xl ring-1 ring-inset ring-gray-900/10" />
@@ -65,6 +69,10 @@ const PostList: FC<PostListProps> = ({
                   width={40}
                   height={40}
                   priority={true}
+                  placeholder="blur"
+                  blurDataURL={`data:image/svg+xml;base64,${toBase64(
+                    shimmer(40, 40)
+                  )}`}
                   className="rounded-full bg-slate-500 dark:bg-slate-600"
                 />
                 <div className="text-sm leading-6">

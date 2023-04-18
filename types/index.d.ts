@@ -54,7 +54,7 @@ export type Author = {
   imageUrl: string
 }
 
-export type Blog = {
+export type BlogAttributes = {
   id: number
   title: string
   href: string
@@ -66,7 +66,7 @@ export type Blog = {
   author: Author
 }
 
-export type Address = {
+export type AddressAttributes = {
   id: number
   title: string
   href: string

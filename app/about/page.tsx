@@ -50,7 +50,7 @@ export const metadata: Metadata = {
 const AboutPage = () => {
   return (
     <>
-      <div className="mx-auto max-w-7xl px-6 lg:px-8">
+      <div className="mx-auto mb-10 max-w-7xl px-6 sm:mb-14 lg:px-8">
         <div className="mx-auto max-w-2xl px-8 text-center lg:max-w-4xl lg:px-10">
           <Connector />
           <Number number={1} className="mb-8 opacity-70 md:mb-6" />

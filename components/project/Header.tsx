@@ -1,5 +1,6 @@
 import { FC } from "react"
 import Image from "next/image"
+import { shimmer, toBase64 } from "@/libs/utils"
 import dateFormat from "date-fns/format"
 
 interface HeaderProps {
@@ -30,7 +31,11 @@ const Header: FC<HeaderProps> = ({
                 width={80}
                 height={80}
                 alt={iconDescription}
-                priority
+                placeholder="blur"
+                blurDataURL={`data:image/svg+xml;base64,${toBase64(
+                  shimmer(80, 80)
+                )}`}
+                priority={true}
               />
             </div>
 

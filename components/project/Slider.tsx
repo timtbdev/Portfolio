@@ -7,7 +7,7 @@ import { useKeenSlider } from "keen-slider/react"
 
 import { cn } from "@libs/utils"
 import "keen-slider/keen-slider.min.css"
-import { clsx } from "clsx"
+import { shimmer, toBase64 } from "@libs/utils"
 
 interface SliderProps {
   images: string[]
@@ -40,7 +40,11 @@ const Slider: FC<SliderProps> = ({ images }) => {
               width={640}
               height={840}
               alt="Screenshot"
-              priority
+              placeholder="blur"
+              blurDataURL={`data:image/svg+xml;base64,${toBase64(
+                shimmer(640, 840)
+              )}`}
+              priority={true}
             />
           </div>
         ))}
