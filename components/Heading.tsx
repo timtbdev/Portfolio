@@ -1,5 +1,4 @@
 import { Avatar } from "@/components"
-import { MouseIcon } from "@/icons"
 import ProfileImage from "@/public/profile.jpg"
 
 const Heading = () => {
@@ -14,7 +13,7 @@ const Heading = () => {
               large={true}
             />
           </div>
-          <h2 className="text-center font-calsans text-4xl font-extrabold leading-8 tracking-tight text-slate-900 dark:text-slate-200">
+          <h2 className="text-center font-calsans text-5xl font-extrabold leading-8 tracking-tight text-slate-900 dark:text-slate-200">
             Hello
           </h2>
           <h2 className="mx-auto max-w-3xl px-4 text-center text-xl font-medium text-slate-600 dark:text-slate-400">
@@ -32,7 +31,6 @@ const Heading = () => {
             </p>
             <p className="mb-2">This is my Portfolio.</p>
           </h2>
-          <MouseIcon className="h-9 w-9 animate-bounce text-slate-500 opacity-50 dark:text-slate-500" />
         </div>
       </>
     </>

@@ -1,6 +1,6 @@
 import { FC, ReactNode } from "react"
 import Image, { StaticImageData } from "next/image"
-import { cn } from "@/libs/utils"
+import { cn, shimmer, toBase64 } from "@/libs/utils"
 
 interface PhotoProps {
   image: StaticImageData
@@ -13,18 +13,20 @@ const Photo: FC<PhotoProps> = ({ image, description = "", className = "" }) => {
     <>
       <div
         className={cn(
-          "relative mx-auto w-full max-w-xl overflow-hidden rounded-xl bg-gray-50 p-3 shadow-sm shadow-black/5 ring-1 ring-black/10 dark:bg-slate-800 sm:max-w-2xl",
+          "lg:aspect-square relative flex aspect-[16/9] sm:aspect-[2/1] lg:w-[600px]",
           className
         )}
       >
         <Image
-          className="relative rounded-lg"
           src={image}
           alt={description}
-          height={650}
-          width={650}
-          placeholder="blur"
+          fill={true}
           priority={true}
+          placeholder="blur"
+          blurDataURL={`data:image/svg+xml;base64,${toBase64(
+            shimmer(256, 256)
+          )}`}
+          className="absolute inset-0 h-full w-full rounded-2xl bg-gray-50 object-cover"
         />
       </div>
     </>

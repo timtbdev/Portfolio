@@ -11,7 +11,7 @@ const Title: FC<TitleProps> = ({ children, className = "" }) => {
     <>
       <span
         className={cn(
-          "block font-calsans text-5xl tracking-tight text-slate-900 dark:text-slate-100",
+          "block font-calsans text-4xl tracking-tight text-slate-900 dark:text-slate-100",
           className
         )}
       >
