@@ -13,7 +13,7 @@ const Photo: FC<PhotoProps> = ({ image, description = "", className = "" }) => {
     <>
       <div
         className={cn(
-          "lg:aspect-square relative flex aspect-[16/9] sm:aspect-[2/1] lg:w-[600px]",
+          "lg:aspect-square ring-photo shadow-photo relative flex aspect-[16/9] rounded-2xl shadow-md ring-1 sm:aspect-[2/1] lg:max-w-2xl",
           className
         )}
       >
