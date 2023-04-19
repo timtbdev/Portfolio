@@ -1,22 +1,26 @@
 import { FC } from "react"
 
 import { Project } from "types"
-import { Browser, Connector, Feature, Header, Slider } from "./project/index"
+import { Browser, Year, Line, Feature, Header, Slider } from "./project/index"
+import { formatYearMonth } from "@/libs/utils"
 
 interface ProjectProps {
   idx: number
   project: Project
+  length: number
 }
 
 const Project: FC<ProjectProps> = ({
   idx,
   project,
+  length
 }) => {
   return (
     <>
       <div className="mx-auto max-w-5xl px-4 sm:px-8">
-        {idx != 0 && (<Connector />) }
         {/* Body */}
+        <Year year={formatYearMonth(project.releaseDate)}/>
+        <Line/>
         <Browser key={project.url + idx} url={project.url}>
           <div
             key={idx}
@@ -28,7 +32,7 @@ const Project: FC<ProjectProps> = ({
               </h2>
               <Header
                 title={project.title}
-                releaseDate={project.releaseDate}
+                languages={project.languages}
                 icon={project.icon}
                 iconDescription={project.iconDescription}
                 type={project.type}
@@ -55,6 +59,7 @@ const Project: FC<ProjectProps> = ({
           </div>
         </Browser>
       </div>
+      {idx != length-1 && (<Line/>)}
     </>
   )
 }

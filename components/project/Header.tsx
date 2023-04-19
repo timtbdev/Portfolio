@@ -1,11 +1,10 @@
 import { FC } from "react"
 import Image from "next/image"
 import { shimmer, toBase64 } from "@/libs/utils"
-import dateFormat from "date-fns/format"
 
 interface HeaderProps {
   title: string
-  releaseDate: string
+  languages: Array<string>
   icon: string
   iconDescription: string
   type: string
@@ -13,7 +12,7 @@ interface HeaderProps {
 
 const Header: FC<HeaderProps> = ({
   title,
-  releaseDate,
+  languages,
   icon,
   iconDescription,
   type,
@@ -47,8 +46,15 @@ const Header: FC<HeaderProps> = ({
                 {title}
               </p>
 
-              <p className="text-sm font-medium text-slate-500 dark:text-slate-400">
-                {dateFormat(new Date(releaseDate), "MMMM yyyy")}
+              <p className="mt-1.5 text-sm font-medium text-slate-500">
+                {languages.map((item, idx) => (
+                  <span
+                    key={idx + item}
+                    className="mr-1.5 rounded-lg bg-gray-50 px-2 py-0.5 ring-1 ring-black/5 dark:bg-slate-700/50 dark:ring-white/10"
+                  >
+                    {item}
+                  </span>
+                ))}
               </p>
             </div>
           </div>

@@ -6,7 +6,7 @@ import { Footer, Grid, Header, ThemeProvider, TwIndicator } from "@/components"
 import { metaData } from "@/config/meta"
 import { Analytics as VercelAnalytics } from "@vercel/analytics/react"
 
-import { absoluteUrl, cn, constructOgImageUri, getUrl } from "@libs/utils"
+import { absoluteUrl, cn, constructOgImageUri } from "@libs/utils"
 
 interface RootLayoutProps {
   children: React.ReactNode
@@ -121,7 +121,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: getUrl(),
+    url: absoluteUrl(),
     title: metaData.title,
     description: metaData.description,
     siteName: metaData.title,

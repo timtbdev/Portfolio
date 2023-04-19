@@ -14,12 +14,16 @@ export function formatDate(input: string | number): string {
   })
 }
 
-export function absoluteUrl(path: string = "") {
-  return `${process.env.NEXT_PUBLIC_APP_URL}${path}`
+export function formatYearMonth(input: string | number): string {
+  const date = new Date(input)
+  return date.toLocaleDateString("en-US", {
+    month: "long",
+    year: "numeric",
+  })
 }
 
-export function getUrl() {
-  return process.env.NEXT_PUBLIC_APP_URL
+export function absoluteUrl(path: string = "") {
+  return `${process.env.NEXT_PUBLIC_APP_URL}${path}`
 }
 
 export function constructOgImageUri(

@@ -16,6 +16,7 @@ export type Project = {
   id: number
   title: string
   releaseDate: string
+  languages: Array<string>
   icon: string
   iconDescription: string
   type: string

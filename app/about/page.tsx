@@ -66,7 +66,7 @@ const AboutPage = () => {
               className="mx-auto text-center"
             />
             <figcaption className="my-4 text-sm text-slate-400 dark:text-slate-500 sm:mb-6">
-              And this is what I look like. Ulaanbaatar, Mongolia, 2016
+              And this is what I look like. Ulaanbaatar, Mongolia, 2015
             </figcaption>
             <Title className="mb-4 sm:mb-6">
               <Decorator>Build.</Decorator>
@@ -78,24 +78,8 @@ const AboutPage = () => {
               like Jetpack Compose, Next.js and Tailwind Css.
             </Text>
             <Text>
-              Currently, I&apos;ve been working on personal projects such as
-            </Text>
-            <Text className="mb-4 sm:mb-6">
-              <a
-                className="... text-blue-500 after:content-['_↗'] dark:text-sky-500"
-                href="https://www.andy.mn"
-                target="_blank"
-              >
-                Andy
-              </a>{" "}
-              and{" "}
-              <a
-                className="... text-blue-500 after:content-['_↗'] dark:text-sky-500"
-                href="https://www.signapp.net"
-                target="_blank"
-              >
-                Sign App
-              </a>{" "}
+              Currently, I&apos;ve been working on personal projects to improve
+              my skills.
             </Text>
             <Text className="mb-4 sm:mb-6">
               Outside of Android, I&apos;m a passionate runner, husband, and
