@@ -28,6 +28,7 @@ const Navigation: FC<NavigationProps> = ({ path, menu }) => {
           <Link
             href={url}
             key={idx}
+            scroll={true}
             onMouseEnter={() => setHoveredItem(title)}
             onMouseLeave={() => setHoveredItem("")}
             className="group relative inline-flex items-center rounded-full bg-transparent px-4 py-1 text-base font-medium text-gray-600 ring-1 ring-transparent transition duration-200 active:scale-[96%] active:ring-black/20 dark:text-slate-400 dark:active:ring-white/20"

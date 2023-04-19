@@ -21,6 +21,7 @@ const MobileBottomNavigation: FC<MobileBottomNavigationProps> = ({
             <Link
               href={item.url}
               key={item.idx + item.title}
+              scroll={true}
               className={cn(
                 "group inline-flex flex-col items-center justify-center px-5",
                 {

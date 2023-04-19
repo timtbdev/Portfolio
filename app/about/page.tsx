@@ -1,12 +1,5 @@
 import { Metadata } from "next"
-import {
-  Connector,
-  Decorator,
-  Link,
-  Photo,
-  Text,
-  Title,
-} from "@/components/blog"
+import { Decorator, Photo, Text, Title } from "@/components/blog"
 import { metaData } from "@/config/meta"
 import { absoluteUrl, constructOgImageUri } from "@/libs/utils"
 import FamilyImage from "@/public/family.jpg"
