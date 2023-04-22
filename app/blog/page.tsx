@@ -54,7 +54,7 @@ const BlogPage = () => {
                 <PostList
                   id={post.id}
                   title={post.title}
-                  href={post.href}
+                  slug={post.slug}
                   description={post.description}
                   imageUrl={post.imageUrl}
                   date={post.date}

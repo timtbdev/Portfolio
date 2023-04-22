@@ -2,11 +2,13 @@
 
 import React, { FC, useState } from "react"
 import Image from "next/image"
-import { AnimatePresence, Variants, motion } from "framer-motion"
+import { motion } from "framer-motion"
 import { useKeenSlider } from "keen-slider/react"
 
 import { cn } from "@libs/utils"
 import "keen-slider/keen-slider.min.css"
+import { Seperator } from "@/components/blog"
+
 import { shimmer, toBase64 } from "@libs/utils"
 
 interface SliderProps {
@@ -37,8 +39,8 @@ const Slider: FC<SliderProps> = ({ images }) => {
             <span className="sr-only">Screenshot</span>
             <Image
               src={image}
-              width={640}
-              height={840}
+              width={440}
+              height={440}
               alt="Screenshot"
               placeholder="blur"
               blurDataURL={`data:image/svg+xml;base64,${toBase64(
@@ -51,7 +53,14 @@ const Slider: FC<SliderProps> = ({ images }) => {
       </div>
       {loaded && instanceRef.current && (
         <>
-          <nav className="flex items-center justify-between border-t border-dashed border-black/5 px-4 dark:border-white/10 sm:px-0">
+          {/* Seperator for desktop */}
+          <Seperator
+            variant="gradient-from-lr"
+            className="hidden sm:flex sm:flex-1"
+          />
+          {/* Seperator for mobile */}
+          <Seperator variant="solid" className="flex flex-1 md:hidden" />
+          <nav className="flex items-center justify-between px-4 dark:border-white/10 sm:px-0">
             <div className="mt-6 flex w-0 flex-1">
               <button
                 onClick={(e: any) =>

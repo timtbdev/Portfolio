@@ -1,5 +1,6 @@
-import { FC, ReactNode } from "react"
+import { FC } from "react"
 import Image from "next/image"
+import Link from "next/link"
 import { shimmer, toBase64 } from "@/libs/utils"
 
 import { BlogAttributes } from "types"
@@ -9,7 +10,7 @@ type PostListProps = BlogAttributes
 const PostList: FC<PostListProps> = ({
   id,
   title,
-  href,
+  slug,
   description,
   imageUrl,
   date,
@@ -19,9 +20,12 @@ const PostList: FC<PostListProps> = ({
 }) => {
   return (
     <>
-      <div className="ring-trisma dark:ring-dark-trisma mx-auto rounded-lg bg-gray-50 p-5 hover:bg-white dark:bg-slate-800/50 dark:hover:bg-slate-800">
-        <article
-          key={id}
+      <div
+        key={id + slug}
+        className="ring-trisma dark:ring-dark-trisma group mx-auto rounded-lg bg-gray-50 p-5 hover:bg-white dark:bg-slate-800/50 dark:hover:bg-slate-800"
+      >
+        <Link
+          href={`/blog/${slug}`}
           className="relative isolate flex flex-col gap-8 lg:flex-row"
         >
           <div className="lg:aspect-square relative aspect-[16/9] sm:aspect-[2/1] lg:w-64 lg:shrink-0">
@@ -43,19 +47,13 @@ const PostList: FC<PostListProps> = ({
               <time dateTime={dateTime} className="text-gray-500">
                 {date}
               </time>
-              <a
-                href={category.href}
-                className="bg-gray-10 relative z-10 whitespace-nowrap rounded-full px-4 py-1.5 font-medium text-slate-600 shadow-sm shadow-black/5 ring-1 ring-black/10 transition duration-200 hover:ring-slate-600 dark:bg-slate-700/30 dark:text-slate-300 dark:ring-white/20 dark:hover:ring-slate-300"
-              >
+              <div className="bg-gray-10 relative whitespace-nowrap rounded-full px-4 py-1.5 font-medium text-slate-500 shadow-sm shadow-black/5 ring-1 ring-black/10 dark:bg-slate-700/30 dark:ring-white/10">
                 {category.title}
-              </a>
+              </div>
             </div>
             <div className="group relative max-w-xl">
-              <h3 className="mt-3 text-lg font-semibold leading-6 text-slate-900 group-hover:text-gray-600 dark:text-slate-400">
-                <a href={href}>
-                  <span className="absolute inset-0" />
-                  {title}
-                </a>
+              <h3 className="mt-3 text-lg font-semibold leading-6 text-slate-900 dark:text-slate-400">
+                {title}
               </h3>
               <p className="mt-5 text-sm leading-6 text-slate-600">
                 {description}
@@ -85,7 +83,7 @@ const PostList: FC<PostListProps> = ({
               </div>
             </div>
           </div>
-        </article>
+        </Link>
       </div>
     </>
   )

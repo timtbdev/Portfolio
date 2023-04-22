@@ -2,7 +2,16 @@ import "@styles/tailwind.css"
 import type { Metadata } from "next"
 import { Inter as FontSans } from "next/font/google"
 import localFont from "next/font/local"
-import { Footer, Grid, Header, ThemeProvider, TwIndicator } from "@/components"
+import {
+  Container,
+  Footer,
+  Grid,
+  Header,
+  Main,
+  ThemeProvider,
+  TwIndicator,
+  Wrapper,
+} from "@/components/base"
 import { metaData } from "@/config/meta"
 import { Analytics as VercelAnalytics } from "@vercel/analytics/react"
 
@@ -150,29 +159,27 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
-    <html
-      lang="en"
-      className={cn(
-        "layout h-full scroll-smooth font-sans antialiased",
-        fontSans.variable,
-        calSans.variable
-      )}
-      suppressHydrationWarning
-    >
+    <html lang="en" className="layout" suppressHydrationWarning>
       <body
-        className="layout h-full bg-white font-sans antialiased dark:bg-slate-800/90"
+        className={cn(
+          "layout h-full scroll-smooth",
+          fontSans.variable,
+          calSans.variable
+        )}
         style={{ WebkitTapHighlightColor: "transparent" }}
       >
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          <div className="min-h-full selection:bg-blue-500/10 selection:text-blue-500 dark:selection:bg-sky-500/10 dark:selection:text-sky-500">
+          <Wrapper>
             <Header />
-            <main className="mx-auto max-w-5xl">
-              <Grid>{children}</Grid>
-            </main>
+            <Container>
+              <Grid>
+                <Main>{children}</Main>
+              </Grid>
+            </Container>
             <Footer />
             <VercelAnalytics />
             <TwIndicator />
-          </div>
+          </Wrapper>
         </ThemeProvider>
       </body>
     </html>

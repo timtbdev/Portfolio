@@ -1,10 +1,9 @@
 import { FC } from "react"
 import Image from "next/image"
-import { shimmer, toBase64 } from "@/libs/utils"
 
 interface HeaderProps {
   title: string
-  languages: Array<string>
+  tags: Array<string>
   icon: string
   iconDescription: string
   type: string
@@ -12,51 +11,40 @@ interface HeaderProps {
 
 const Header: FC<HeaderProps> = ({
   title,
-  languages,
+  tags,
   icon,
   iconDescription,
   type,
 }) => {
   return (
     <>
-      <div className="border-b border-dashed border-black/5 pb-3 dark:border-white/10">
-        <div className="sm:mt-10 sm:flex sm:items-center sm:justify-between">
-          <div className="sm:flex sm:space-x-5">
-            <div className="mx-auto h-20 w-20 shrink-0 rounded-full">
-              <span className="sr-only">{iconDescription}</span>
-              <Image
-                className="rounded-full"
-                src={icon}
-                width={80}
-                height={80}
-                alt={iconDescription}
-                placeholder="blur"
-                blurDataURL={`data:image/svg+xml;base64,${toBase64(
-                  shimmer(80, 80)
-                )}`}
-                priority={true}
-              />
-            </div>
-
-            <div className="mt-4 text-center sm:mt-0 sm:pt-1 sm:text-left">
-              <p className="inline-flex text-sm font-medium text-slate-500 dark:text-slate-400">
-                {type}
-              </p>
-              <p className="font-calsans text-xl text-slate-900 dark:text-slate-200 sm:text-2xl">
-                {title}
-              </p>
-
-              <p className="mt-1.5 text-sm font-medium text-slate-500">
-                {languages.map((item, idx) => (
-                  <span
-                    key={idx + item}
-                    className="mr-1.5 rounded-lg bg-gray-50 px-2 py-0.5 ring-1 ring-black/5 dark:bg-slate-700/50 dark:ring-white/10"
-                  >
-                    {item}
-                  </span>
-                ))}
-              </p>
-            </div>
+      <div className="relative p-3">
+        <div className="relative flex flex-col items-center justify-center gap-6 rounded-xl border border-dashed border-slate-500/50 p-4 dark:border-white/10 sm:flex-row">
+          <div className="text-normal absolute left-2.5 top-0 -translate-y-1/2 bg-white px-2 font-normal text-slate-500 dark:bg-slate-800">
+            {type}
+          </div>
+          <Image
+            src={icon}
+            alt={iconDescription}
+            width={80}
+            height={80}
+            priority={true}
+            className="rounded-full"
+          />
+          <div className="flex-auto text-center sm:text-left">
+            <h3 className="text-xl font-semibold tracking-tight text-slate-900 dark:text-slate-100">
+              {title}
+            </h3>
+            <p className="mt-2">
+              {tags.map((tag, idx) => (
+                <span
+                  key={idx + tag}
+                  className="mr-1 inline-flex items-center rounded-full bg-gray-50 px-2 py-1 text-sm font-medium text-slate-500 ring-1 ring-inset ring-gray-500/10 dark:bg-slate-700/30 dark:ring-white/10"
+                >
+                  {tag}
+                </span>
+              ))}
+            </p>
           </div>
         </div>
       </div>

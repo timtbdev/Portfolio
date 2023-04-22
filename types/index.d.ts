@@ -12,18 +12,17 @@ export type Feature = {
   description: string
 }
 
-export type Project = {
+export type ProjectAttributes = {
   id: number
   title: string
   releaseDate: string
-  languages: Array<string>
+  tags: Array<string>
   icon: string
   iconDescription: string
   type: string
   url: string
   features: Feature[]
-  images: string[]
-  text: string
+  screenshot: string
 }
 export type Footer = {
   socials: Social[]
@@ -58,7 +57,7 @@ export type Author = {
 export type BlogAttributes = {
   id: number
   title: string
-  href: string
+  slug: string
   description: string
   imageUrl: string
   date: string
@@ -72,4 +71,16 @@ export type AddressAttributes = {
   title: string
   href: string
   address: string
+}
+
+export type ImageAttributes = {
+  href: string
+  description: string
+}
+
+export type BioAttributes = {
+  title: string
+  text: string
+  image: string
+  imageDescription: string
 }

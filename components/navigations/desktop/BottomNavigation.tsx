@@ -1,6 +1,4 @@
-import { FC, useEffect, useState } from "react"
-import { Transition } from "@headlessui/react"
-import { useMediaQuery } from "react-responsive"
+import { FC } from "react"
 
 import { Footer } from "types"
 
@@ -8,7 +6,6 @@ interface BottomNavigationProps {
   footer: Footer
 }
 const BottomNavigation: FC<BottomNavigationProps> = ({ footer }) => {
-  const isTablet = useMediaQuery({ query: "(min-width: 640px)" })
   return (
     <>
       <div className="mx-auto w-full max-w-7xl px-2 py-3 md:flex md:items-center md:justify-between">
