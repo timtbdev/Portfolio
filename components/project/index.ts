@@ -1,8 +1,0 @@
-export { default as Features } from "./Features"
-export { default as Slider } from "./Slider"
-export { default as Line } from "./Line"
-export { default as Year } from "./Year"
-export { default as Container } from "./Container"
-export { default as Browser } from "./Browser"
-export { default as Header } from "./Header"
-export { default as ScreenShot } from "./ScreenShot"

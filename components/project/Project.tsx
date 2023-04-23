@@ -1,17 +1,14 @@
 import { FC } from "react"
-import {
-  Browser,
-  Container,
-  Features,
-  Header,
-  Line,
-  ScreenShot,
-  Slider,
-  Year,
-} from "@/components/project/index"
 import { formatYearMonth } from "@/libs/utils"
 
 import { ProjectAttributes } from "types"
+import Browser from "./Browser"
+import Container from "./Container"
+import Features from "./Features"
+import Header from "./Header"
+import Line from "./Line"
+import ScreenShot from "./ScreenShot"
+import Year from "./Year"
 
 interface ProjectProps {
   idx: number
@@ -28,7 +25,6 @@ const Project: FC<ProjectProps> = ({ idx, project, length }) => {
         <Line />
         <Browser key={project.url + idx} url={project.url}>
           <Container>
-            {/* Left side */}
             <div className="overflow-hidden">
               <Header
                 title={project.title}
@@ -37,11 +33,8 @@ const Project: FC<ProjectProps> = ({ idx, project, length }) => {
                 iconDescription={project.iconDescription}
                 type={project.type}
               />
-
               <Features features={project.features} />
             </div>
-            {/* Right side */}
-
             <ScreenShot screenshot={project.screenshot} />
           </Container>
         </Browser>

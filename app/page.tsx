@@ -1,5 +1,5 @@
 import Image from "next/image"
-import { Project } from "@/components"
+import { Project } from "@/components/"
 import { bio, projects } from "@/config/"
 
 const HomePage = () => {

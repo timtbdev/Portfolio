@@ -1,2 +1,1 @@
-"use client"
-export { default as Project } from "./Project"
+export { default as Project } from "./project/Project"

@@ -50,7 +50,7 @@ export const projects: ProjectAttributes[] = [
       },
       {
         description: "Firebase Cloud Firestore, Firebase Cloud Functions",
-        title: "Backend & Design Tools",
+        title: "Backend",
       },
     ],
     screenshot: "/app-1/screen.png",
@@ -76,7 +76,7 @@ export const projects: ProjectAttributes[] = [
       },
       {
         description: "Firebase Cloud Firestore, Firebase Cloud Functions",
-        title: "Backend & Design Tools",
+        title: "Backend",
       },
     ],
     screenshot: "/app-2/screen.png",
