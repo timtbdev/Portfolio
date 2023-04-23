@@ -16,10 +16,6 @@ export const config = {
   runtime: "edge",
 }
 
-const interRegular = fetch(
-  new URL("../../public/fonts/Inter-Regular.ttf", import.meta.url)
-).then((res) => res.arrayBuffer())
-
 const interBold = fetch(
   new URL("../../public/fonts/Inter-Bold.ttf", import.meta.url)
 ).then((res) => res.arrayBuffer())
@@ -27,7 +23,6 @@ const interBold = fetch(
 export default async function handler(req: NextRequest) {
   try {
     const { searchParams } = new URL(`${req.url}`)
-    const fontRegular = await interRegular
     const fontBold = await interBold
 
     const { title, subTitle, tags, slug } = ogImageSchema.parse({
@@ -43,12 +38,6 @@ export default async function handler(req: NextRequest) {
         width: 1200,
         height: 630,
         fonts: [
-          {
-            name: "Inter",
-            data: fontRegular,
-            weight: 400,
-            style: "normal",
-          },
           {
             name: "Inter",
             data: fontBold,
