@@ -6,7 +6,7 @@ const HomePage = () => {
   const length = projects.length
   return (
     <>
-      <div className="mx-auto text-center">
+      <div className="mx-auto mb-4 text-center">
         <Image
           src={bio.image}
           alt={bio.imageDescription}
