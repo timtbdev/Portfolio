@@ -14,7 +14,7 @@
     "@heroicons/react": "^2.0.17",
     "@n8tb1t/use-scroll-position": "^2.0.3",
     "@tailwindcss/container-queries": "^0.1.1",
-    "@types/node": "18.15.13",
+    "@types/node": "18.16.0",
     "@types/react": "18.0.38",
     "@types/react-dom": "18.0.11",
     "@vercel/analytics": "^1.0.0",
@@ -50,7 +50,7 @@
     "husky": "^8.0.3",
     "postcss": "^8.4.23",
     "postcss-100vh-fix": "^1.0.2",
-    "prettier": "^2.8.7",
+    "prettier": "^2.8.8",
     "prettier-plugin-tailwindcss": "^0.2.7",
     "pretty-quick": "^3.1.3"
   }
