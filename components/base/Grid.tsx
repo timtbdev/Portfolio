@@ -9,7 +9,7 @@ const Grid: FC<GridProps> = ({ children }) => {
     <>
       <div className="relative isolate">
         <svg
-          className="absolute inset-0 -z-10 h-full w-full stroke-slate-200/70 [mask-image:radial-gradient(100%_100%_at_top_right,white,transparent)] dark:stroke-slate-700/20"
+          className="absolute inset-0 -z-10 h-full w-full stroke-black/5 [mask-image:radial-gradient(100%_100%_at_top_right,white,transparent)] dark:stroke-slate-700/20"
           aria-hidden="true"
         >
           <defs>

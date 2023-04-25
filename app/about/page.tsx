@@ -43,25 +43,26 @@ export const metadata: Metadata = {
 const AboutPage = () => {
   return (
     <>
-      <div className="mx-auto max-w-2xl">
-        <div className="relative border-b border-l border-dashed border-slate-500/50 px-6 py-4">
+      <div className="mx-auto max-w-5xl">
+        <div className="relative mx-auto max-w-3xl border-b border-l border-dashed border-slate-500/50 px-6 py-4 md:border-y">
+          <div className="absolute -top-1.5 left-0 h-2 w-full bg-gradient-to-r from-white from-20% via-white/5 to-white to-80% dark:from-slate-800 dark:from-20% dark:via-slate-800/5 dark:to-slate-800 dark:to-80%"></div>
           <div className="absolute -bottom-1.5 left-0 h-2 w-full bg-gradient-to-r from-white/10 via-white/5 to-white to-90% dark:from-slate-800/10 dark:via-slate-800/5 dark:to-slate-800 dark:to-90%"></div>
           <div className="absolute -left-1.5 bottom-0 h-full w-2 bg-gradient-to-t from-white/10 via-white/5 to-white dark:from-slate-800/10 dark:via-slate-800/5 dark:to-slate-800"></div>
-          <h1 className="font-calsans text-3xl tracking-tight text-slate-900 dark:text-slate-100">
+          <h1 className="mx-auto text-left font-calsans text-3xl tracking-tight text-slate-900 dark:text-slate-100 md:text-center">
             Oh Hello there,
           </h1>
         </div>
-        <div className="relative border-l border-dashed border-slate-500/50 px-6 py-4">
+        <div className="relative mx-auto max-w-3xl border-l border-dashed border-slate-500/50 px-6 py-4">
           <div className="absolute -left-1.5 bottom-0 h-full w-2 bg-gradient-to-b from-white/10 from-20% via-white/5 via-50% to-white to-80% dark:from-slate-800/10 dark:via-slate-800/5 dark:to-slate-800 dark:to-80%"></div>
-          <span className="mb-4 text-lg leading-8 text-slate-600 dark:text-slate-500">
+          <span className="mb-4 block text-lg leading-8 text-slate-600 dark:text-slate-500">
             My name is Tim. I&apos;m an Android and Frontend developer based in
             Hayward, California. I was born and grew up in Mongolia, and studied
             Computer Science in Germany.
           </span>
-          <div className="lg:aspect-square ring-photo shadow-photo relative mx-auto mt-4 flex aspect-[16/9] rounded-2xl text-center shadow-md ring-1 sm:aspect-[2/1] lg:max-w-2xl">
+          <div className="lg:aspect-square ring-photo shadow-photo relative mx-auto mt-4 flex aspect-[16/9] rounded-2xl text-center shadow-md ring-1 sm:aspect-[2/1] lg:max-w-3xl">
             <Image
               src={MeImage}
-              alt="Profile picture"
+              alt="Profile photo"
               fill={true}
               priority={true}
               className="absolute inset-0 h-full w-full rounded-2xl bg-gray-50 object-cover"
@@ -71,14 +72,15 @@ const AboutPage = () => {
             And this is what I look like. Ulaanbaatar, Mongolia, 2015
           </figcaption>
         </div>
-        <div className="relative border-b border-l border-dashed border-slate-500/50 px-6 py-4">
+
+        <div className="relative mx-auto max-w-3xl border-b border-l border-dashed border-slate-500/50 px-6 py-4">
           <div className="absolute -bottom-1.5 left-0 h-2 w-full bg-gradient-to-r from-white/10 via-white/5 to-white to-90% dark:from-slate-800/10 dark:via-slate-800/5 dark:to-slate-800 dark:to-90%"></div>
           <div className="absolute -left-1.5 bottom-0 h-full w-2 bg-gradient-to-t from-white/10 via-white/5 to-white dark:from-slate-800/10 dark:via-slate-800/5 dark:to-slate-800"></div>
           <h1 className="font-calsans text-3xl tracking-tight text-slate-900 line-through decoration-blue-500 dark:text-slate-100 dark:decoration-sky-500">
             Build.
           </h1>
         </div>
-        <div className="relative border-l border-dashed border-slate-500/50 px-6 py-4">
+        <div className="relative mx-auto max-w-3xl border-l border-dashed border-slate-500/50 px-6 py-4">
           <div className="absolute -left-1.5 bottom-0 h-full w-2 bg-gradient-to-b from-white/10 from-20% via-white/5 via-50% to-white to-80% dark:from-slate-800/10 dark:via-slate-800/5 dark:to-slate-800 dark:to-80%"></div>
           <span className="mb-4 block text-lg leading-8 text-slate-600 dark:text-slate-500">
             I started learning Android and Frontend development in 2017. I have
@@ -88,10 +90,10 @@ const AboutPage = () => {
           </span>
           <span className="mb-4 block text-lg leading-8 text-slate-600 dark:text-slate-500">
             Currently, I&apos;ve been working on personal projects to improve my
-            skills. Outside of Android, I&apos;m a passionate runner, husband,
-            and dad.
+            skills. Outside of Android and Frontend, I&apos;m a passionate
+            runner, husband, and dad.
           </span>
-          <div className="lg:aspect-square ring-photo shadow-photo relative mx-auto mt-4 flex aspect-[16/9] rounded-2xl text-center shadow-md ring-1 sm:aspect-[2/1] lg:max-w-2xl">
+          <div className="lg:aspect-square ring-photo shadow-photo relative mx-auto mt-4 flex aspect-[16/9] rounded-2xl text-center shadow-md ring-1 sm:aspect-[2/1] lg:max-w-3xl">
             <Image
               src={FamilyImage}
               alt="Wedding photo"
@@ -104,7 +106,8 @@ const AboutPage = () => {
             City hall wedding. Ulaanbaatar, Mongolia, 2023
           </figcaption>
         </div>
-        <div className="relative border-b border-l border-dashed border-slate-500/50 px-6 py-4">
+
+        <div className="relative mx-auto max-w-3xl border-b border-l border-dashed border-slate-500/50 px-6 py-4">
           <div className="absolute -bottom-1.5 left-0 h-2 w-full bg-gradient-to-r from-white/10 via-white/5 to-white to-90% dark:from-slate-800/10 dark:via-slate-800/5 dark:to-slate-800 dark:to-90%"></div>
           <div className="absolute -left-1.5 bottom-0 h-full w-2 bg-gradient-to-t from-white/10 via-white/5 to-white dark:from-slate-800/10 dark:via-slate-800/5 dark:to-slate-800"></div>
           <h1 className="font-calsans text-3xl tracking-tight text-slate-900 dark:text-slate-100">
@@ -113,7 +116,7 @@ const AboutPage = () => {
             </span>
           </h1>
         </div>
-        <div className="relative border-l border-dashed border-slate-500/50 px-6 py-4">
+        <div className="relative mx-auto max-w-3xl border-l border-dashed border-slate-500/50 px-6 py-4">
           <div className="absolute -left-1.5 bottom-0 h-full w-2 bg-gradient-to-b from-white/10 from-20% via-white/5 via-50% to-white to-80% dark:from-slate-800/10 dark:via-slate-800/5 dark:to-slate-800 dark:to-80%"></div>
           <span className="mb-4 block text-lg leading-8 text-slate-600 dark:text-slate-500">
             Anyway, that&apos;s enough about me.
