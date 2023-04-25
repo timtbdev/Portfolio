@@ -1,6 +1,5 @@
 import { Metadata } from "next"
 import Image from "next/image"
-import { Decorator, Photo, Text, Title } from "@/components/blog"
 import { metaData } from "@/config/meta"
 import { absoluteUrl, constructOgImageUri } from "@/libs/utils"
 import FamilyImage from "@/public/family.jpg"

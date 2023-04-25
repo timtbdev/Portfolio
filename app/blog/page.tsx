@@ -1,5 +1,5 @@
 import { Metadata } from "next"
-import { PostList, Text, Title } from "@/components/blog"
+import { PostList } from "@/components/blog"
 import { absoluteUrl, constructOgImageUri } from "@/libs/utils"
 
 import { blog } from "@config/blog"
