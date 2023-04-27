@@ -1,5 +1,3 @@
-import { GithubIcon, TwitterIcon } from "@/icons"
-
 import { BioAttributes } from "types"
 
 export const bio: BioAttributes = {

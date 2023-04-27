@@ -66,11 +66,13 @@ export type BlogAttributes = {
   author: Author
 }
 
-export type AddressAttributes = {
+export type ContactAttributes = {
   id: number
   title: string
-  href: string
+  text: string
   address: string
+  href: string
+  icon: Icon
 }
 
 export type ImageAttributes = {
