@@ -10,6 +10,7 @@ export const contacts: Contact[] = [
     href: "mailto:timtb.dev@gmail.com",
     text: "Please drop me an email.",
     icon: EmailIcon,
+    iconColor: "text-green-500",
   },
   {
     id: 2,
@@ -18,6 +19,7 @@ export const contacts: Contact[] = [
     href: "https://twitter.com/timtbdev",
     text: "Please follow me on twitter.",
     icon: TwitterIcon,
+    iconColor: "text-blue-500",
   },
   {
     id: 3,
@@ -26,5 +28,6 @@ export const contacts: Contact[] = [
     href: "https://github.com/timtbdev",
     text: "Please visit my Github account.",
     icon: GithubIcon,
+    iconColor: "text-slate-900 dark:text-slate-400",
   },
 ]

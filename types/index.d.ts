@@ -73,6 +73,7 @@ export type ContactAttributes = {
   address: string
   href: string
   icon: Icon
+  iconColor: string
 }
 
 export type ImageAttributes = {

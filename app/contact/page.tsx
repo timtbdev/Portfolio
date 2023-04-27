@@ -60,16 +60,19 @@ const ContactPage = () => {
           </span>
         </div>
         <div className="grid gap-8 px-5 sm:grid-cols-1 md:grid-cols-3 md:px-0">
+          <span className="text-blue-500"></span>
+          <span className="text-green-500"></span>
+          <span className="text-slate-900"></span>
           {contacts.map((item) => (
             <a
-              className="block rounded-xl bg-white p-8 text-slate-500 shadow-sm ring-1 ring-black/5 transition-all hover:-translate-y-1 hover:shadow-md dark:bg-slate-700/50 dark:shadow-white/5 dark:ring-white/10"
+              className="block rounded-xl bg-white p-8 shadow-sm ring-1 ring-black/5 transition-all hover:-translate-y-1 hover:shadow-md dark:bg-slate-700/50 dark:shadow-white/5 dark:ring-white/10"
               href={item.href}
               target="_blank"
               rel="noreferrer"
               aria-label="Twitter"
               key={item.id + item.title}
             >
-              <item.icon className={cn("h-6 w-6 text-slate-500")} />
+              <item.icon className={cn("h-6 w-6", item.iconColor)} />
               <h3 className="mt-3 text-base font-semibold text-slate-700 dark:text-slate-300">
                 {item.title}
               </h3>

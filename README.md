@@ -43,7 +43,7 @@ https://user-images.githubusercontent.com/25026241/234760036-36ca4df7-b5a1-4e60-
 - Page and blogs are using [MDX](https://mdxjs.com/) and [Contentlayer](https://www.contentlayer.dev/)
 - Styled using [Tailwind CSS](https://tailwindcss.com/)
 - Icons using [Heroicons](https://heroicons.com/) and [Lucide](https://lucide.dev/)
-- Validations using [Zod](<(https://www.zod.dev)>)
+- Validations using [Zod](https://www.zod.dev)
 - Written in [TypeScript](https://www.typescriptlang.org/)
 
 ## Code Quality
