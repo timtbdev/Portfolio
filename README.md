@@ -1,36 +1,61 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+<a href="https://timtb.dev">
+  <img alt="Portfolio – Simple and minimal portfolio website" src="https://timtb.dev/images/banner/banner.jpg">
+  <h1 align="center">Portfolio</h1>
+</a>
 
-## Getting Started
+<p align="center">
+  Simple and minimal portfolio website
+</p>
 
-First, run the development server:
+<p align="center">
+  <a href="https://twitter.com/timtbdev">
+    <img src="https://img.shields.io/twitter/follow/timtbdev?style=flat&label=timtbdev&logo=twitter&color=0bf&logoColor=fff" alt="Timtbdev twitter" />
+  </a>
+  <a href="https://github.com/timtbdev/Portfolio">
+    <img src="https://img.shields.io/github/stars/timtbdev/Portfolio?label=timtbdev%2FPortfolio" alt="Portfolio repo star count" />
+  </a>
+</p>
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+# Introduction
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+An open source application built using the new router, server components and everything new in Next.js 13.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+> **Warning**
+> This app is still in progress.
+> This app is using the unstable releases for Next.js 13 and React 18. The new router and app dir is still in beta and not production-ready.
 
-[http://localhost:3000/api/hello](http://localhost:3000/api/hello) is an endpoint that uses [Route Handlers](https://beta.nextjs.org/docs/routing/route-handlers). This endpoint can be edited in `app/api/hello/route.ts`.
+https://user-images.githubusercontent.com/25026241/234760036-36ca4df7-b5a1-4e60-b4ce-e431704c5dfb.mp4
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## Features
 
-## Learn More
+- New `/app` dir,
+- Routing, Layouts, Nested Layouts and Layout Groups
+- Data Fetching, Caching and Mutation
+- Loading UI
+- Route handlers
+- Metadata files
+- Server and Client Components
+- API Routes and Middlewares
+- Authentication using [NextAuth.js](https://next-auth.js.org/)
+- ORM using [Prisma](https://www.prisma.io/)
+- Database on [PlanetScale](https://planetscale.com/)
+- UI Components built using [Radix UI](https://www.radix-ui.com/) and [Headless UI](https://headlessui.com/)
+- Page and blogs are using [MDX](https://mdxjs.com/) and [Contentlayer](https://www.contentlayer.dev/)
+- Styled using [Tailwind CSS](https://tailwindcss.com/)
+- Icons using [Heroicons](https://heroicons.com/) and [Lucide](https://lucide.dev/)
+- Validations using [Zod](<(https://www.zod.dev)>)
+- Written in [TypeScript](https://www.typescriptlang.org/)
 
-To learn more about Next.js, take a look at the following resources:
+## Code Quality
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- [TypeScript](https://www.typescriptlang.org/)
+- [Prettier](https://prettier.io/)
+- [ESLint](https://eslint.org/)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## Miscellaneous
 
-## Deploy on Vercel
+- [Vercel Analytics](https://vercel.com/analytics)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Author
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- Tim ([@timtbdev](https://twitter.com/timtbdev))
