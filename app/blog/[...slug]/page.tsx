@@ -109,10 +109,10 @@ export default async function PostPage({ params }: PostPageProps) {
           />
         </div>
         <figcaption className="my-4 text-sm text-slate-400 dark:text-slate-500 sm:mb-6">
-          And this is what I look like. Ulaanbaatar, Mongolia, 2015
+          {post.imageCaption}
         </figcaption>
+        <Mdx code={post.body.code} />
       </div>
-      <Mdx code={post.body.code} />
     </div>
   )
 }

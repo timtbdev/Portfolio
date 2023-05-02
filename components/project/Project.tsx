@@ -1,7 +1,6 @@
 import { FC } from "react"
 import { formatYearMonth } from "@/libs/utils"
 
-import { ProjectAttributes } from "types"
 import Browser from "./Browser"
 import Container from "./Container"
 import Date from "./Date"

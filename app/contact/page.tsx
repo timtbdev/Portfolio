@@ -73,36 +73,39 @@ const ContactPage = () => {
           <span className="text-green-500"></span>
           <span className="text-slate-900"></span>
 
-          {socials?.map((social, idx) => (
-            <a
-              className="block rounded-xl bg-white p-8 shadow-sm ring-1 ring-black/5 transition-all hover:-translate-y-1 hover:shadow-md dark:bg-slate-700/50 dark:shadow-white/5 dark:ring-white/10"
-              href={social.url}
-              target="_blank"
-              rel="noreferrer"
-              aria-label="Twitter"
-              key={idx + social.title}
-            >
-              {social.icon === "GithubIcon" && (
-                <GithubIcon className={cn("h-6 w-6", social.iconColor)} />
-              )}
-              {social.icon === "TwitterIcon" && (
-                <TwitterIcon className={cn("h-6 w-6", social.iconColor)} />
-              )}
-              {social.icon === "EmailIcon" && (
-                <EmailIcon className={cn("h-6 w-6", social.iconColor)} />
-              )}
+          {socials?.map(
+            (social, idx) =>
+              social && (
+                <a
+                  className="block rounded-xl bg-white p-8 shadow-sm ring-1 ring-black/5 transition-all hover:-translate-y-1 hover:shadow-md dark:bg-slate-700/50 dark:shadow-white/5 dark:ring-white/10"
+                  href={social.url}
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label="Twitter"
+                  key={idx + social.title}
+                >
+                  {social.icon === "GithubIcon" && (
+                    <GithubIcon className={cn("h-6 w-6", social.iconColor)} />
+                  )}
+                  {social.icon === "TwitterIcon" && (
+                    <TwitterIcon className={cn("h-6 w-6", social.iconColor)} />
+                  )}
+                  {social.icon === "EmailIcon" && (
+                    <EmailIcon className={cn("h-6 w-6", social.iconColor)} />
+                  )}
 
-              <h3 className="mt-3 text-base font-semibold text-slate-700 dark:text-slate-300">
-                {social.title}
-              </h3>
-              <div className="mt-4 text-sm text-slate-500">
-                {social.description}
-              </div>
-              <div className="mt-4 text-sm text-slate-700 dark:text-slate-400">
-                {social.address}
-              </div>
-            </a>
-          ))}
+                  <h3 className="mt-3 text-base font-semibold text-slate-700 dark:text-slate-300">
+                    {social.title}
+                  </h3>
+                  <div className="mt-4 text-sm text-slate-500">
+                    {social.description}
+                  </div>
+                  <div className="mt-4 text-sm text-slate-700 dark:text-slate-400">
+                    {social.address}
+                  </div>
+                </a>
+              )
+          )}
         </div>
       </div>
     </>

@@ -17,8 +17,8 @@ const HomePage = async () => {
     <>
       <div className="mx-auto mb-4 text-center">
         <Image
-          src={page.image}
-          alt={page.imageAlt}
+          src={page.image ?? ""}
+          alt={page.imageAlt ?? ""}
           width={96}
           height={96}
           className="mx-auto mb-2 rounded-full bg-gray-100 shadow-sm shadow-gray-800/50 ring-1 ring-gray-900/5  dark:bg-neutral-800/90 dark:ring-white/10"

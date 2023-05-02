@@ -37,6 +37,7 @@ export type Post = {
   date: IsoDateTimeString
   published: boolean
   image: string
+  imageCaption?: string | undefined
   category: string
   author?: Author | undefined
   tags: string[]

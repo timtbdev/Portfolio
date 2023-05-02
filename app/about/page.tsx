@@ -64,8 +64,8 @@ const AboutPage = async () => {
           </span>
           <div className="lg:aspect-square ring-photo shadow-photo relative mx-auto mt-4 flex aspect-[16/9] rounded-2xl text-center shadow-md ring-1 sm:aspect-[2/1] lg:max-w-3xl">
             <Image
-              src={page.image}
-              alt={page.imageAlt}
+              src={page.image ?? ""}
+              alt={page.imageAlt ?? ""}
               fill={true}
               priority={true}
               className="absolute inset-0 h-full w-full rounded-2xl bg-gray-50 object-cover"

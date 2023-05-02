@@ -1,93 +1,89 @@
+// contentlayer.config.js
 import {
   defineDocumentType,
   defineNestedType,
-  makeSource,
-} from "contentlayer/source-files"
-import readingTime from "reading-time"
-import rehypeAutolinkHeadings from "rehype-autolink-headings"
-import rehypePrettyCode from "rehype-pretty-code"
-import rehypeSlug from "rehype-slug"
-import remarkGfm from "remark-gfm"
-
-/** @type {import('contentlayer/source-files').ComputedFields} */
-const computedFields = {
+  makeSource
+} from "contentlayer/source-files";
+import readingTime from "reading-time";
+import rehypeAutolinkHeadings from "rehype-autolink-headings";
+import rehypePrettyCode from "rehype-pretty-code";
+import rehypeSlug from "rehype-slug";
+import remarkGfm from "remark-gfm";
+var computedFields = {
   readingTime: { type: "json", resolve: (doc) => readingTime(doc.body.raw) },
   slug: {
     type: "string",
-    resolve: (doc) => `/${doc._raw.flattenedPath}`,
+    resolve: (doc) => `/${doc._raw.flattenedPath}`
   },
   slugAsParams: {
     type: "string",
-    resolve: (doc) => doc._raw.flattenedPath.split("/").slice(1).join("/"),
-  },
-}
-
-const Author = defineNestedType(() => ({
+    resolve: (doc) => doc._raw.flattenedPath.split("/").slice(1).join("/")
+  }
+};
+var Author = defineNestedType(() => ({
   name: "Author",
   fields: {
     name: { type: "string", required: true },
     image: { type: "string", required: true },
-    twitter: { type: "string", required: true },
-  },
-}))
-
-export const Social = defineDocumentType(() => ({
+    twitter: { type: "string", required: true }
+  }
+}));
+var Social = defineDocumentType(() => ({
   name: "Social",
   filePathPattern: `socials/**/*.mdx`,
   contentType: "mdx",
   fields: {
     title: {
       type: "string",
-      required: true,
+      required: true
     },
     description: {
       type: "string",
-      required: true,
+      required: true
     },
     address: {
       type: "string",
-      required: true,
+      required: true
     },
     url: {
       type: "string",
-      required: true,
+      required: true
     },
     icon: {
       type: "string",
-      required: true,
+      required: true
     },
     iconColor: {
       type: "string",
-      required: true,
-    },
+      required: true
+    }
   },
-  computedFields,
-}))
-
-export const Page = defineDocumentType(() => ({
+  computedFields
+}));
+var Page = defineDocumentType(() => ({
   name: "Page",
   filePathPattern: `pages/**/*.mdx`,
   contentType: "mdx",
   fields: {
     title: {
       type: "string",
-      required: true,
+      required: true
     },
     description: {
       type: "string",
-      required: true,
+      required: true
     },
     date: {
-      type: "date",
+      type: "date"
     },
     image: {
-      type: "string",
+      type: "string"
     },
     imageAlt: {
-      type: "string",
+      type: "string"
     },
     imageCaption: {
-      type: "string",
+      type: "string"
     },
     socials: {
       // Reference types are not embedded.
@@ -95,47 +91,46 @@ export const Page = defineDocumentType(() => ({
       // type: "reference",
       // of: Social,
       type: "list",
-      of: { type: "string" },
-    },
+      of: { type: "string" }
+    }
   },
-  computedFields,
-}))
-
-export const Post = defineDocumentType(() => ({
+  computedFields
+}));
+var Post = defineDocumentType(() => ({
   name: "Post",
   filePathPattern: `posts/**/*.mdx`,
   contentType: "mdx",
   fields: {
     title: {
       type: "string",
-      required: true,
+      required: true
     },
     description: {
       type: "string",
-      required: true,
+      required: true
     },
     date: {
       type: "date",
-      required: true,
+      required: true
     },
     published: {
       type: "boolean",
-      default: true,
+      default: true
     },
     image: {
       type: "string",
-      required: true,
+      required: true
     },
     imageCaption: {
-      type: "string",
+      type: "string"
     },
     category: {
       type: "string",
-      required: true,
+      required: true
     },
     author: {
       type: "nested",
-      of: Author,
+      of: Author
     },
     tags: {
       // Reference types are not embedded.
@@ -144,43 +139,42 @@ export const Post = defineDocumentType(() => ({
       // of: Tags,
       type: "list",
       of: { type: "string" },
-      required: true,
-    },
+      required: true
+    }
   },
-  computedFields,
-}))
-
-export const Project = defineDocumentType(() => ({
+  computedFields
+}));
+var Project = defineDocumentType(() => ({
   name: "Project",
   filePathPattern: `projects/**/*.mdx`,
   contentType: "mdx",
   fields: {
     title: {
       type: "string",
-      required: true,
+      required: true
     },
     mobile: {
       type: "boolean",
-      default: true,
+      default: true
     },
     description: {
-      type: "string",
+      type: "string"
     },
     url: {
       type: "string",
-      required: true,
+      required: true
     },
     date: {
       type: "date",
-      required: true,
+      required: true
     },
     icon: {
       type: "string",
-      required: true,
+      required: true
     },
     screenshot: {
       type: "string",
-      required: true,
+      required: true
     },
     tags: {
       // Reference types are not embedded.
@@ -189,7 +183,7 @@ export const Project = defineDocumentType(() => ({
       // of: Tags,
       type: "list",
       of: { type: "string" },
-      required: true,
+      required: true
     },
     features: {
       // Reference types are not embedded.
@@ -198,13 +192,12 @@ export const Project = defineDocumentType(() => ({
       // of: Features,
       type: "list",
       of: { type: "string" },
-      required: true,
-    },
+      required: true
+    }
   },
-  computedFields,
-}))
-
-export default makeSource({
+  computedFields
+}));
+var contentlayer_config_default = makeSource({
   contentDirPath: "./content",
   documentTypes: [Post, Page, Project, Social],
   mdx: {
@@ -216,29 +209,35 @@ export default makeSource({
         {
           theme: "github-dark",
           onVisitLine(node) {
-            // Prevent lines from collapsing in `display: grid` mode, and allow empty
-            // lines to be copy/pasted
             if (node.children.length === 0) {
-              node.children = [{ type: "text", value: " " }]
+              node.children = [{ type: "text", value: " " }];
             }
           },
           onVisitHighlightedLine(node) {
-            node.properties.className.push("line--highlighted")
+            node.properties.className.push("line--highlighted");
           },
           onVisitHighlightedWord(node) {
-            node.properties.className = ["word--highlighted"]
-          },
-        },
+            node.properties.className = ["word--highlighted"];
+          }
+        }
       ],
       [
         rehypeAutolinkHeadings,
         {
           properties: {
             className: ["subheading-anchor"],
-            ariaLabel: "Link to section",
-          },
-        },
-      ],
-    ],
-  },
-})
+            ariaLabel: "Link to section"
+          }
+        }
+      ]
+    ]
+  }
+});
+export {
+  Page,
+  Post,
+  Project,
+  Social,
+  contentlayer_config_default as default
+};
+//# sourceMappingURL=compiled-contentlayer-config-4ZLVJ7AN.mjs.map
