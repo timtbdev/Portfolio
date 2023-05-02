@@ -94,7 +94,7 @@ export default async function PostPage({ params }: PostPageProps) {
           {post.title}
         </h1>
       </div>
-      <div className="relative mx-auto max-w-3xl border-l border-dashed border-slate-500/50 px-6 py-4">
+      <div className="relative mx-auto max-w-3xl border-l border-dashed border-slate-500/50 px-6 py-2">
         <div className="absolute -left-1.5 bottom-0 h-full w-2 bg-gradient-to-b from-white/10 from-20% via-white/5 via-50% to-white to-80% dark:from-slate-800/10 dark:via-slate-800/5 dark:to-slate-800 dark:to-80%"></div>
         <span className="mb-4 block text-lg leading-8 text-slate-600 dark:text-slate-500">
           {post.description}
@@ -111,6 +111,8 @@ export default async function PostPage({ params }: PostPageProps) {
         <figcaption className="my-4 text-sm text-slate-400 dark:text-slate-500 sm:mb-6">
           {post.imageCaption}
         </figcaption>
+      </div>
+      <div className="relative mx-auto max-w-3xl border-slate-500/50 px-6">
         <Mdx code={post.body.code} />
       </div>
     </div>
