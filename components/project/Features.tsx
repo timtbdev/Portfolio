@@ -1,12 +1,11 @@
 import { FC } from "react"
 
-import { Feature } from "types"
-
 interface FeaturesProps {
-  features: Feature[]
+  features: Array<string>
 }
 
 const Features: FC<FeaturesProps> = ({ features }) => {
+  const titles: Array<string> = ["Components", "Libraries", "Backend"]
   return (
     <>
       <div className="relative p-3">
@@ -16,12 +15,12 @@ const Features: FC<FeaturesProps> = ({ features }) => {
           </div>
 
           {features.map((feature, idx) => (
-            <div key={idx + feature.title} className="flex flex-col gap-1.5">
+            <div key={idx + feature} className="flex flex-col gap-1.5">
               <p className="text-lg font-semibold leading-6 text-slate-800 dark:text-slate-200">
-                {feature.title}
+                {titles[idx]}
               </p>
               <dd className="text-medium text-slate-600 dark:text-slate-400">
-                {feature.description}
+                {feature}
               </dd>
             </div>
           ))}

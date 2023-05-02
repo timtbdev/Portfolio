@@ -8,17 +8,21 @@ export { isType } from 'contentlayer/client'
 export type { Markdown, MDX, ImageFieldData, IsoDateTimeString }
 
 /** Document types */
-export type Author = {
+export type Page = {
   /** File path relative to `contentDirPath` */
   _id: string
   _raw: Local.RawDocumentData
-  type: 'Author'
+  type: 'Page'
   title: string
-  description?: string | undefined
-  avatar: string
-  twitter: string
+  description: string
+  date?: IsoDateTimeString | undefined
+  image?: string | undefined
+  imageAlt?: string | undefined
+  imageCaption?: string | undefined
+  socials?: string[] | undefined
   /** MDX file body */
   body: MDX
+  readingTime: json
   slug: string
   slugAsParams: string
 }
@@ -29,35 +33,88 @@ export type Post = {
   _raw: Local.RawDocumentData
   type: 'Post'
   title: string
-  description?: string | undefined
+  description: string
   date: IsoDateTimeString
   published: boolean
   image: string
-  authors: string[]
+  category: string
+  author?: Author | undefined
+  tags: string[]
   /** MDX file body */
   body: MDX
+  readingTime: json
+  slug: string
+  slugAsParams: string
+}
+
+export type Project = {
+  /** File path relative to `contentDirPath` */
+  _id: string
+  _raw: Local.RawDocumentData
+  type: 'Project'
+  title: string
+  mobile: boolean
+  description?: string | undefined
+  url: string
+  date: IsoDateTimeString
+  icon: string
+  screenshot: string
+  tags: string[]
+  features: string[]
+  /** MDX file body */
+  body: MDX
+  readingTime: json
+  slug: string
+  slugAsParams: string
+}
+
+export type Social = {
+  /** File path relative to `contentDirPath` */
+  _id: string
+  _raw: Local.RawDocumentData
+  type: 'Social'
+  title: string
+  description: string
+  address: string
+  url: string
+  icon: string
+  iconColor: string
+  /** MDX file body */
+  body: MDX
+  readingTime: json
   slug: string
   slugAsParams: string
 }  
 
 /** Nested types */
-  
+export type Author = {
+  /** File path relative to `contentDirPath` */
+  _id: string
+  _raw: Local.RawDocumentData
+  type: 'Author'
+  name: string
+  image: string
+  twitter: string
+
+}  
 
 /** Helper types */
 
 export type AllTypes = DocumentTypes | NestedTypes
 export type AllTypeNames = DocumentTypeNames | NestedTypeNames
 
-export type DocumentTypes = Author | Post
-export type DocumentTypeNames = 'Author' | 'Post'
+export type DocumentTypes = Page | Post | Project | Social
+export type DocumentTypeNames = 'Page' | 'Post' | 'Project' | 'Social'
 
-export type NestedTypes = never
-export type NestedTypeNames = never
+export type NestedTypes = Author
+export type NestedTypeNames = 'Author'
 
 export type DataExports = {
   allDocuments: DocumentTypes[]
   allPosts: Post[]
-  allAuthors: Author[]
+  allPages: Page[]
+  allProjects: Project[]
+  allSocials: Social[]
 }
 
 
@@ -77,12 +134,14 @@ declare global {
 }
 
 export type DocumentTypeMap = {
-  Author: Author
+  Page: Page
   Post: Post
+  Project: Project
+  Social: Social
 }
 
 export type NestedTypeMap = {
-
+  Author: Author
 }
 
  

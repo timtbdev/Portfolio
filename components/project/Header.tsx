@@ -5,27 +5,19 @@ interface HeaderProps {
   title: string
   tags: Array<string>
   icon: string
-  iconDescription: string
-  type: string
 }
 
-const Header: FC<HeaderProps> = ({
-  title,
-  tags,
-  icon,
-  iconDescription,
-  type,
-}) => {
+const Header: FC<HeaderProps> = ({ title, tags, icon }) => {
   return (
     <>
       <div className="relative p-3">
         <div className="relative flex flex-col items-center justify-center gap-6 rounded-xl border border-dashed border-slate-500/50 p-4 dark:border-white/10 sm:flex-row">
           <div className="text-normal absolute left-2.5 top-0 -translate-y-1/2 bg-white px-2 font-normal text-slate-500 dark:bg-slate-800">
-            {type}
+            Android
           </div>
           <Image
             src={icon}
-            alt={iconDescription}
+            alt={title}
             width={80}
             height={80}
             priority={true}

@@ -4,42 +4,52 @@ import { formatYearMonth } from "@/libs/utils"
 import { ProjectAttributes } from "types"
 import Browser from "./Browser"
 import Container from "./Container"
+import Date from "./Date"
 import Features from "./Features"
 import Header from "./Header"
 import Line from "./Line"
 import ScreenShot from "./ScreenShot"
-import Year from "./Year"
 
 interface ProjectProps {
-  idx: number
-  project: ProjectAttributes
-  length: number
+  id: string
+  title: string
+  icon: string
+  screenshot: string
+  url: string
+  date: string
+  tags: Array<string>
+  features: Array<string>
+  line: boolean
 }
 
-const Project: FC<ProjectProps> = ({ idx, project, length }) => {
+const Project: FC<ProjectProps> = ({
+  id,
+  title,
+  icon,
+  screenshot,
+  url,
+  date,
+  tags,
+  features,
+  line,
+}) => {
   return (
     <>
       <div className="mx-auto max-w-5xl px-4 sm:px-8">
         {/* Body */}
-        <Year year={formatYearMonth(project.releaseDate)} />
+        <Date year={formatYearMonth(date)} />
         <Line />
-        <Browser key={project.url + idx} url={project.url}>
+        <Browser key={id} url={url}>
           <Container>
             <div className="overflow-hidden">
-              <Header
-                title={project.title}
-                tags={project.tags}
-                icon={project.icon}
-                iconDescription={project.iconDescription}
-                type={project.type}
-              />
-              <Features features={project.features} />
+              <Header title={title} tags={tags} icon={icon} />
+              <Features features={features} />
             </div>
-            <ScreenShot screenshot={project.screenshot} />
+            <ScreenShot screenshot={screenshot} />
           </Container>
         </Browser>
       </div>
-      {idx != length - 1 && <Line />}
+      {!line && <Line />}
     </>
   )
 }

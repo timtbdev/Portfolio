@@ -1,7 +1,3 @@
 export * from "./menu"
 export * from "./footer"
 export * from "./meta"
-export * from "./blog"
-export * from "./bio"
-export * from "./projects"
-export * from "./contacts"

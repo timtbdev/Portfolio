@@ -1,4 +1,9 @@
-import { defineDocumentType, makeSource } from "contentlayer/source-files"
+import {
+  defineDocumentType,
+  defineNestedType,
+  makeSource,
+} from "contentlayer/source-files"
+import readingTime from "reading-time"
 import rehypeAutolinkHeadings from "rehype-autolink-headings"
 import rehypePrettyCode from "rehype-pretty-code"
 import rehypeSlug from "rehype-slug"
@@ -6,6 +11,7 @@ import remarkGfm from "remark-gfm"
 
 /** @type {import('contentlayer/source-files').ComputedFields} */
 const computedFields = {
+  readingTime: { type: "json", resolve: (doc) => readingTime(doc.body.raw) },
   slug: {
     type: "string",
     resolve: (doc) => `/${doc._raw.flattenedPath}`,
@@ -16,9 +22,18 @@ const computedFields = {
   },
 }
 
-export const Post = defineDocumentType(() => ({
-  name: "Post",
-  filePathPattern: `blog/**/*.mdx`,
+const Author = defineNestedType(() => ({
+  name: "Author",
+  fields: {
+    name: { type: "string", required: true },
+    image: { type: "string", required: true },
+    twitter: { type: "string", required: true },
+  },
+}))
+
+export const Social = defineDocumentType(() => ({
+  name: "Social",
+  filePathPattern: `socials/**/*.mdx`,
   contentType: "mdx",
   fields: {
     title: {
@@ -27,6 +42,77 @@ export const Post = defineDocumentType(() => ({
     },
     description: {
       type: "string",
+      required: true,
+    },
+    address: {
+      type: "string",
+      required: true,
+    },
+    url: {
+      type: "string",
+      required: true,
+    },
+    icon: {
+      type: "string",
+      required: true,
+    },
+    iconColor: {
+      type: "string",
+      required: true,
+    },
+  },
+  computedFields,
+}))
+
+export const Page = defineDocumentType(() => ({
+  name: "Page",
+  filePathPattern: `pages/**/*.mdx`,
+  contentType: "mdx",
+  fields: {
+    title: {
+      type: "string",
+      required: true,
+    },
+    description: {
+      type: "string",
+      required: true,
+    },
+    date: {
+      type: "date",
+    },
+    image: {
+      type: "string",
+    },
+    imageAlt: {
+      type: "string",
+    },
+    imageCaption: {
+      type: "string",
+    },
+    socials: {
+      // Reference types are not embedded.
+      // Until this is fixed, we can use a simple list.
+      // type: "reference",
+      // of: Social,
+      type: "list",
+      of: { type: "string" },
+    },
+  },
+  computedFields,
+}))
+
+export const Post = defineDocumentType(() => ({
+  name: "Post",
+  filePathPattern: `posts/**/*.mdx`,
+  contentType: "mdx",
+  fields: {
+    title: {
+      type: "string",
+      required: true,
+    },
+    description: {
+      type: "string",
+      required: true,
     },
     date: {
       type: "date",
@@ -40,11 +126,19 @@ export const Post = defineDocumentType(() => ({
       type: "string",
       required: true,
     },
-    authors: {
+    category: {
+      type: "string",
+      required: true,
+    },
+    author: {
+      type: "nested",
+      of: Author,
+    },
+    tags: {
       // Reference types are not embedded.
       // Until this is fixed, we can use a simple list.
       // type: "reference",
-      // of: Author,
+      // of: Tags,
       type: "list",
       of: { type: "string" },
       required: true,
@@ -53,24 +147,54 @@ export const Post = defineDocumentType(() => ({
   computedFields,
 }))
 
-export const Author = defineDocumentType(() => ({
-  name: "Author",
-  filePathPattern: `authors/**/*.mdx`,
+export const Project = defineDocumentType(() => ({
+  name: "Project",
+  filePathPattern: `projects/**/*.mdx`,
   contentType: "mdx",
   fields: {
     title: {
       type: "string",
       required: true,
     },
+    mobile: {
+      type: "boolean",
+      default: true,
+    },
     description: {
       type: "string",
     },
-    avatar: {
+    url: {
       type: "string",
       required: true,
     },
-    twitter: {
+    date: {
+      type: "date",
+      required: true,
+    },
+    icon: {
       type: "string",
+      required: true,
+    },
+    screenshot: {
+      type: "string",
+      required: true,
+    },
+    tags: {
+      // Reference types are not embedded.
+      // Until this is fixed, we can use a simple list.
+      // type: "reference",
+      // of: Tags,
+      type: "list",
+      of: { type: "string" },
+      required: true,
+    },
+    features: {
+      // Reference types are not embedded.
+      // Until this is fixed, we can use a simple list.
+      // type: "reference",
+      // of: Features,
+      type: "list",
+      of: { type: "string" },
       required: true,
     },
   },
@@ -79,7 +203,7 @@ export const Author = defineDocumentType(() => ({
 
 export default makeSource({
   contentDirPath: "./content",
-  documentTypes: [Post, Author],
+  documentTypes: [Post, Page, Project, Social],
   mdx: {
     remarkPlugins: [remarkGfm],
     rehypePlugins: [
