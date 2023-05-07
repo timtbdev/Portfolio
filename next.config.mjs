@@ -1,4 +1,6 @@
-const { withContentlayer } = require("next-contentlayer")
+import { withContentlayer } from "next-contentlayer"
+
+import "./env.mjs"
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
@@ -14,7 +16,8 @@ const nextConfig = {
   },
   experimental: {
     appDir: true,
+    serverComponentsExternalPackages: ["@prisma/client"],
   },
 }
 
-module.exports = withContentlayer(nextConfig)
+export default withContentlayer(nextConfig)

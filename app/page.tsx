@@ -2,6 +2,7 @@ import Image from "next/image"
 import { Project } from "@/components/"
 import { allPages, allProjects } from "contentlayer/generated"
 import { compareDesc } from "date-fns"
+import Balancer from "react-wrap-balancer"
 
 const HomePage = async () => {
   const page = allPages.find((page) => page.slugAsParams === "home")
@@ -26,11 +27,11 @@ const HomePage = async () => {
         />
 
         <h1 className="mb-2 font-calsans text-4xl tracking-tight text-slate-900 dark:text-slate-100">
-          {page.title}
+          <Balancer>{page.title}</Balancer>
         </h1>
 
         <span className="text-lg leading-8 text-slate-600 dark:text-slate-500">
-          {page.description}
+          <Balancer>{page.description}</Balancer>
         </span>
       </div>
 

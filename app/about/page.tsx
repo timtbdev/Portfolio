@@ -4,6 +4,7 @@ import { Mdx } from "@/components/mdx"
 import { metaData } from "@/config/meta"
 import { absoluteUrl, constructOgImageUri } from "@/libs/utils"
 import { allPages } from "contentlayer/generated"
+import Balancer from "react-wrap-balancer"
 
 export const metadata: Metadata = {
   title: "About",
@@ -54,7 +55,7 @@ const AboutPage = async () => {
           <div className="absolute -bottom-1.5 left-0 h-2 w-full bg-gradient-to-r from-white/10 via-white/5 to-white to-90% dark:from-slate-800/10 dark:via-slate-800/5 dark:to-slate-800 dark:to-90%"></div>
           <div className="absolute -left-1.5 bottom-0 h-full w-2 bg-gradient-to-t from-white/10 via-white/5 to-white dark:from-slate-800/10 dark:via-slate-800/5 dark:to-slate-800"></div>
           <h1 className="mx-auto text-left font-calsans text-3xl tracking-tight text-slate-900 dark:text-slate-100 md:text-center">
-            {page.title}
+            <Balancer>{page.title}</Balancer>
           </h1>
         </div>
         <div className="relative mx-auto max-w-3xl border-l border-dashed border-slate-500/50 px-6 pt-4">

@@ -1,6 +1,7 @@
 import { Metadata } from "next"
 import Image from "next/image"
 import Link from "next/link"
+import { metaData } from "@/config/meta"
 import {
   absoluteUrl,
   constructOgImageUri,
@@ -14,8 +15,7 @@ import {
 } from "@heroicons/react/24/outline"
 import { allPages, allPosts } from "contentlayer/generated"
 import { compareDesc } from "date-fns"
-
-import { metaData } from "@config/meta"
+import Balancer from "react-wrap-balancer"
 
 export const metadata: Metadata = {
   title: "Blog",
@@ -70,14 +70,13 @@ const BlogPage = async () => {
           <div className="absolute -bottom-1.5 left-0 h-2 w-full bg-gradient-to-r from-white from-10% via-white/5 to-white to-90% dark:from-slate-800 dark:from-10% dark:via-slate-800/5 dark:to-slate-800 dark:to-90%"></div>
 
           <h1 className="mx-auto text-center font-calsans text-3xl tracking-tight text-slate-900 dark:text-slate-100">
-            {page.title}
+            <Balancer>{page.title}</Balancer>
           </h1>
         </div>
         <div className="relative mx-auto max-w-4xl px-6 py-4">
           <span className="mb-4 block text-center text-lg leading-8 text-slate-600 dark:text-slate-500">
-            {page.description}
+            <Balancer>{page.description}</Balancer>
           </span>
-
           <div className="lg:mt-15 mt-10 space-y-5 lg:space-y-5">
             {posts.map((post) => (
               <div

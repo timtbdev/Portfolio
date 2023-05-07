@@ -2,9 +2,9 @@
 
 import { Fragment } from "react"
 import { usePathname } from "next/navigation"
+import { menu } from "@/config/index"
 import { Disclosure } from "@headlessui/react"
 
-import { menu } from "@config/index"
 import {
   Logo,
   MobileMenuButton,

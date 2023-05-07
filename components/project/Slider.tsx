@@ -2,12 +2,12 @@
 
 import React, { FC, useState } from "react"
 import Image from "next/image"
+import { cn } from "@/libs/utils"
 import { motion } from "framer-motion"
 import { useKeenSlider } from "keen-slider/react"
 
-import { cn } from "@libs/utils"
 import "keen-slider/keen-slider.min.css"
-import { shimmer, toBase64 } from "@libs/utils"
+import { shimmer, toBase64 } from "@/libs/utils"
 
 interface SliderProps {
   images: string[]

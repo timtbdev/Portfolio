@@ -1,7 +1,6 @@
 import { FC } from "react"
+import { cn } from "@/libs/utils"
 import { Disclosure } from "@headlessui/react"
-
-import { cn } from "@libs/utils"
 
 interface MobileMenuButtonProps {
   open: boolean

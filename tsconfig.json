@@ -15,22 +15,15 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "incremental": true,
+    "baseUrl": ".",
     "plugins": [
       {
         "name": "next"
       }
     ],
-    "baseUrl": ".",
+    "strictNullChecks": true,
     "paths": {
       "@/*": ["./*"],
-      "@assets/*": ["assets/*"],
-      "@components/*": ["components/*"],
-      "@config/*": ["config/*"],
-      "@hooks/*": ["hooks/*"],
-      "@icons/*": ["icons/*"],
-      "@libs/*": ["libs/*"],
-      "@styles/*": ["styles/*"],
-      "@types/*": ["types/*"],
       "contentlayer/generated": ["./.contentlayer/generated"]
     }
   },

@@ -1,10 +1,9 @@
 "use client"
 
 import { FC, useEffect, useState } from "react"
+import { cn } from "@/libs/utils"
 import { Switch as Toggle } from "@headlessui/react"
 import { useTheme } from "next-themes"
-
-import { cn } from "@libs/utils"
 
 const Switch = () => {
   const { theme, setTheme } = useTheme()

@@ -5,22 +5,20 @@ import * as z from "zod"
 /* eslint-disable jsx-a11y/alt-text */
 /* eslint-disable @next/next/no-img-element */
 
-export const ogImageSchema = z.object({
+const ogImageSchema = z.object({
   title: z.string(),
   subTitle: z.string(),
   tags: z.string().array(),
   slug: z.string(),
 })
 
-export const config = {
-  runtime: "edge",
-}
+export const runtime = "edge"
 
 const interBold = fetch(
-  new URL("../../public/fonts/Inter-Bold.ttf", import.meta.url)
+  new URL("../../../public/fonts/Inter-Bold.ttf", import.meta.url)
 ).then((res) => res.arrayBuffer())
 
-export default async function handler(req: NextRequest) {
+export async function GET(req: Request) {
   try {
     const { searchParams } = new URL(`${req.url}`)
     const fontBold = await interBold

@@ -1,4 +1,4 @@
-import "@styles/tailwind.css"
+import "@/styles/tailwind.css"
 import type { Metadata } from "next"
 import { Inter as FontSans } from "next/font/google"
 import localFont from "next/font/local"
@@ -11,11 +11,10 @@ import {
   ThemeProvider,
   TwIndicator,
   Wrapper,
-} from "@/components/base"
+} from "@/components/core"
 import { metaData } from "@/config/meta"
+import { absoluteUrl, cn, constructOgImageUri } from "@/libs/utils"
 import { Analytics as VercelAnalytics } from "@vercel/analytics/react"
-
-import { absoluteUrl, cn, constructOgImageUri } from "@libs/utils"
 
 interface RootLayoutProps {
   children: React.ReactNode

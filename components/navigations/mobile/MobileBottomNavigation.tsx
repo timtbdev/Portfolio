@@ -1,8 +1,8 @@
 import { FC } from "react"
 import Link from "next/link"
+import { cn } from "@/libs/utils"
 
 import { Menu } from "types"
-import { cn } from "@libs/utils"
 
 interface MobileBottomNavigationProps {
   path?: string | null
