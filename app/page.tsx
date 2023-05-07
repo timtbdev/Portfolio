@@ -1,19 +1,46 @@
 import Image from "next/image"
 import { Project } from "@/components/"
+import { db } from "@/libs/db"
 import { allPages, allProjects } from "contentlayer/generated"
 import { compareDesc } from "date-fns"
 import Balancer from "react-wrap-balancer"
 
 const HomePage = async () => {
+  const projects = await db.project.findMany({
+    orderBy: [
+      {
+        publishedAt: "desc",
+      },
+    ],
+    include: {
+      features: {
+        orderBy: {
+          order: "asc",
+        },
+        select: {
+          title: true,
+          description: true,
+        },
+      },
+      tags: {
+        orderBy: {
+          priority: "asc",
+        },
+        select: {
+          title: true,
+        },
+      },
+    },
+  })
   const page = allPages.find((page) => page.slugAsParams === "home")
 
   if (!page) {
     return null
   }
 
-  const projects = allProjects.sort((a, b) => {
-    return compareDesc(new Date(a.date), new Date(b.date))
-  })
+  // const projects = allProjects.sort((a, b) => {
+  //   return compareDesc(new Date(a.date), new Date(b.date))
+  // })
   return (
     <>
       <div className="mx-auto mb-4 text-center">
@@ -37,12 +64,12 @@ const HomePage = async () => {
 
       {projects.map((project, idx) => (
         <Project
-          id={project._id}
+          id={project.id}
           title={project.title}
           icon={project.icon}
           screenshot={project.screenshot}
           url={project.url}
-          date={project.date}
+          date={project.publishedAt}
           tags={project.tags}
           features={project.features}
           line={idx === projects.length - 1}

@@ -12,33 +12,48 @@ datasource db {
 }
 
 model Project {
-  id         String    @id @default(cuid())
-  title      String
-  icon       String
-  url        String
-  screenshot String
-  tags       Tag[]
-  features   Feature[]
-  createdAt  DateTime  @default(now())
-  updatedAt  DateTime  @updatedAt
+  id          String    @id @default(cuid())
+  title       String
+  icon        String
+  url         String
+  screenshot  String
+  tags        Tag[]
+  features    Feature[]
+  category    Category  @relation(fields: [categoryId], references: [id])
+  publishedAt DateTime  @map(name: "published_at")
+  createdAt   DateTime  @default(now()) @map(name: "created_at")
+  updatedAt   DateTime  @updatedAt @map(name: "updated_at")
+  categoryId  String
+
+  @@index([categoryId])
+}
+
+model Category {
+  id        String    @id @default(cuid())
+  title     String    @default("Android")
+  createdAt DateTime  @default(now()) @map(name: "created_at")
+  updatedAt DateTime  @updatedAt @map(name: "updated_at")
+  Project   Project[]
 }
 
 model Tag {
   id        String    @id @default(cuid())
   title     String
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @updatedAt
   projects  Project[]
+  priority  Int       @default(1)
+  createdAt DateTime  @default(now()) @map(name: "created_at")
+  updatedAt DateTime  @updatedAt @map(name: "updated_at")
 }
 
 model Feature {
   id          String   @id @default(cuid())
   title       String
-  description String
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  description String   @db.LongText
+  order       Int      @default(1)
   project     Project? @relation(fields: [projectId], references: [id])
   projectId   String?
+  createdAt   DateTime @default(now()) @map(name: "created_at")
+  updatedAt   DateTime @updatedAt @map(name: "updated_at")
 
   @@index([projectId])
 }
@@ -57,7 +72,7 @@ model Account {
   id_token          String?  @db.Text
   session_state     String?
   createdAt         DateTime @default(now()) @map(name: "created_at")
-  updatedAt         DateTime @default(now()) @map(name: "updated_at")
+  updatedAt         DateTime @updatedAt @map(name: "updated_at")
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
@@ -84,7 +99,7 @@ model User {
   emailVerified DateTime?
   image         String?
   createdAt     DateTime  @default(now()) @map(name: "created_at")
-  updatedAt     DateTime  @default(now()) @map(name: "updated_at")
+  updatedAt     DateTime  @updatedAt @map(name: "updated_at")
 
   accounts Account[]
   sessions Session[]

@@ -15,8 +15,7 @@ export function formatDate(input: string | number): string {
   })
 }
 
-export function formatYearMonth(input: string | number): string {
-  const date = new Date(input)
+export function formatYearMonth(date: Date): string {
   return date.toLocaleDateString("en-US", {
     month: "long",
     year: "numeric",

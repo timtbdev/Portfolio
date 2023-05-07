@@ -15,9 +15,12 @@ interface ProjectProps {
   icon: string
   screenshot: string
   url: string
-  date: string
-  tags: Array<string>
-  features: Array<string>
+  date: Date
+  tags: { title: string }[]
+  features: {
+    title: string
+    description: string
+  }[]
   line: boolean
 }
 

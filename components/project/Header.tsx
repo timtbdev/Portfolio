@@ -3,7 +3,7 @@ import Image from "next/image"
 
 interface HeaderProps {
   title: string
-  tags: Array<string>
+  tags: { title: string }[]
   icon: string
 }
 
@@ -30,10 +30,10 @@ const Header: FC<HeaderProps> = ({ title, tags, icon }) => {
             <p className="mt-2">
               {tags.map((tag, idx) => (
                 <span
-                  key={idx + tag}
+                  key={idx + tag.title}
                   className="mr-1 inline-flex items-center rounded-full bg-gray-50 px-2 py-1 text-sm font-medium text-slate-500 ring-1 ring-inset ring-gray-500/10 dark:bg-slate-700/30 dark:ring-white/10"
                 >
-                  {tag}
+                  {tag.title}
                 </span>
               ))}
             </p>
