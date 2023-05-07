@@ -1,4 +1,4 @@
-import { ImageResponse, NextRequest } from "next/server"
+import { ImageResponse } from "next/server"
 import OgImage from "@/components/ogImage/OgImage"
 import * as z from "zod"
 
