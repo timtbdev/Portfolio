@@ -1,11 +1,11 @@
 import { FC } from "react"
 import Image from "next/image"
 
-interface ScreenShotProps {
+interface ProjectScreenShotProps {
   screenshot: string
 }
 
-const ScreenShot: FC<ScreenShotProps> = ({ screenshot }) => {
+const ProjectScreenShot: FC<ProjectScreenShotProps> = ({ screenshot }) => {
   return (
     <>
       <div className="relative p-3">
@@ -55,4 +55,4 @@ const ScreenShot: FC<ScreenShotProps> = ({ screenshot }) => {
   )
 }
 
-export default ScreenShot
+export default ProjectScreenShot

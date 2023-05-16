@@ -1,3 +1,3 @@
-export { default as MobileMenuButton } from "./MobileMenuButton"
-export { default as MobileNavigation } from "./MobileNavigation"
-export { default as MobileBottomNavigation } from "./MobileBottomNavigation"
+export { default as MobileMenuButton } from "./mobile-menu-button"
+export { default as MobileNav } from "./mobile-nav"
+export { default as MobileBottomNav } from "./mobile-bottom-nav"

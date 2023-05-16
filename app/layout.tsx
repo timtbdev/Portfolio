@@ -2,16 +2,7 @@ import "@/styles/tailwind.css"
 import type { Metadata } from "next"
 import { Inter as FontSans } from "next/font/google"
 import localFont from "next/font/local"
-import {
-  Container,
-  Footer,
-  Grid,
-  Header,
-  Main,
-  ThemeProvider,
-  TwIndicator,
-  Wrapper,
-} from "@/components/core"
+import { MainWrapper, ThemeProvider, TwIndicator } from "@/components/main"
 import { Toaster } from "@/components/ui/toaster"
 import { metaData } from "@/config/meta"
 import { absoluteUrl, cn, constructOgImageUri } from "@/libs/utils"
@@ -169,12 +160,12 @@ export default function RootLayout({ children }: RootLayoutProps) {
         style={{ WebkitTapHighlightColor: "transparent" }}
       >
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          <Wrapper>
+          <MainWrapper>
             {children}
             <VercelAnalytics />
             <Toaster />
             <TwIndicator />
-          </Wrapper>
+          </MainWrapper>
         </ThemeProvider>
       </body>
     </html>

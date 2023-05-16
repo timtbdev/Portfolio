@@ -1,6 +1,6 @@
 import { FC, ReactNode } from "react"
 import { Metadata } from "next"
-import { Grid } from "@/components/core"
+import { MainGrid } from "@/components/main"
 import { metaData } from "@/config/meta"
 import { absoluteUrl, cn, constructOgImageUri } from "@/libs/utils"
 
@@ -43,7 +43,7 @@ interface LoginLayoutProps {
 }
 
 const LoginLayout: FC<LoginLayoutProps> = ({ children }) => {
-  return <Grid>{children}</Grid>
+  return <MainGrid>{children}</MainGrid>
 }
 
 export default LoginLayout

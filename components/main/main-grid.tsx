@@ -1,10 +1,10 @@
 import React, { FC } from "react"
 
-interface GridProps {
+interface MainGridProps {
   children: React.ReactNode
 }
 
-const Grid: FC<GridProps> = ({ children }) => {
+const MainGrid: FC<MainGridProps> = ({ children }) => {
   return (
     <>
       <div className="relative isolate">
@@ -37,4 +37,4 @@ const Grid: FC<GridProps> = ({ children }) => {
   )
 }
 
-export default Grid
+export default MainGrid

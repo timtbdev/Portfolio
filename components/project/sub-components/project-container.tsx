@@ -1,12 +1,15 @@
 import { FC, ReactNode } from "react"
 import { cn } from "@/libs/utils"
 
-interface ContainerProps {
+interface ProjectContainerProps {
   children: ReactNode
   className?: string
 }
 
-const Container: FC<ContainerProps> = ({ children, className = "" }) => {
+const ProjectContainer: FC<ProjectContainerProps> = ({
+  children,
+  className = "",
+}) => {
   return (
     <>
       <div
@@ -21,4 +24,4 @@ const Container: FC<ContainerProps> = ({ children, className = "" }) => {
   )
 }
 
-export default Container
+export default ProjectContainer

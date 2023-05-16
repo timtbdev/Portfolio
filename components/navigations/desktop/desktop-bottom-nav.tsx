@@ -2,10 +2,10 @@ import { FC } from "react"
 
 import { Footer } from "types"
 
-interface BottomNavigationProps {
+interface DesktopBottomNavProps {
   footer: Footer
 }
-const BottomNavigation: FC<BottomNavigationProps> = ({ footer }) => {
+const DesktopBottomNav: FC<DesktopBottomNavProps> = ({ footer }) => {
   return (
     <>
       <div className="mx-auto w-full max-w-7xl px-2 py-3 md:flex md:items-center md:justify-between">
@@ -31,4 +31,4 @@ const BottomNavigation: FC<BottomNavigationProps> = ({ footer }) => {
   )
 }
 
-export default BottomNavigation
+export default DesktopBottomNav

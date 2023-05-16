@@ -1,10 +1,10 @@
 import { FC } from "react"
 
-interface DateProps {
+interface ProjectDateProps {
   year: string
 }
 
-const Date: FC<DateProps> = ({ year }) => {
+const ProjectDate: FC<ProjectDateProps> = ({ year }) => {
   return (
     <>
       <div className="relative mx-auto max-w-xl">
@@ -40,4 +40,4 @@ const Date: FC<DateProps> = ({ year }) => {
   )
 }
 
-export default Date
+export default ProjectDate

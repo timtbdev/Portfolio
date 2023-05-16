@@ -1,5 +1,11 @@
 import { FC, ReactNode } from "react"
-import { Container, Footer, Grid, Header, Main } from "@/components/core"
+import {
+  Main,
+  MainContainer,
+  MainFooter,
+  MainGrid,
+  MainHeader,
+} from "@/components/main"
 
 interface LayoutProps {
   children: ReactNode
@@ -8,13 +14,13 @@ interface LayoutProps {
 export default function Layout({ children }: LayoutProps) {
   return (
     <div>
-      <Header />
-      <Container>
-        <Grid>
+      <MainHeader />
+      <MainContainer>
+        <MainGrid>
           <Main>{children}</Main>
-        </Grid>
-      </Container>
-      <Footer />
+        </MainGrid>
+      </MainContainer>
+      <MainFooter />
     </div>
   )
 }

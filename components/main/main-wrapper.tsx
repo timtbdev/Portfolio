@@ -1,12 +1,12 @@
 import { FC, ReactNode } from "react"
 import { cn } from "@/libs/utils"
 
-interface WrapperProps {
+interface MainWrapperProps {
   children: ReactNode
   className?: string
 }
 
-const Wrapper: FC<WrapperProps> = ({ children, className = "" }) => {
+const MainWrapper: FC<MainWrapperProps> = ({ children, className = "" }) => {
   return (
     <>
       <div
@@ -21,4 +21,4 @@ const Wrapper: FC<WrapperProps> = ({ children, className = "" }) => {
   )
 }
 
-export default Wrapper
+export default MainWrapper

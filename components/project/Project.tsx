@@ -1,13 +1,15 @@
 import { FC } from "react"
 import { formatYearMonth } from "@/libs/utils"
 
-import Browser from "./Browser"
-import Container from "./Container"
-import Date from "./Date"
-import Features from "./Features"
-import Header from "./Header"
-import Line from "./Line"
-import ScreenShot from "./ScreenShot"
+import {
+  ProjectBrowser,
+  ProjectContainer,
+  ProjectDate,
+  ProjectFeatures,
+  ProjectHeader,
+  ProjectLine,
+  ProjectScreenShot,
+} from "./sub-components/"
 
 interface ProjectProps {
   id: string
@@ -39,19 +41,19 @@ const Project: FC<ProjectProps> = ({
     <>
       <div className="mx-auto max-w-5xl px-4 sm:px-8">
         {/* Body */}
-        <Date year={formatYearMonth(date)} />
-        <Line />
-        <Browser key={id} url={url}>
-          <Container>
+        <ProjectDate year={formatYearMonth(date)} />
+        <ProjectLine />
+        <ProjectBrowser key={id} url={url}>
+          <ProjectContainer>
             <div className="overflow-hidden">
-              <Header title={title} tags={tags} icon={icon} />
-              <Features features={features} />
+              <ProjectHeader title={title} tags={tags} icon={icon} />
+              <ProjectFeatures features={features} />
             </div>
-            <ScreenShot screenshot={screenshot} />
-          </Container>
-        </Browser>
+            <ProjectScreenShot screenshot={screenshot} />
+          </ProjectContainer>
+        </ProjectBrowser>
       </div>
-      {!line && <Line />}
+      {!line && <ProjectLine />}
     </>
   )
 }

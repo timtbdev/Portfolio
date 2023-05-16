@@ -1,13 +1,13 @@
 import { FC } from "react"
 
-interface FeaturesProps {
+interface ProjectFeaturesProps {
   features: {
     title: string
     description: string
   }[]
 }
 
-const Features: FC<FeaturesProps> = ({ features }) => {
+const ProjectFeatures: FC<ProjectFeaturesProps> = ({ features }) => {
   return (
     <>
       <div className="relative p-3">
@@ -32,4 +32,4 @@ const Features: FC<FeaturesProps> = ({ features }) => {
   )
 }
 
-export default Features
+export default ProjectFeatures

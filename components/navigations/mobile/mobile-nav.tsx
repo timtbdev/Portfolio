@@ -4,14 +4,14 @@ import { Disclosure, Transition } from "@headlessui/react"
 
 import { Menu } from "types"
 
-interface MobileNavigationProps {
+interface MobileNavProps {
   fragment: ExoticComponent<{
     children?: ReactNode | undefined
   }>
   menu: Menu[]
 }
 
-const MobileNavigation: FC<MobileNavigationProps> = ({ fragment, menu }) => {
+const MobileNav: FC<MobileNavProps> = ({ fragment, menu }) => {
   const router = useRouter()
 
   return (
@@ -50,4 +50,4 @@ const MobileNavigation: FC<MobileNavigationProps> = ({ fragment, menu }) => {
   )
 }
 
-export default MobileNavigation
+export default MobileNav

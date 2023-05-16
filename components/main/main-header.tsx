@@ -2,18 +2,13 @@
 
 import { Fragment } from "react"
 import { usePathname } from "next/navigation"
-import { menu } from "@/config/index"
+import { Logo, Toggle } from "@/components/navigations/core"
+import { DesktopNav } from "@/components/navigations/desktop"
+import { MobileMenuButton, MobileNav } from "@/components/navigations/mobile"
+import { menu } from "@/config"
 import { Disclosure } from "@headlessui/react"
 
-import {
-  Logo,
-  MobileMenuButton,
-  MobileNavigation,
-  Navigation,
-  Switch,
-} from "../navigations"
-
-const Header = () => {
+const MainHeader = () => {
   const currentPath = usePathname()
 
   return (
@@ -30,13 +25,13 @@ const Header = () => {
               {/* Navigation */}
               <div>
                 <div className="hidden gap-x-6 sm:flex sm:flex-1">
-                  <Navigation path={currentPath} menu={menu} />
+                  <DesktopNav currentPath={currentPath || ""} menu={menu} />
                 </div>
               </div>
 
               {/* Dark Mode */}
               <div className="hidden justify-end md:flex md:flex-1">
-                <Switch />
+                <Toggle />
               </div>
               {/* Mobile Menu */}
               <div className="flex flex-1 justify-end pr-2 md:hidden">
@@ -45,7 +40,7 @@ const Header = () => {
             </nav>
 
             {/* <!-- Mobile Navigation --> */}
-            <MobileNavigation fragment={Fragment} menu={menu} />
+            <MobileNav fragment={Fragment} menu={menu} />
           </>
         )}
       </Disclosure>
@@ -53,4 +48,4 @@ const Header = () => {
   )
 }
 
-export default Header
+export default MainHeader

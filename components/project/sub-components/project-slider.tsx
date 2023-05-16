@@ -9,11 +9,11 @@ import { useKeenSlider } from "keen-slider/react"
 import "keen-slider/keen-slider.min.css"
 import { shimmer, toBase64 } from "@/libs/utils"
 
-interface SliderProps {
+interface ProjectSliderProps {
   images: string[]
 }
 
-const Slider: FC<SliderProps> = ({ images }) => {
+const ProjectSlider: FC<ProjectSliderProps> = ({ images }) => {
   const [currentSlide, setCurrentSlide] = useState(0)
   const [loaded, setLoaded] = useState(false)
   const [sliderRef, instanceRef] = useKeenSlider<HTMLDivElement>({
@@ -173,4 +173,4 @@ const Slider: FC<SliderProps> = ({ images }) => {
   )
 }
 
-export default Slider
+export default ProjectSlider

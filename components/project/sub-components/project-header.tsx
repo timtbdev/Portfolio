@@ -1,13 +1,13 @@
 import { FC } from "react"
 import Image from "next/image"
 
-interface HeaderProps {
+interface ProjectHeaderProps {
   title: string
   tags: { title: string }[]
   icon: string
 }
 
-const Header: FC<HeaderProps> = ({ title, tags, icon }) => {
+const ProjectHeader: FC<ProjectHeaderProps> = ({ title, tags, icon }) => {
   return (
     <>
       <div className="relative p-3">
@@ -44,4 +44,4 @@ const Header: FC<HeaderProps> = ({ title, tags, icon }) => {
   )
 }
 
-export default Header
+export default ProjectHeader

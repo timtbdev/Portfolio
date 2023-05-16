@@ -1,4 +1,4 @@
-const Line = () => {
+const ProjectLine = () => {
   return (
     <>
       <div className="mx-auto flex max-w-xl flex-row justify-center">
@@ -8,4 +8,4 @@ const Line = () => {
   )
 }
 
-export default Line
+export default ProjectLine

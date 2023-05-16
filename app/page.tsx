@@ -1,6 +1,12 @@
 import Image from "next/image"
-import { Project } from "@/components/"
-import { Container, Footer, Grid, Header, Main } from "@/components/core"
+import {
+  Main,
+  MainContainer,
+  MainFooter,
+  MainGrid,
+  MainHeader,
+} from "@/components/main"
+import { Project } from "@/components/project/"
 import { db } from "@/libs/db"
 import { allPages } from "contentlayer/generated"
 import Balancer from "react-wrap-balancer"
@@ -38,14 +44,11 @@ const HomePage = async () => {
     return null
   }
 
-  // const projects = allProjects.sort((a, b) => {
-  //   return compareDesc(new Date(a.date), new Date(b.date))
-  // })
   return (
     <>
-      <Header />
-      <Container>
-        <Grid>
+      <MainHeader />
+      <MainContainer>
+        <MainGrid>
           <Main>
             {" "}
             <div className="mx-auto mb-4 text-center">
@@ -80,9 +83,9 @@ const HomePage = async () => {
               />
             ))}
           </Main>
-        </Grid>
-      </Container>
-      <Footer />
+        </MainGrid>
+      </MainContainer>
+      <MainFooter />
     </>
   )
 }

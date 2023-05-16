@@ -1,6 +1,7 @@
+import { FC } from "react"
 import { absoluteUrl } from "@/libs/utils"
 
-import { Wrapper } from "./Wrappter"
+import OgWrapper from "./og-wrapper"
 
 /* eslint-disable jsx-a11y/alt-text */
 /* eslint-disable @next/next/no-img-element */
@@ -12,10 +13,10 @@ interface OgImageProps {
   slug: string
 }
 
-export default function OgImage({ title, subTitle, tags, slug }: OgImageProps) {
+const OgImage: FC<OgImageProps> = ({ title, subTitle, tags, slug }) => {
   return (
     <>
-      <Wrapper>
+      <OgWrapper>
         <div tw="flex relative flex-col p-12 w-full h-full items-start">
           <div tw="flex flex-col flex-1 py-10">
             <div
@@ -73,7 +74,9 @@ export default function OgImage({ title, subTitle, tags, slug }: OgImageProps) {
             </div>
           </div>
         </div>
-      </Wrapper>
+      </OgWrapper>
     </>
   )
 }
+
+export default OgImage
