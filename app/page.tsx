@@ -6,7 +6,7 @@ import {
   MainGrid,
   MainHeader,
 } from "@/components/main"
-import { Project } from "@/components/project/"
+import Project from "@/components/project/project"
 import { db } from "@/libs/db"
 import { allPages } from "contentlayer/generated"
 import Balancer from "react-wrap-balancer"

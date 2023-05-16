@@ -1,6 +1,6 @@
 import { Metadata } from "next"
 import Image from "next/image"
-import { Mdx } from "@/components/mdx"
+import Mdx from "@/components/ui/mdx"
 import { metaData } from "@/config/meta"
 import { absoluteUrl, constructOgImageUri } from "@/libs/utils"
 import { allPages } from "contentlayer/generated"
