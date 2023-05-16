@@ -9,7 +9,7 @@ import {
   ProjectHeader,
   ProjectLine,
   ProjectScreenShot,
-} from "./sub-components/"
+} from "./sub-components"
 
 interface ProjectProps {
   id: string
