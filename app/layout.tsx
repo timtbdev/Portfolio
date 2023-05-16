@@ -12,6 +12,7 @@ import {
   TwIndicator,
   Wrapper,
 } from "@/components/core"
+import { Toaster } from "@/components/ui/toaster"
 import { metaData } from "@/config/meta"
 import { absoluteUrl, cn, constructOgImageUri } from "@/libs/utils"
 import { Analytics as VercelAnalytics } from "@vercel/analytics/react"
@@ -169,14 +170,9 @@ export default function RootLayout({ children }: RootLayoutProps) {
       >
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <Wrapper>
-            <Header />
-            <Container>
-              <Grid>
-                <Main>{children}</Main>
-              </Grid>
-            </Container>
-            <Footer />
+            {children}
             <VercelAnalytics />
+            <Toaster />
             <TwIndicator />
           </Wrapper>
         </ThemeProvider>

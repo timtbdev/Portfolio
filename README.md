@@ -37,6 +37,7 @@ https://user-images.githubusercontent.com/25026241/234760036-36ca4df7-b5a1-4e60-
 - Server and Client Components
 - API Routes and Middlewares
 - Authentication using [NextAuth.js](https://next-auth.js.org/)
+- Database on [PlanetScale](https://planetscale.com)
 - ORM using [Prisma](https://www.prisma.io/)
 - Database on [PlanetScale](https://planetscale.com/)
 - UI Components built using [Radix UI](https://www.radix-ui.com/) and [Headless UI](https://headlessui.com/)

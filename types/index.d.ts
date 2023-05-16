@@ -47,3 +47,15 @@ export type ImageAttributes = {
   href: string
   description: string
 }
+
+export type NavItem = {
+  name: string
+  href: string
+}
+
+export type User = {
+  id: string
+  name: string
+  email: string
+  image: string
+}
