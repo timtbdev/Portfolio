@@ -22,9 +22,16 @@ An open source application built using the new router, server components and eve
 
 > **Warning**
 > This app is still in progress.
-> This app is using the unstable releases for Next.js 13 and React 18. The new router and app dir is still in beta and not production-ready.
 
-https://user-images.githubusercontent.com/25026241/234760036-36ca4df7-b5a1-4e60-b4ce-e431704c5dfb.mp4
+## Frontend
+
+- [Homepage](https://timtb.dev)
+  <img width="1069" alt="Screenshot 2023-05-16 at 3 20 27 PM" src="https://github.com/timtbdev/Portfolio/assets/25026241/cbe64e2a-26ce-49b0-9d82-a60d9901e120">
+
+## Backend
+
+- [Dashboard](https://timtb.dev/dashboard)
+  <img width="1256" alt="Screenshot 2023-05-16 at 3 19 46 PM" src="https://github.com/timtbdev/Portfolio/assets/25026241/45549bc7-045a-4b25-a475-5caf9031939e">
 
 ## Features
 
@@ -40,7 +47,7 @@ https://user-images.githubusercontent.com/25026241/234760036-36ca4df7-b5a1-4e60-
 - Database on [PlanetScale](https://planetscale.com)
 - ORM using [Prisma](https://www.prisma.io/)
 - Database on [PlanetScale](https://planetscale.com/)
-- UI Components built using [Radix UI](https://www.radix-ui.com/) and [Headless UI](https://headlessui.com/)
+- UI Components built using [Radix UI](https://www.radix-ui.com/) and [Headless UI](https://headlessui.com/), [Shadcn UI](https://ui.shadcn.com/)
 - Page and blogs are using [MDX](https://mdxjs.com/) and [Contentlayer](https://www.contentlayer.dev/)
 - Styled using [Tailwind CSS](https://tailwindcss.com/)
 - Icons using [Heroicons](https://heroicons.com/) and [Lucide](https://lucide.dev/)
@@ -52,6 +59,13 @@ https://user-images.githubusercontent.com/25026241/234760036-36ca4df7-b5a1-4e60-
 - [TypeScript](https://www.typescriptlang.org/)
 - [Prettier](https://prettier.io/)
 - [ESLint](https://eslint.org/)
+
+## Credits
+
+- [Taxonomy](https://github.com/shadcn/taxonomy)
+- [Shadcn/UI](https://github.com/shadcn/ui)
+- [HeadlessUI](https://headlessui.com)
+- [TailwindUi](https://tailwindui.com)
 
 ## Miscellaneous
 
