@@ -23,14 +23,12 @@ An open source application built using the new router, server components and eve
 > **Warning**
 > This app is still in progress.
 
-## Frontend
+## Frontend - [Homepage](https://timtb.dev)
 
-- [Homepage](https://timtb.dev)
   <img width="1069" alt="Screenshot 2023-05-16 at 3 20 27 PM" src="https://github.com/timtbdev/Portfolio/assets/25026241/cbe64e2a-26ce-49b0-9d82-a60d9901e120">
 
-## Backend
+## Backend - [Dashboard](https://timtb.dev/dashboard)
 
-- [Dashboard](https://timtb.dev/dashboard)
   <img width="1256" alt="Screenshot 2023-05-16 at 3 19 46 PM" src="https://github.com/timtbdev/Portfolio/assets/25026241/45549bc7-045a-4b25-a475-5caf9031939e">
 
 ## Features
@@ -46,9 +44,9 @@ An open source application built using the new router, server components and eve
 - Authentication using [NextAuth.js](https://next-auth.js.org/)
 - Database on [PlanetScale](https://planetscale.com)
 - ORM using [Prisma](https://www.prisma.io/)
-- Database on [PlanetScale](https://planetscale.com/)
+- Database on [Vercel/Postgres](https://vercel.com/docs/storage/vercel-postgres/)
 - UI Components built using [Radix UI](https://www.radix-ui.com/) and [Headless UI](https://headlessui.com/), [Shadcn UI](https://ui.shadcn.com/)
-- Page and blogs are using [MDX](https://mdxjs.com/) and [Contentlayer](https://www.contentlayer.dev/)
+- Pages and blogs are using [MDX](https://mdxjs.com/) and [Contentlayer](https://www.contentlayer.dev/)
 - Styled using [Tailwind CSS](https://tailwindcss.com/)
 - Icons using [Heroicons](https://heroicons.com/) and [Lucide](https://lucide.dev/)
 - Validations using [Zod](https://www.zod.dev)
@@ -65,7 +63,7 @@ An open source application built using the new router, server components and eve
 - [Taxonomy](https://github.com/shadcn/taxonomy)
 - [Shadcn/UI](https://github.com/shadcn/ui)
 - [HeadlessUI](https://headlessui.com)
-- [TailwindUi](https://tailwindui.com)
+- [TailwindUI](https://tailwindui.com)
 
 ## Miscellaneous
 

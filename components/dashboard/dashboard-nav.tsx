@@ -24,7 +24,7 @@ const DashBoardNav: FC<DashBoardNavProps> = ({ id, name, email, image }) => {
     <Disclosure as="nav" className="bg-gray-800">
       {({ open }) => (
         <>
-          <div className="mx-auto max-w-7xl px-2 sm:px-4 lg:px-8">
+          <div className="mx-auto max-w-5xl px-2 sm:px-4 lg:px-8">
             <div className="relative flex h-16 items-center justify-between">
               <div className="flex items-center px-2 lg:px-0">
                 {/* Logo */}

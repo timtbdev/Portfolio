@@ -18,25 +18,6 @@ const HomePage = async () => {
         publishedAt: "desc",
       },
     ],
-    include: {
-      features: {
-        orderBy: {
-          order: "asc",
-        },
-        select: {
-          title: true,
-          description: true,
-        },
-      },
-      tags: {
-        orderBy: {
-          priority: "asc",
-        },
-        select: {
-          title: true,
-        },
-      },
-    },
   })
   const page = allPages.find((page) => page.slugAsParams === "home")
 
@@ -70,17 +51,7 @@ const HomePage = async () => {
               </span>
             </div>
             {projects.map((project, idx) => (
-              <Project
-                id={project.id}
-                title={project.title}
-                icon={project.icon}
-                screenshot={project.screenshot}
-                url={project.url}
-                date={project.publishedAt}
-                tags={project.tags}
-                features={project.features}
-                line={idx === projects.length - 1}
-              />
+              <Project project={project} line={idx === projects.length - 1} />
             ))}
           </Main>
         </MainGrid>

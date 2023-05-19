@@ -2,6 +2,7 @@ import { ReactNode } from "react"
 import { Metadata } from "next"
 import { notFound } from "next/navigation"
 import DashBoardNav from "@/components/dashboard/dashboard-nav"
+import { Main, MainGrid } from "@/components/main"
 import { metaData } from "@/config/meta"
 import { getCurrentUser } from "@/libs/session"
 import { absoluteUrl, constructOgImageUri } from "@/libs/utils"
@@ -65,13 +66,9 @@ export default async function DashBoardLayout({
         email={user.email || ""}
         image={user.image || ""}
       />
-      <div className="min-h-full">
-        <div className="py-10">
-          <main>
-            <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">{children}</div>
-          </main>
-        </div>
-      </div>
+      <MainGrid>
+        <Main>{children}</Main>
+      </MainGrid>
     </>
   )
 }

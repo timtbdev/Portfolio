@@ -18,6 +18,14 @@ const nextConfig = {
     appDir: true,
     serverComponentsExternalPackages: ["@prisma/client", "bcrypt"],
   },
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'timtb.dev',
+      },
+    ],
+  },
 }
 
 export default withContentlayer(nextConfig)

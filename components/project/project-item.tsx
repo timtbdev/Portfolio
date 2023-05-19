@@ -11,45 +11,46 @@ import {
   ProjectScreenShot,
 } from "./sub-components"
 
+import {Project} from "@prisma/client"
+
 interface ProjectProps {
-  id: string
-  title: string
-  icon: string
-  screenshot: string
-  url: string
-  date: Date
-  tags: { title: string }[]
-  features: {
-    title: string
-    description: string
-  }[]
+  project: Project
   line: boolean
 }
 
 const Project: FC<ProjectProps> = ({
-  id,
-  title,
-  icon,
-  screenshot,
-  url,
-  date,
-  tags,
-  features,
+  project,
   line,
 }) => {
+
+  const features: {title: string, description: string} [] = [
+    {
+      title: "Components",
+      description: project.components
+    },
+    {
+      title: "Libraries",
+      description: project.libraries,
+    },
+    {
+      title: "Backend",
+      description: project.backend
+    }
+  ]
+
   return (
     <>
       <div className="mx-auto max-w-5xl px-4 sm:px-8">
         {/* Body */}
-        <ProjectDate year={formatYearMonth(date)} />
+        <ProjectDate year={formatYearMonth(project.publishedAt)} />
         <ProjectLine />
-        <ProjectBrowser key={id} url={url}>
+        <ProjectBrowser key={project.id} url={project.url}>
           <ProjectContainer>
             <div className="overflow-hidden">
-              <ProjectHeader title={title} tags={tags} icon={icon} />
+              <ProjectHeader title={project.title} tags={project.tags.split(",")} icon={project.icon} />
               <ProjectFeatures features={features} />
             </div>
-            <ProjectScreenShot screenshot={screenshot} />
+            <ProjectScreenShot screenshot={project.screenshot} />
           </ProjectContainer>
         </ProjectBrowser>
       </div>
