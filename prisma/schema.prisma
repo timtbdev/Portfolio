@@ -15,17 +15,17 @@ datasource db {
 model Project {
   id          String   @id @default(cuid())
   title       String   @unique
-  icon        String
-  url         String
-  screenshot  String
-  tags        String
-  components  String   @db.Text
-  libraries   String   @db.Text
-  backend     String   @db.Text
-  category    String   @default("Android")
-  publishedAt DateTime @map(name: "published_at")
+  icon        String?
+  url         String?
+  screenshot  String?
+  tags        String?
+  components  String?   @db.Text
+  libraries   String?   @db.Text
+  backend     String?   @db.Text
+  category    String?   @default("Android")
+  publishedAt DateTime @map(name: "published_at") @db.Date @default(now())
   createdAt   DateTime @default(now()) @map(name: "created_at")
-  updatedAt   DateTime @updatedAt @map(name: "updated_at")
+  updatedAt   DateTime @updatedAt @map(name: "updated_at") @default(now())
   user        User?    @relation(fields: [userId], references: [id])
   userId      String?
 

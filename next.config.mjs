@@ -12,19 +12,19 @@ const nextConfig = {
         protocol: "https",
         hostname: "images.unsplash.com",
       },
+      {
+        protocol: "https",
+        hostname: "uploadthing.com",
+      },
+      {
+        protocol: "https",
+        hostname: "timtb.dev",
+      },
     ],
   },
   experimental: {
     appDir: true,
     serverComponentsExternalPackages: ["@prisma/client", "bcrypt"],
-  },
-  images: {
-    remotePatterns: [
-      {
-        protocol: 'https',
-        hostname: 'timtb.dev',
-      },
-    ],
   },
 }
 

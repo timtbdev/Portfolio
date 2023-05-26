@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "next lint",
     "prepare": "husky install",
-    "postinstall": "prisma generate"
+    "postinstall": "prisma generate",
+    "debug": "NODE_OPTIONS='--inspect' next dev"
   },
   "prisma": {
     "seed": "ts-node --compiler-options {\"module\":\"CommonJS\"} prisma/seed.ts"
@@ -28,6 +29,7 @@
     "@radix-ui/react-label": "^2.0.1",
     "@radix-ui/react-popover": "^1.0.5",
     "@radix-ui/react-radio-group": "^1.1.2",
+    "@radix-ui/react-select": "^1.2.1",
     "@radix-ui/react-separator": "^1.0.2",
     "@radix-ui/react-slot": "^1.0.1",
     "@radix-ui/react-switch": "^1.0.2",
@@ -36,11 +38,12 @@
     "@t3-oss/env-nextjs": "^0.3.1",
     "@tailwindcss/container-queries": "^0.1.1",
     "@tanstack/react-table": "^8.9.1",
-    "@types/node": "20.1.5",
+    "@types/node": "20.2.3",
     "@types/react": "18.2.6",
     "@types/react-dom": "18.2.4",
+    "@uploadthing/react": "^3.0.5",
     "@vercel/analytics": "^1.0.1",
-    "@vercel/og": "^0.5.4",
+    "@vercel/og": "^0.5.6",
     "@vercel/postgres": "^0.3.0",
     "autoprefixer": "10.4.14",
     "bcryptjs": "^2.4.3",
@@ -50,11 +53,11 @@
     "concurrently": "^8.0.1",
     "contentlayer": "^0.3.2",
     "date-fns": "^2.30.0",
-    "eslint-config-next": "13.4.2",
-    "framer-motion": "^10.12.11",
+    "eslint-config-next": "13.4.3",
+    "framer-motion": "^10.12.14",
     "keen-slider": "^6.8.5",
-    "lucide-react": "^0.216.0",
-    "next": "^13.4.2",
+    "lucide-react": "^0.220.0",
+    "next": "^13.4.3",
     "next-auth": "^4.22.1",
     "next-contentlayer": "^0.3.2",
     "next-themes": "^0.2.1",
@@ -63,6 +66,7 @@
     "react": "18.2.0",
     "react-day-picker": "^8.7.1",
     "react-dom": "18.2.0",
+    "react-dropzone": "^14.2.3",
     "react-hook-form": "^7.43.9",
     "react-responsive": "^9.0.2",
     "react-textarea-autosize": "^8.4.1",
@@ -74,6 +78,7 @@
     "tailwindcss": "3.3.2",
     "tailwindcss-animate": "^1.0.5",
     "typescript": "5.0.4",
+    "uploadthing": "^3.0.5",
     "yup": "^1.1.1",
     "zod": "^3.21.4"
   },
@@ -85,7 +90,7 @@
     "@tailwindcss/forms": "^0.5.3",
     "@tailwindcss/typography": "^0.5.9",
     "@types/bcryptjs": "^2.4.2",
-    "eslint": "^8.40.0",
+    "eslint": "^8.41.0",
     "eslint-config-prettier": "^8.8.0",
     "eslint-plugin-react": "^7.32.2",
     "eslint-plugin-tailwindcss": "^3.12.0",
@@ -100,7 +105,7 @@
     "rehype-autolink-headings": "^6.1.1",
     "rehype-pretty-code": "^0.9.5",
     "rehype-slug": "^5.1.0",
-    "remark": "^14.0.2",
+    "remark": "^14.0.3",
     "remark-gfm": "^3.0.1"
   }
 }

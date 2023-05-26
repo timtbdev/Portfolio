@@ -1,8 +1,11 @@
 "use client"
 
 import { FC } from "react"
-import Link from "next/link"
 import { useRouter } from "next/navigation"
+import {
+  ProjectCreateButton,
+  ProjectOperations,
+} from "@/components/editor/project/"
 import { formatYearMonth } from "@/libs/utils"
 
 interface ProjectTableProps {
@@ -10,7 +13,7 @@ interface ProjectTableProps {
     id: string
     title: string
     publishedAt: Date
-    category: string
+    category: string | undefined | null
   }[]
 }
 
@@ -27,12 +30,7 @@ const ProjectTable: FC<ProjectTableProps> = ({ projects }) => {
             <p className="mt-2 text-sm text-gray-700">A list of all projects</p>
           </div>
           <div className="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
-            <button
-              type="button"
-              className="block rounded-md bg-blue-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
-            >
-              New Project
-            </button>
+            <ProjectCreateButton />
           </div>
         </div>
         <div className="mt-8 flow-root">
@@ -81,13 +79,7 @@ const ProjectTable: FC<ProjectTableProps> = ({ projects }) => {
                           {formatYearMonth(project.publishedAt)}
                         </td>
                         <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
-                          <Link
-                            href={`/editor/project/${project.id}`}
-                            className="inline-flex items-center rounded-md bg-white px-2.5 py-1.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-30 disabled:hover:bg-white"
-                          >
-                            Edit
-                            <span className="sr-only">, {project.title}</span>
-                          </Link>
+                          <ProjectOperations project={project} />
                         </td>
                       </tr>
                     ))}

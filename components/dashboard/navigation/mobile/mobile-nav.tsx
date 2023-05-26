@@ -23,6 +23,7 @@ const MobileNav: FC<MobileNavProps> = ({ navigations, currentPath, user }) => {
           {navigations.map((item, idx) => (
             <Disclosure.Button
               as="a"
+              key={idx + item.name}
               href={item.href}
               className={cn(
                 "block rounded-md px-3 py-2 text-base font-medium",

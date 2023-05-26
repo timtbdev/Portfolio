@@ -216,3 +216,18 @@
     --tw-shadow: var(--tw-shadow-colored);
   }
 }
+
+.ut-hidden {
+  @apply hidden;
+}
+.ut-bg-blue-600 {
+  @apply flex h-10 w-36 cursor-pointer items-center justify-center rounded-md bg-blue-600 hover:bg-blue-500;
+}
+
+.ut-text-white {
+  @apply text-white;
+}
+
+.ut-text-xs {
+  @apply text-center text-xs leading-5 text-gray-600;
+}

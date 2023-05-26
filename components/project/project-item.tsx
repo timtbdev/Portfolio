@@ -12,6 +12,7 @@ import {
 } from "./sub-components"
 
 import {Project} from "@prisma/client"
+import { empty } from "@prisma/client/runtime"
 
 interface ProjectProps {
   project: Project
@@ -26,15 +27,15 @@ const Project: FC<ProjectProps> = ({
   const features: {title: string, description: string} [] = [
     {
       title: "Components",
-      description: project.components
+      description: project.components || ""
     },
     {
       title: "Libraries",
-      description: project.libraries,
+      description: project.libraries || ""
     },
     {
       title: "Backend",
-      description: project.backend
+      description: project.backend || ""
     }
   ]
 
@@ -44,13 +45,13 @@ const Project: FC<ProjectProps> = ({
         {/* Body */}
         <ProjectDate year={formatYearMonth(project.publishedAt)} />
         <ProjectLine />
-        <ProjectBrowser key={project.id} url={project.url}>
+        <ProjectBrowser key={project.id} url={project.url ? project.url : ""}>
           <ProjectContainer>
             <div className="overflow-hidden">
-              <ProjectHeader title={project.title} tags={project.tags.split(",")} icon={project.icon} />
+              <ProjectHeader title={project.title} tags={project?.tags?.split(",") ? project.tags.split(",") : []} icon={project.icon ? project.icon : ""} />
               <ProjectFeatures features={features} />
             </div>
-            <ProjectScreenShot screenshot={project.screenshot} />
+            <ProjectScreenShot screenshot={project.screenshot ? project.screenshot : ""} />
           </ProjectContainer>
         </ProjectBrowser>
       </div>
