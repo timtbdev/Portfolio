@@ -19,7 +19,7 @@ An open source application built using the new router, server components and eve
 
 ## 🪜 Project structure
 
-````bash
+```bash
 📦 root
 ├── 🗂️ app                     # NextJs 13 app router directory
 │ ├── 🗂️ admin                 # Admin functionality for creating and editing projects and blog posts
@@ -36,7 +36,6 @@ An open source application built using the new router, server components and eve
 ```
 
 ## 📊 Google Lighthouse performance statistics
-
 
 ## 📚 Features
 
@@ -84,7 +83,7 @@ An open source application built using the new router, server components and eve
 
 ```sh
 pnpm install
-````
+```
 
 2. Copy `.env.example` to `.env.local` and update the variables.
 
