@@ -7,6 +7,7 @@ const nextConfig = {
   reactStrictMode: true,
   images: {
     domains: ["avatars.githubusercontent.com"],
+    domains: ["firebasestorage.googleapis.com"],
     remotePatterns: [
       {
         protocol: "https",

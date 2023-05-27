@@ -41,7 +41,7 @@ export default async function EditorProject({ params }: EditorProjectProps) {
       <div>
         <Link
           href="/dashboard"
-          className={cn(buttonVariants({ variant: "ghost" }))}
+          className={cn(buttonVariants({ variant: "outline" }))}
         >
           <>
             <ArrowLeft className="mr-2 h-4 w-4" />

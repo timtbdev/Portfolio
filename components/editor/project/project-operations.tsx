@@ -52,6 +52,7 @@ export default function ProjectOperations({ project }: ProjectOperationsProps) {
   const router = useRouter()
   const [showDeleteAlert, setShowDeleteAlert] = React.useState<boolean>(false)
   const [isDeleteLoading, setIsDeleteLoading] = React.useState<boolean>(false)
+  const [showLoadingAlert, setShowLoadingAlert] = React.useState<boolean>(false)
 
   return (
     <>
@@ -62,12 +63,15 @@ export default function ProjectOperations({ project }: ProjectOperationsProps) {
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end" className="font-sans">
           <DropdownMenuItem>
-            <Link
-              href={`/editor/project/${project.id}`}
+            <a
               className="flex w-full"
+              onClick={() => {
+                router.push(`/editor/project/${project.id}`)
+                setShowLoadingAlert(true)
+              }}
             >
               Edit
-            </Link>
+            </a>
           </DropdownMenuItem>
           <DropdownMenuSeparator />
           <DropdownMenuItem
@@ -78,11 +82,23 @@ export default function ProjectOperations({ project }: ProjectOperationsProps) {
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
+      <AlertDialog open={showLoadingAlert} onOpenChange={setShowLoadingAlert}>
+        <AlertDialogContent className="font-sans">
+          <AlertDialogHeader>
+            <AlertDialogTitle className="text-center">
+              Please wait ....
+            </AlertDialogTitle>
+            <AlertDialogDescription className="mx-auto text-center">
+              <SpinnerIcon className="h-6 w-6 animate-spin" />
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+        </AlertDialogContent>
+      </AlertDialog>
       <AlertDialog open={showDeleteAlert} onOpenChange={setShowDeleteAlert}>
         <AlertDialogContent className="font-sans">
           <AlertDialogHeader>
             <AlertDialogTitle>
-              Are you sure you want to delete this post?
+              Are you sure you want to delete this project?
             </AlertDialogTitle>
             <AlertDialogDescription>
               This action cannot be undone.

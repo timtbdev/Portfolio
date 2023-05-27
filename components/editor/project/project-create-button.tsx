@@ -27,7 +27,7 @@ const ProjectCreateButton: FC<ProjectCreateButtonProps> = ({
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        title: "Untitled App",
+        title: `Untitled App - ${new Date().toISOString()}`,
       }),
     })
 

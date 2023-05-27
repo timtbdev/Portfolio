@@ -1,8 +1,8 @@
 "use client"
 
-import { FC, useState } from "react"
+import { FC, useCallback, useState } from "react"
+import Image from "next/image"
 import { useRouter } from "next/navigation"
-import { OurFileRouter } from "@/app/api/uploadthing/core"
 import { Button, buttonVariants } from "@/components/ui/button"
 import { Calendar } from "@/components/ui/calendar"
 import {
@@ -20,16 +20,38 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover"
+import { Progress } from "@/components/ui/progress"
 import { Textarea } from "@/components/ui/textarea"
 import { toast } from "@/components/ui/use-toast"
-import { cn } from "@/libs/utils"
+import { cn, initFirebase } from "@/libs/utils"
+import {
+  CheckBadgeIcon,
+  CloudArrowUpIcon,
+  DocumentArrowDownIcon,
+  PhotoIcon,
+} from "@heroicons/react/24/solid"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { Project } from "@prisma/client"
-import { UploadButton } from "@uploadthing/react"
 import { format } from "date-fns"
+import {
+  getDownloadURL,
+  getStorage,
+  ref,
+  uploadBytesResumable,
+} from "firebase/storage"
 import { CalendarIcon, ChevronDown, Loader2 as SpinnerIcon } from "lucide-react"
+import { useDropzone } from "react-dropzone"
 import { useForm } from "react-hook-form"
 import * as z from "zod"
+
+initFirebase()
+
+const storage = getStorage()
+
+type Image = {
+  imageFile: Blob
+  type: string
+}
 
 const projectSchema = z.object({
   title: z.string().min(3, { message: "Title must be at least 3 characters." }),
@@ -72,6 +94,133 @@ interface ProjectEditorProps {
 
 const ProjectEditor: FC<ProjectEditorProps> = ({ project }) => {
   const router = useRouter()
+
+  const storageRefIcon = ref(
+    storage,
+    `${project.id}-icon-${new Date().toISOString()}`
+  )
+  const storageRefScreenShot = ref(
+    storage,
+    `${project.id}-screenshot-${new Date().toISOString()}`
+  )
+
+  const [iconUrl, setIconUrl] = useState<string>(
+    project?.icon || "/images/not-found.jpg"
+  )
+
+  const [screenShotUrl, setScreenShotUrl] = useState<string>(
+    project?.screenshot || "/images/not-found.jpg"
+  )
+
+  let [progressIcon, setProgressIcon] = useState<number>(0)
+
+  const [loadingIcon, setLoadingIcon] = useState(false)
+
+  const [successIcon, setSuccessIcon] = useState(false)
+
+  let [progressScreenShot, setProgressScreenShot] = useState<number>(0)
+
+  const [loadingScreenShot, setLoadingScreenShot] = useState(false)
+
+  const [successScreenShot, setSuccessScreenShot] = useState(false)
+
+  // Icon Drop
+  const onDropIcon = useCallback((acceptedFiles: any) => {
+    // Upload files to storage
+    const file = acceptedFiles[0]
+    const type = "icon"
+    uploadImage({ imageFile: file, type })
+  }, [])
+
+  // ScreenShot Drop
+  const onDropScreenShot = useCallback((acceptedFiles: any) => {
+    // Upload files to storage
+    const file = acceptedFiles[0]
+    const type = "screenshot"
+    uploadImage({ imageFile: file, type })
+  }, [])
+
+  // Icon
+  const {
+    getRootProps: getRootIconProps,
+    getInputProps: getInputIconProps,
+    isDragActive: isDragActiveIcon,
+    open: openIcon,
+  } = useDropzone({
+    accept: {
+      "image/png": [".png"],
+      "image/jpg": [".jpg"],
+      "image/jpeg": [".jpeg"],
+    },
+    maxFiles: 1,
+    noClick: true,
+    noKeyboard: true,
+    onDrop: onDropIcon,
+  })
+
+  // screenshot
+  const {
+    getRootProps: getRootScreenShotProps,
+    getInputProps: getInputScreenShotProps,
+    isDragActive: isDragActiveScreenShot,
+    open: openScreenShot,
+  } = useDropzone({
+    accept: {
+      "image/png": [".png"],
+      "image/jpg": [".jpg"],
+      "image/jpeg": [".jpeg"],
+    },
+    maxFiles: 1,
+    noClick: true,
+    noKeyboard: true,
+    onDrop: onDropScreenShot,
+  })
+
+  // Upload image to Firebase storage
+
+  const uploadImage = async ({ imageFile, type }: Image) => {
+    try {
+      let storageRef = storageRefIcon
+      if (type === "icon") {
+        setLoadingIcon(true)
+      } else {
+        setLoadingScreenShot(true)
+        storageRef = storageRefScreenShot
+      }
+      const uploadTask = uploadBytesResumable(storageRef, imageFile)
+      uploadTask.on(
+        "state_changed",
+        (snapshot) => {
+          const progress =
+            (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+          type === "icon"
+            ? setProgressIcon(progress)
+            : setProgressScreenShot(progress)
+        },
+        (error) => {
+          console.log(error.message)
+        },
+        () => {
+          getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+            type === "icon"
+              ? setLoadingIcon(false)
+              : setLoadingScreenShot(false)
+            type === "icon" ? setSuccessIcon(true) : setSuccessScreenShot(true)
+            if (type === "icon") {
+              form.setValue("icon", downloadURL)
+              setIconUrl(downloadURL)
+            } else {
+              form.setValue("screenshot", downloadURL)
+              setScreenShotUrl(downloadURL)
+            }
+          })
+        }
+      )
+    } catch (e: any) {
+      console.log(e.message)
+      type === "icon" ? setLoadingIcon(false) : setLoadingScreenShot(false)
+    }
+  }
 
   const form = useForm<FormData>({
     resolver: zodResolver(projectSchema),
@@ -156,24 +305,99 @@ const ProjectEditor: FC<ProjectEditorProps> = ({ project }) => {
             render={({ field }) => (
               <FormItem>
                 <FormLabel>Icon</FormLabel>
-                <div className="flex w-full max-w-xl space-x-2">
-                  <FormControl>
+                <div className="flex w-full max-w-xl flex-row">
+                  <FormControl className="basis-3/4">
                     <Input {...field} disabled />
                   </FormControl>
-                  <UploadButton<OurFileRouter>
-                    endpoint="imageUploader"
-                    onClientUploadComplete={(res) => {
-                      // Upload complete
-                      res?.map((fileURLToPath) => {
-                        form.setValue("icon", fileURLToPath.fileUrl)
-                        field.value = fileURLToPath.fileUrl
-                      })
-                    }}
-                    onUploadError={(error: Error) => {
-                      // Do something with the error.
-                      alert(`ERROR! ${error.message}`)
-                    }}
-                  />
+                  <Button
+                    onClick={openIcon}
+                    className={cn(
+                      "dropzone_button ml-2 basis-1/4",
+                      { hidden: loadingIcon },
+                      { hidden: successIcon }
+                    )}
+                  >
+                    Choose a file
+                  </Button>
+                </div>
+
+                {/* Uploader */}
+                <div className={cn("flex w-full max-w-xl flex-row")}>
+                  <div className="flex basis-1/2 justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-10">
+                    <Image
+                      src={iconUrl}
+                      onError={() => {
+                        setIconUrl("/images/not-found.jpg")
+                      }}
+                      width={250}
+                      height={250}
+                      alt="icon"
+                      priority
+                    />
+                  </div>
+
+                  <div
+                    {...getRootIconProps()}
+                    className={cn(
+                      "drag_drop_wrapper ml-4 flex basis-1/2 items-center justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-10",
+                      { hidden: loadingIcon },
+                      { hidden: successIcon }
+                    )}
+                  >
+                    <input hidden {...getInputIconProps()} />
+                    {isDragActiveIcon ? (
+                      <div className="text-center">
+                        <DocumentArrowDownIcon
+                          className="mx-auto h-12 w-12 text-gray-300"
+                          aria-hidden="true"
+                        />
+                        <div className="mt-4 flex text-sm leading-6 text-gray-600">
+                          <p className="pl-1">Drop your file here.</p>
+                        </div>
+                      </div>
+                    ) : (
+                      <div className="text-center">
+                        <PhotoIcon
+                          className="mx-auto h-12 w-12 text-gray-300"
+                          aria-hidden="true"
+                        />
+                        <div className="mt-4 flex text-sm leading-6 text-gray-600">
+                          <p className="pl-1">Drag and drop a file here.</p>
+                        </div>
+                        <p className="text-xs leading-5 text-gray-600">
+                          PNG, JPG, GIF up to 10MB
+                        </p>
+                      </div>
+                    )}
+                  </div>
+                  {/* Upload progress */}
+                  {loadingIcon && (
+                    <>
+                      <div className="ml-4 flex basis-1/2 flex-col items-center justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-10">
+                        <CloudArrowUpIcon
+                          className="mx-auto h-12 w-12 text-gray-300"
+                          aria-hidden="true"
+                        />
+                        <Progress value={progressIcon} className="w-[60%]" />
+                        <div className="mt-4 flex text-sm font-semibold leading-6 text-slate-600">
+                          <p className="pl-1">Uploading ...</p>
+                        </div>
+                      </div>
+                    </>
+                  )}
+                  {successIcon && (
+                    <>
+                      <div className="ml-4 flex basis-1/2 flex-col items-center justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-10">
+                        <CheckBadgeIcon
+                          className="mx-auto h-12 w-12 text-gray-300"
+                          aria-hidden="true"
+                        />
+                        <div className="mt-4 flex text-sm font-semibold leading-6 text-green-600">
+                          <p className="pl-1">Successfully uploaded</p>
+                        </div>
+                      </div>
+                    </>
+                  )}
                 </div>
 
                 <FormMessage />
@@ -201,25 +425,104 @@ const ProjectEditor: FC<ProjectEditorProps> = ({ project }) => {
             render={({ field }) => (
               <FormItem>
                 <FormLabel>Screenshot</FormLabel>
-                <div className="flex w-full max-w-xl space-x-2">
-                  <FormControl>
+                <div className="flex w-full max-w-xl flex-row space-x-2">
+                  <FormControl className="basis-3/4">
                     <Input {...field} disabled />
                   </FormControl>
-                  <UploadButton<OurFileRouter>
-                    endpoint="imageUploader"
-                    onClientUploadComplete={(res) => {
-                      // Upload complete
-                      res?.map((fileURLToPath) => {
-                        form.setValue("screenshot", fileURLToPath.fileUrl)
-                        field.value = fileURLToPath.fileUrl
-                      })
-                    }}
-                    onUploadError={(error: Error) => {
-                      // Do something with the error.
-                      alert(`ERROR! ${error.message}`)
-                    }}
-                  />
+                  <Button
+                    onClick={openScreenShot}
+                    className={cn(
+                      "dropzone_button ml-2 basis-1/4",
+                      { hidden: loadingScreenShot },
+                      { hidden: successScreenShot }
+                    )}
+                  >
+                    Choose a file
+                  </Button>
                 </div>
+
+                {/* Uploader */}
+                <div className={cn("flex w-full max-w-xl flex-row")}>
+                  <div className="flex basis-1/2 justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-10">
+                    <Image
+                      src={screenShotUrl}
+                      onError={() => {
+                        setIconUrl("/images/not-found.jpg")
+                      }}
+                      width={250}
+                      height={250}
+                      alt="icon"
+                      priority
+                    />
+                  </div>
+
+                  <div
+                    {...getRootScreenShotProps()}
+                    className={cn(
+                      "drag_drop_wrapper ml-4 flex basis-1/2 items-center justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-10",
+                      { hidden: loadingScreenShot },
+                      { hidden: successScreenShot }
+                    )}
+                  >
+                    <input hidden {...getInputScreenShotProps()} />
+                    {isDragActiveScreenShot ? (
+                      <div className="text-center">
+                        <DocumentArrowDownIcon
+                          className="mx-auto h-12 w-12 text-gray-300"
+                          aria-hidden="true"
+                        />
+                        <div className="mt-4 flex text-sm leading-6 text-gray-600">
+                          <p className="pl-1">Drop your file here.</p>
+                        </div>
+                      </div>
+                    ) : (
+                      <div className="text-center">
+                        <PhotoIcon
+                          className="mx-auto h-12 w-12 text-gray-300"
+                          aria-hidden="true"
+                        />
+                        <div className="mt-4 flex text-sm leading-6 text-gray-600">
+                          <p className="pl-1">Drag and drop a file here.</p>
+                        </div>
+                        <p className="text-xs leading-5 text-gray-600">
+                          PNG, JPG, GIF up to 10MB
+                        </p>
+                      </div>
+                    )}
+                  </div>
+                  {/* Upload progress */}
+                  {loadingScreenShot && (
+                    <>
+                      <div className="ml-4 flex basis-1/2 flex-col items-center justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-10">
+                        <CloudArrowUpIcon
+                          className="mx-auto h-12 w-12 text-gray-300"
+                          aria-hidden="true"
+                        />
+                        <Progress
+                          value={progressScreenShot}
+                          className="w-[60%]"
+                        />
+                        <div className="mt-4 flex text-sm font-semibold leading-6 text-slate-600">
+                          <p className="pl-1">Uploading ...</p>
+                        </div>
+                      </div>
+                    </>
+                  )}
+                  {successScreenShot && (
+                    <>
+                      <div className="ml-4 flex basis-1/2 flex-col items-center justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-10">
+                        <CheckBadgeIcon
+                          className="mx-auto h-12 w-12 text-gray-300"
+                          aria-hidden="true"
+                        />
+                        <div className="mt-4 flex text-sm font-semibold leading-6 text-green-600">
+                          <p className="pl-1">Successfully uploaded</p>
+                        </div>
+                      </div>
+                    </>
+                  )}
+                </div>
+
                 <FormMessage />
               </FormItem>
             )}

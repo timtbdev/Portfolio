@@ -1,19 +1,5 @@
-<a href="https://timtb.dev">
-  <img alt="Portfolio – Simple and minimal portfolio website" src="https://timtb.dev/images/banner/banner.jpg">
-  <h1 align="center">Portfolio</h1>
-</a>
-
 <p align="center">
   Simple and minimal portfolio website
-</p>
-
-<p align="center">
-  <a href="https://twitter.com/timtbdev">
-    <img src="https://img.shields.io/twitter/follow/timtbdev?style=flat&label=timtbdev&logo=twitter&color=0bf&logoColor=fff" alt="Timtbdev twitter" />
-  </a>
-  <a href="https://github.com/timtbdev/Portfolio">
-    <img src="https://img.shields.io/github/stars/timtbdev/Portfolio?label=timtbdev%2FPortfolio" alt="Portfolio repo star count" />
-  </a>
 </p>
 
 # 💁‍♂️ Introduction
@@ -47,6 +33,7 @@ An open source application built using the new router, server components and eve
 ├── 🗂️ styles                  # CSS
 ├── 📝 contentlayer.config.ts  # Contentlayer config
 └── 📝 next.config.js          # configuration related to Next.js
+```
 
 ## 📊 Google Lighthouse performance statistics
 
@@ -65,7 +52,7 @@ An open source application built using the new router, server components and eve
 - ORM using [Prisma](https://www.prisma.io/)
 - Database on [Vercel/Postgres](https://vercel.com/docs/storage/vercel-postgres/)
 - Open Graph Image Generation using [Vercel/Og](https://vercel.com/docs/concepts/functions/edge-functions/og-image-generation)
-- Image Upload using [UploadThing](https://uploadthing.com/)
+- Image Upload using [ReactDropZone](https://react-dropzone.js.org/) and [Cloud Storage for Firebase](https://firebase.google.com/products/storage)
 - UI Components built using [Radix UI](https://www.radix-ui.com/) and [Headless UI](https://headlessui.com/), [Shadcn UI](https://ui.shadcn.com/)
 - Pages and blogs are using [MDX](https://mdxjs.com/) and [Contentlayer](https://www.contentlayer.dev/)
 - Styled using [Tailwind CSS](https://tailwindcss.com/)
