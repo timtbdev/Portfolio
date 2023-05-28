@@ -1,4 +1,5 @@
 import { Metadata } from "next"
+import { ContactForm } from "@/components/contact"
 import { metaData } from "@/config/meta"
 import { EmailIcon, GithubIcon, TwitterIcon } from "@/icons"
 import { absoluteUrl, cn, constructOgImageUri } from "@/libs/utils"
@@ -69,6 +70,10 @@ const ContactPage = () => {
             <Balancer>{page.description}</Balancer>
           </span>
         </div>
+        <div className="relative mx-auto max-w-4xl px-6 py-4">
+          <ContactForm />
+        </div>
+        <div className="grid gap-8 px-5 sm:grid-cols-1 md:grid-cols-3 md:px-0"></div>
         <div className="grid gap-8 px-5 sm:grid-cols-1 md:grid-cols-3 md:px-0">
           <span className="text-blue-500"></span>
           <span className="text-green-500"></span>

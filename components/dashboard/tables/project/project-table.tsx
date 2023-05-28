@@ -1,11 +1,13 @@
 "use client"
 
 import { FC } from "react"
-import { useRouter, useSearchParams } from "next/navigation"
+import Link from "next/link"
 import {
   ProjectCreateButton,
   ProjectOperations,
 } from "@/components/editor/project/"
+import { db } from "@/libs/db"
+import { getCurrentUser } from "@/libs/session"
 import { formatYearMonth } from "@/libs/utils"
 
 interface ProjectTableProps {
@@ -15,10 +17,19 @@ interface ProjectTableProps {
     publishedAt: Date
     category: string | undefined | null
   }[]
+  page: number
+  perPage: number
+  totalProjects: number
+  totalPages: number
 }
 
-const ProjectTable: FC<ProjectTableProps> = ({ projects }) => {
-  const router = useRouter()
+const ProjectTable: FC<ProjectTableProps> = ({
+  projects,
+  page,
+  perPage,
+  totalPages,
+  totalProjects,
+}) => {
   return (
     <>
       <div className="px-4 sm:px-6 lg:px-8">
@@ -87,6 +98,38 @@ const ProjectTable: FC<ProjectTableProps> = ({ projects }) => {
                 </table>
               </div>
             </div>
+          </div>
+        </div>
+        <div className="mt-4 flex items-center justify-between">
+          <p className="text-sm text-gray-700">
+            Showing{" "}
+            <span className="font-medium">{(page - 1) * perPage + 1}</span> to{" "}
+            <span className="font-medium">
+              {Math.min(page * perPage, totalProjects)}
+            </span>{" "}
+            of <span className="font-medium">{totalProjects}</span> projects
+          </p>
+          <div className="space-x-2">
+            <Link
+              href={page > 2 ? `/dashboard/?page=${page - 1}` : "/"}
+              className={`${
+                page === 1 ? "pointer-events-none opacity-50" : ""
+              } inline-flex items-center justify-center rounded-md border border-gray-300 bg-white px-3 py-2 text-sm font-semibold text-gray-900 hover:bg-gray-50`}
+            >
+              Previous
+            </Link>
+            <Link
+              href={
+                page < totalPages
+                  ? `/dashboard/?page=${page + 1}`
+                  : `/dashboard/?page=${page}`
+              }
+              className={`${
+                page >= totalPages ? "pointer-events-none opacity-50" : ""
+              } inline-flex items-center justify-center rounded-md border border-gray-300 bg-white px-3 py-2 text-sm font-semibold text-gray-900 hover:bg-gray-50`}
+            >
+              Next
+            </Link>
           </div>
         </div>
       </div>
