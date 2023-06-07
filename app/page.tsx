@@ -18,6 +18,11 @@ const HomePage = async () => {
         publishedAt: "desc",
       },
     ],
+    include: {
+      categories: true,
+      tags: true,
+      features: true,
+    },
   })
   const page = allPages.find((page) => page.slugAsParams === "home")
 

@@ -2,7 +2,7 @@
 
 import { FC } from "react"
 import { usePathname } from "next/navigation"
-import { navigations } from "@/config"
+import { dbNavigations } from "@/config"
 import { Disclosure } from "@headlessui/react"
 
 import { User } from "types"
@@ -31,7 +31,7 @@ const DashBoardNav: FC<DashBoardNavProps> = ({ id, name, email, image }) => {
                 <Logo />
                 {/* Desktop Navigation */}
                 <DesktopNav
-                  navigations={navigations}
+                  dbNavigations={dbNavigations}
                   currentPath={currentPath || ""}
                 />
               </div>
@@ -54,7 +54,7 @@ const DashBoardNav: FC<DashBoardNavProps> = ({ id, name, email, image }) => {
 
           {/* Mobile Menu */}
           <MobileNav
-            navigations={navigations}
+            dbNavigations={dbNavigations}
             currentPath={currentPath || ""}
             user={user}
           />

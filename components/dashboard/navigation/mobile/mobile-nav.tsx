@@ -1,26 +1,30 @@
 import { FC } from "react"
 import Image from "next/image"
 import { cn } from "@/libs/utils"
-import { NavItem } from "@/types"
+import { DBNavItem } from "@/types"
 import { Disclosure } from "@headlessui/react"
 import { signOut } from "next-auth/react"
 
 import { User } from "types"
 
 interface MobileNavProps {
-  navigations: NavItem[]
+  dbNavigations: DBNavItem[]
   currentPath: string
   user: User
 }
 
-const MobileNav: FC<MobileNavProps> = ({ navigations, currentPath, user }) => {
+const MobileNav: FC<MobileNavProps> = ({
+  dbNavigations,
+  currentPath,
+  user,
+}) => {
   return (
     <>
       <Disclosure.Panel className="lg:hidden">
         <div className="space-y-1 px-2 pb-3 pt-2">
           {/* Current: "bg-gray-900 text-white", Default: "" */}
 
-          {navigations.map((item, idx) => (
+          {dbNavigations.map((item, idx) => (
             <Disclosure.Button
               as="a"
               key={idx + item.name}

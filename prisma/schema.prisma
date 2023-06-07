@@ -2,7 +2,8 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 generator client {
-  provider = "prisma-client-js"
+  provider        = "prisma-client-js"
+  previewFeatures = ["fullTextSearch"]
 }
 
 datasource db {
@@ -13,23 +14,35 @@ datasource db {
 }
 
 model Project {
-  id          String   @id @default(cuid())
-  title       String   @unique
+  id          String              @id @default(cuid())
+  title       String
   icon        String?
   url         String?
   screenshot  String?
-  tags        String?
-  components  String?   @db.Text
-  libraries   String?   @db.Text
-  backend     String?   @db.Text
-  category    String?   @default("Android")
-  publishedAt DateTime @map(name: "published_at") @db.Date @default(now())
-  createdAt   DateTime @default(now()) @map(name: "created_at")
-  updatedAt   DateTime @updatedAt @map(name: "updated_at") @default(now())
-  user        User?    @relation(fields: [userId], references: [id])
-  userId      String?
+  tags        TagOnProject[]
+  features    Feature[]
+  categories  CategoryOnProject[]
+  publishedAt DateTime            @default(now()) @map(name: "published_at") @db.Date
+  createdAt   DateTime            @default(now()) @map(name: "created_at")
+  updatedAt   DateTime            @default(now()) @updatedAt @map(name: "updated_at")
+  author      User                @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  authorId    String
 
-  @@index([userId])
+  @@index([authorId])
+  @@map("projects")
+}
+
+model Feature {
+  id          String   @id @default(cuid())
+  title       String
+  description String   @db.Text
+  createdAt   DateTime @default(now()) @map(name: "created_at")
+  updatedAt   DateTime @default(now()) @updatedAt @map(name: "updated_at")
+  project     Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  projectId   String
+
+  @@index([projectId])
+  @@map("features")
 }
 
 model User {
@@ -41,6 +54,107 @@ model User {
   projects  Project[]
   createdAt DateTime  @default(now()) @map(name: "created_at")
   updatedAt DateTime  @updatedAt @map(name: "updated_at")
+  posts     Post[]
+  pages     Page[]
+  socials   Social[]
 
   @@map(name: "users")
+}
+
+model Post {
+  id           String           @id @default(cuid())
+  title        String
+  description  String?          @db.Text
+  image        String?
+  imageCaption String?
+  content      Json?
+  published    Boolean          @default(false)
+  createdAt    DateTime         @default(now()) @map(name: "created_at")
+  updatedAt    DateTime         @default(now()) @map(name: "updated_at")
+  author       User             @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  authorId     String
+  tags         TagOnPost[]
+  categories   CategoryOnPost[]
+
+  @@index([authorId])
+  @@map(name: "posts")
+}
+
+model TagOnPost {
+  id        String   @id @default(cuid())
+  name      String
+  createdAt DateTime @default(now()) @map(name: "created_at")
+  updatedAt DateTime @default(now()) @map(name: "updated_at")
+  post      Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
+  postId    String
+
+  @@index([postId])
+  @@map(name: "tags_on_posts")
+}
+
+model TagOnProject {
+  id        String   @id @default(cuid())
+  name      String
+  createdAt DateTime @default(now()) @map(name: "created_at")
+  updatedAt DateTime @default(now()) @map(name: "updated_at")
+  project   Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  projectId String
+
+  @@index([projectId])
+  @@map(name: "tags_on_projects")
+}
+
+model CategoryOnProject {
+  id        String   @id @default(cuid())
+  title     String   @unique
+  createdAt DateTime @default(now()) @map(name: "created_at")
+  updatedAt DateTime @default(now()) @map(name: "updated_at")
+
+  projects Project[]
+
+  @@map(name: "categories_on_project")
+}
+
+model CategoryOnPost {
+  id        String   @id @default(cuid())
+  title     String   @unique
+  createdAt DateTime @default(now()) @map(name: "created_at")
+  updatedAt DateTime @default(now()) @map(name: "updated_at")
+
+  posts Post[]
+
+  @@map(name: "categories_on_post")
+}
+
+model Page {
+  id        String   @id @default(cuid())
+  title     String
+  image     String?
+  type      String   @default("about")
+  order     Int?
+  content   Json?
+  published Boolean  @default(false)
+  createdAt DateTime @default(now()) @map(name: "created_at")
+  updatedAt DateTime @default(now()) @map(name: "updated_at")
+  author    User     @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  authorId  String
+
+  @@index([authorId])
+  @@map(name: "pages")
+}
+
+model Social {
+  id          String   @id @default(cuid())
+  title       String
+  description String?
+  icon        String?
+  address     String?
+  order       Int?
+  createdAt   DateTime @default(now()) @map(name: "created_at")
+  updatedAt   DateTime @default(now()) @map(name: "updated_at")
+  author      User     @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  authorId    String
+
+  @@index([authorId])
+  @@map(name: "socials")
 }

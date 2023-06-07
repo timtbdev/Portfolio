@@ -1,66 +1,69 @@
-import { FC } from "react"
 import { redirect } from "next/navigation"
-import {
-  ProjecTableEmpty,
-  ProjectTable,
-} from "@/components/dashboard/tables/project"
+import { Dashboard } from "@/components/dashboard"
+import { dbPages, dbPosts, dbProjects, dbSocials } from "@/config/dashboard"
 import { authOptions } from "@/libs/auth"
 import { db } from "@/libs/db"
 import { getCurrentUser } from "@/libs/session"
 
-interface DashboardPageProps {
-  searchParams: { [key: string]: string | string[] | undefined }
-}
-
-export default async function DashBoardPage({
-  searchParams,
-}: DashboardPageProps) {
+export default async function DashBoardPage() {
   const user = await getCurrentUser()
 
   if (!user) {
     redirect(authOptions?.pages?.signIn || "/login")
   }
 
-  const totalProjects = await db.project.count()
-  const perPage = 1
-  const totalPages = Math.ceil(totalProjects / perPage)
-  const page =
-    typeof searchParams.page === "string" &&
-    +searchParams.page > 1 &&
-    +searchParams.page <= totalPages
-      ? +searchParams.page
-      : 1
-
-  const projects = await db.project.findMany({
+  //Projects
+  const projectCount = await db.project.count({
     where: {
-      userId: user?.id,
+      authorId: user.id,
     },
-    select: {
-      id: true,
-      title: true,
-      category: true,
-      publishedAt: true,
-    },
-    orderBy: {
-      publishedAt: "desc",
-    },
-    take: perPage,
-    skip: (page - 1) * perPage,
   })
+
+  // Posts
+  const postCount = await db.post.count({
+    where: {
+      authorId: user.id,
+    },
+  })
+
+  // Pages
+  const pageCount = await db.page.count()
+
+  // Socials
+  const socialCount = await db.social.count()
 
   return (
     <>
-      {projects.length ? (
-        <ProjectTable
-          projects={projects}
-          page={page}
-          perPage={perPage}
-          totalPages={totalPages}
-          totalProjects={totalProjects}
+      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+        <Dashboard
+          url={dbProjects.baseUrl}
+          title={dbProjects.title}
+          count={projectCount}
+          empty={dbProjects.empty.title}
+          description={dbProjects.description}
         />
-      ) : (
-        <ProjecTableEmpty userId={user.id} />
-      )}
+        <Dashboard
+          url={dbPosts.baseUrl}
+          title={dbPosts.title}
+          count={postCount}
+          empty={dbPosts.empty.title}
+          description={dbPosts.description}
+        />
+        <Dashboard
+          url={dbPages.baseUrl}
+          title={dbPages.title}
+          count={pageCount}
+          empty={dbPages.empty.title}
+          description={dbPages.description}
+        />
+        <Dashboard
+          url={dbSocials.baseUrl}
+          title={dbSocials.title}
+          count={socialCount}
+          empty={dbSocials.empty.title}
+          description={dbSocials.description}
+        />
+      </div>
     </>
   )
 }

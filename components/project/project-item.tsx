@@ -11,11 +11,15 @@ import {
   ProjectScreenShot,
 } from "./sub-components"
 
-import {Project} from "@prisma/client"
+import {Project, Feature, CategoryOnProject as Category, TagOnProject as Tag} from "@prisma/client"
 import { empty } from "@prisma/client/runtime"
 
 interface ProjectProps {
-  project: Project
+  project: (Project & {
+    tags: Tag[],
+    categories: Category[],
+    features: Feature[]
+}),
   line: boolean
 }
 
@@ -24,20 +28,7 @@ const Project: FC<ProjectProps> = ({
   line,
 }) => {
 
-  const features: {title: string, description: string} [] = [
-    {
-      title: "Components",
-      description: project.components || ""
-    },
-    {
-      title: "Libraries",
-      description: project.libraries || ""
-    },
-    {
-      title: "Backend",
-      description: project.backend || ""
-    }
-  ]
+
 
   return (
     <>
@@ -48,8 +39,8 @@ const Project: FC<ProjectProps> = ({
         <ProjectBrowser key={project.id} url={project.url ? project.url : ""}>
           <ProjectContainer>
             <div className="overflow-hidden">
-              <ProjectHeader title={project.title} tags={project?.tags?.split(",") ? project.tags.split(",") : []} icon={project.icon ? project.icon : ""} />
-              <ProjectFeatures features={features} />
+              <ProjectHeader title={project.title} tags={project?.tags ? project?.tags : []} icon={project.icon ? project.icon : ""} />
+              <ProjectFeatures features={project.features} />
             </div>
             <ProjectScreenShot screenshot={project.screenshot ? project.screenshot : ""} />
           </ProjectContainer>

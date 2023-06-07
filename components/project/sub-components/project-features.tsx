@@ -1,10 +1,8 @@
 import { FC } from "react"
+import { Feature } from "@prisma/client"
 
 interface ProjectFeaturesProps {
-  features: {
-    title: string
-    description: string
-  }[]
+  features: Feature[]
 }
 
 const ProjectFeatures: FC<ProjectFeaturesProps> = ({ features }) => {

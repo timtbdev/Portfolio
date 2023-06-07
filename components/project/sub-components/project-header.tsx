@@ -1,9 +1,10 @@
 import { FC } from "react"
 import Image from "next/image"
+import { TagOnProject as Tag } from "@prisma/client"
 
 interface ProjectHeaderProps {
   title: string
-  tags: string[]
+  tags: Tag[]
   icon: string
 }
 
@@ -28,12 +29,12 @@ const ProjectHeader: FC<ProjectHeaderProps> = ({ title, tags, icon }) => {
               {title}
             </h3>
             <p className="mt-2">
-              {tags.map((tag, idx) => (
+              {tags.map((tag) => (
                 <span
-                  key={idx + tag}
+                  key={tag.id}
                   className="mr-1 inline-flex items-center rounded-full bg-gray-50 px-2 py-1 text-sm font-medium text-slate-500 ring-1 ring-inset ring-gray-500/10 dark:bg-slate-700/30 dark:ring-white/10"
                 >
-                  {tag}
+                  {tag.name}
                 </span>
               ))}
             </p>

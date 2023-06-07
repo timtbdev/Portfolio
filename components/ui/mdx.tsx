@@ -162,9 +162,12 @@ const Mdx: FC<MdxProps> = ({ code }) => {
   const Component = useMDXComponent(code)
 
   return (
-    <div className="mdx">
-      <Component components={components} />
-    </div>
+    <>
+      <div className="mdx">
+        {/* @ts-ignore */}
+        <Component components={components} />
+      </div>
+    </>
   )
 }
 

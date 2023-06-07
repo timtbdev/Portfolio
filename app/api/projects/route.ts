@@ -1,11 +1,8 @@
 import { authOptions } from "@/libs/auth"
 import { db } from "@/libs/db"
+import { projectCreateSchema } from "@/libs/validations/project"
 import { getServerSession } from "next-auth/next"
 import * as z from "zod"
-
-const projectCreateSchema = z.object({
-  title: z.string(),
-})
 
 export async function GET() {
   try {
@@ -21,11 +18,10 @@ export async function GET() {
         id: true,
         title: true,
         icon: true,
-        category: true,
         publishedAt: true,
       },
       where: {
-        userId: user.id,
+        authorId: user.id,
       },
     })
 
@@ -43,8 +39,6 @@ export async function POST(req: Request) {
       return new Response("Unauthorized", { status: 403 })
     }
 
-    const { user } = session
-
     const json = await req.json()
 
     const body = projectCreateSchema.parse(json)
@@ -52,7 +46,7 @@ export async function POST(req: Request) {
     const project = await db.project.create({
       data: {
         title: body.title,
-        userId: session.user.id,
+        authorId: session.user.id,
       },
       select: {
         id: true,

@@ -78,3 +78,5 @@ export const toBase64 = (str: string) =>
   typeof window === "undefined"
     ? Buffer.from(str).toString("base64")
     : window.btoa(str)
+
+export const removeLastChar = (str: string) => str.slice(0,-1)

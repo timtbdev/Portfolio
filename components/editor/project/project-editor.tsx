@@ -3,12 +3,12 @@
 import { FC, useCallback, useState } from "react"
 import Image from "next/image"
 import { useRouter } from "next/navigation"
-import { Button, buttonVariants } from "@/components/ui/button"
+import { Button } from "@/components/ui/button"
 import { Calendar } from "@/components/ui/calendar"
+import { Checkbox } from "@/components/ui/checkbox"
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -21,17 +21,22 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover"
 import { Progress } from "@/components/ui/progress"
+import ProjectEditorTitle from "@/components/ui/project-editor-title"
+import { Separator } from "@/components/ui/separator"
 import { Textarea } from "@/components/ui/textarea"
+import UploadDragDropZone from "@/components/ui/upload-drag-drop-zone"
+import UploadProgress from "@/components/ui/upload-progress"
 import { toast } from "@/components/ui/use-toast"
+import { projectCategories } from "@/config/dashboard"
 import { cn, initFirebase } from "@/libs/utils"
-import {
-  CheckBadgeIcon,
-  CloudArrowUpIcon,
-  DocumentArrowDownIcon,
-  PhotoIcon,
-} from "@heroicons/react/24/solid"
+import { projectSchema } from "@/libs/validations/project"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { Project } from "@prisma/client"
+import {
+  CategoryOnProject as Category,
+  Feature,
+  Project,
+  TagOnProject as Tag,
+} from "@prisma/client"
 import { format } from "date-fns"
 import {
   getDownloadURL,
@@ -39,9 +44,15 @@ import {
   ref,
   uploadBytesResumable,
 } from "firebase/storage"
-import { CalendarIcon, ChevronDown, Loader2 as SpinnerIcon } from "lucide-react"
+import {
+  Plus as AddIcon,
+  CalendarIcon,
+  Trash as RemoveIcon,
+  Loader2 as SpinnerIcon,
+  Upload as UpdateIcon,
+} from "lucide-react"
 import { useDropzone } from "react-dropzone"
-import { useForm } from "react-hook-form"
+import { useFieldArray, useForm } from "react-hook-form"
 import * as z from "zod"
 
 initFirebase()
@@ -53,43 +64,14 @@ type Image = {
   type: string
 }
 
-const projectSchema = z.object({
-  title: z.string().min(3, { message: "Title must be at least 3 characters." }),
-  icon: z.string().url({ message: "Please enter a valid url." }),
-  url: z.string().url({ message: "Please enter a valid url." }),
-  screenshot: z.string().url({ message: "Please enter a valid url." }),
-  tags: z.string().min(3, {
-    message: "Tag must be at least 3 characters, and seperated by commas.",
-  }),
-  category: z
-    .enum(["Android", "Web"], {
-      invalid_type_error: "Select a category",
-      required_error: "Please select a category.",
-    })
-    .default("Android"),
-  components: z.string().max(160).min(4),
-  libraries: z.string().max(160).min(4),
-  backend: z.string().max(160).min(4),
-  publishedAt: z.date({ required_error: "Published date is required." }),
-})
-
 type FormData = z.infer<typeof projectSchema>
 
 interface ProjectEditorProps {
-  project: Pick<
-    Project,
-    | "id"
-    | "title"
-    | "icon"
-    | "url"
-    | "screenshot"
-    | "tags"
-    | "category"
-    | "components"
-    | "libraries"
-    | "backend"
-    | "publishedAt"
-  >
+  project: Project & {
+    tags: Tag[]
+    categories: Category[]
+    features: Feature[]
+  }
 }
 
 const ProjectEditor: FC<ProjectEditorProps> = ({ project }) => {
@@ -229,13 +211,35 @@ const ProjectEditor: FC<ProjectEditorProps> = ({ project }) => {
       icon: project?.icon || "",
       url: project?.url || "",
       screenshot: project?.screenshot || "",
-      tags: project?.tags || "",
-      category: project?.category === "Android" ? "Android" : "Web",
-      components: project?.components || "",
-      libraries: project?.libraries || "",
-      backend: project?.backend || "",
-      publishedAt: project.publishedAt,
+      tags: project.tags.length > 0 ? project.tags : [{ name: "" }],
+      categories:
+        project.categories.length > 0
+          ? project.categories.map((category) => category.title)
+          : ["android", "web"],
+      features:
+        project.features.length > 0
+          ? project.features
+          : [{ title: "", description: "" }],
+      publishedAt: project.publishedAt || new Date(Date.now()),
     },
+  })
+
+  const {
+    fields: tagList,
+    append: addTagList,
+    remove: removeTagList,
+  } = useFieldArray({
+    name: "tags",
+    control: form.control,
+  })
+
+  const {
+    fields: featureList,
+    append: addFeatureList,
+    remove: removeFeatureList,
+  } = useFieldArray({
+    name: "features",
+    control: form.control,
   })
 
   const [isSaving, setIsSaving] = useState<boolean>(false)
@@ -254,11 +258,9 @@ const ProjectEditor: FC<ProjectEditorProps> = ({ project }) => {
         url: data.url,
         screenshot: data.screenshot,
         tags: data.tags,
-        category: data.category,
-        components: data.components,
-        libraries: data.libraries,
-        backend: data.backend,
-        publishedAt: data.publishedAt.toISOString(),
+        categories: data.categories,
+        features: data.features,
+        publishedAt: data.publishedAt?.toISOString(),
       }),
     })
 
@@ -284,12 +286,17 @@ const ProjectEditor: FC<ProjectEditorProps> = ({ project }) => {
     <>
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+          {/* Project Title ---------------------------------- */}
+
+          <ProjectEditorTitle
+            title="Project title"
+            description="Please provide a unique title for your project."
+          />
           <FormField
             control={form.control}
             name="title"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Title</FormLabel>
                 <div className="flex w-full max-w-md space-x-2">
                   <FormControl>
                     <Input {...field} />
@@ -299,26 +306,22 @@ const ProjectEditor: FC<ProjectEditorProps> = ({ project }) => {
               </FormItem>
             )}
           />
+
+          {/* Upload - Icon ---------------------------------- */}
+
+          <ProjectEditorTitle
+            title="Project icon"
+            description="Please drag and drop a file to upload"
+          />
           <FormField
             control={form.control}
             name="icon"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Icon</FormLabel>
                 <div className="flex w-full max-w-xl flex-row">
                   <FormControl className="basis-3/4">
-                    <Input {...field} disabled />
+                    <Input {...field} disabled className="hidden" />
                   </FormControl>
-                  <Button
-                    onClick={openIcon}
-                    className={cn(
-                      "dropzone_button ml-2 basis-1/4",
-                      { hidden: loadingIcon },
-                      { hidden: successIcon }
-                    )}
-                  >
-                    Choose a file
-                  </Button>
                 </div>
 
                 {/* Uploader */}
@@ -346,99 +349,67 @@ const ProjectEditor: FC<ProjectEditorProps> = ({ project }) => {
                   >
                     <input hidden {...getInputIconProps()} />
                     {isDragActiveIcon ? (
-                      <div className="text-center">
-                        <DocumentArrowDownIcon
-                          className="mx-auto h-12 w-12 text-gray-300"
-                          aria-hidden="true"
-                        />
-                        <div className="mt-4 flex text-sm leading-6 text-gray-600">
-                          <p className="pl-1">Drop your file here.</p>
-                        </div>
-                      </div>
+                      <UploadDragDropZone active={true} />
                     ) : (
-                      <div className="text-center">
-                        <PhotoIcon
-                          className="mx-auto h-12 w-12 text-gray-300"
-                          aria-hidden="true"
-                        />
-                        <div className="mt-4 flex text-sm leading-6 text-gray-600">
-                          <p className="pl-1">Drag and drop a file here.</p>
-                        </div>
-                        <p className="text-xs leading-5 text-gray-600">
-                          PNG, JPG, GIF up to 10MB
-                        </p>
-                      </div>
+                      <UploadDragDropZone active={false} />
                     )}
                   </div>
                   {/* Upload progress */}
                   {loadingIcon && (
                     <>
-                      <div className="ml-4 flex basis-1/2 flex-col items-center justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-10">
-                        <CloudArrowUpIcon
-                          className="mx-auto h-12 w-12 text-gray-300"
-                          aria-hidden="true"
-                        />
+                      <UploadProgress>
                         <Progress value={progressIcon} className="w-[60%]" />
-                        <div className="mt-4 flex text-sm font-semibold leading-6 text-slate-600">
-                          <p className="pl-1">Uploading ...</p>
-                        </div>
-                      </div>
+                      </UploadProgress>
                     </>
                   )}
-                  {successIcon && (
-                    <>
-                      <div className="ml-4 flex basis-1/2 flex-col items-center justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-10">
-                        <CheckBadgeIcon
-                          className="mx-auto h-12 w-12 text-gray-300"
-                          aria-hidden="true"
-                        />
-                        <div className="mt-4 flex text-sm font-semibold leading-6 text-green-600">
-                          <p className="pl-1">Successfully uploaded</p>
-                        </div>
-                      </div>
-                    </>
-                  )}
+                  {successIcon && <UploadProgress done={true} />}
                 </div>
 
                 <FormMessage />
               </FormItem>
             )}
           />
+
+          {/* Project Url */}
+
+          <ProjectEditorTitle
+            title="Url"
+            description="Please provide a valid url."
+          />
           <FormField
             control={form.control}
             name="url"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Url</FormLabel>
                 <div className="flex w-full max-w-md space-x-2">
                   <FormControl>
-                    <Input {...field} className="sm:max-w-md" />
+                    <Input
+                      {...field}
+                      className="sm:max-w-md"
+                      placeholder="https://example.com"
+                    />
                   </FormControl>
                 </div>
                 <FormMessage />
               </FormItem>
             )}
           />
+
+          {/* Upload - Screenshot ---------------------------------- */}
+
+          <ProjectEditorTitle
+            title="Project screenshot"
+            description="Please drag and drop a file to upload"
+          />
           <FormField
             control={form.control}
             name="screenshot"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Screenshot</FormLabel>
                 <div className="flex w-full max-w-xl flex-row space-x-2">
                   <FormControl className="basis-3/4">
-                    <Input {...field} disabled />
+                    <Input {...field} disabled className="hidden" />
                   </FormControl>
-                  <Button
-                    onClick={openScreenShot}
-                    className={cn(
-                      "dropzone_button ml-2 basis-1/4",
-                      { hidden: loadingScreenShot },
-                      { hidden: successScreenShot }
-                    )}
-                  >
-                    Choose a file
-                  </Button>
                 </div>
 
                 {/* Uploader */}
@@ -466,174 +437,228 @@ const ProjectEditor: FC<ProjectEditorProps> = ({ project }) => {
                   >
                     <input hidden {...getInputScreenShotProps()} />
                     {isDragActiveScreenShot ? (
-                      <div className="text-center">
-                        <DocumentArrowDownIcon
-                          className="mx-auto h-12 w-12 text-gray-300"
-                          aria-hidden="true"
-                        />
-                        <div className="mt-4 flex text-sm leading-6 text-gray-600">
-                          <p className="pl-1">Drop your file here.</p>
-                        </div>
-                      </div>
+                      <UploadDragDropZone active={true} />
                     ) : (
-                      <div className="text-center">
-                        <PhotoIcon
-                          className="mx-auto h-12 w-12 text-gray-300"
-                          aria-hidden="true"
-                        />
-                        <div className="mt-4 flex text-sm leading-6 text-gray-600">
-                          <p className="pl-1">Drag and drop a file here.</p>
-                        </div>
-                        <p className="text-xs leading-5 text-gray-600">
-                          PNG, JPG, GIF up to 10MB
-                        </p>
-                      </div>
+                      <UploadDragDropZone active={false} />
                     )}
                   </div>
                   {/* Upload progress */}
                   {loadingScreenShot && (
                     <>
-                      <div className="ml-4 flex basis-1/2 flex-col items-center justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-10">
-                        <CloudArrowUpIcon
-                          className="mx-auto h-12 w-12 text-gray-300"
-                          aria-hidden="true"
-                        />
+                      <UploadProgress>
                         <Progress
                           value={progressScreenShot}
                           className="w-[60%]"
                         />
-                        <div className="mt-4 flex text-sm font-semibold leading-6 text-slate-600">
-                          <p className="pl-1">Uploading ...</p>
-                        </div>
-                      </div>
+                      </UploadProgress>
                     </>
                   )}
-                  {successScreenShot && (
-                    <>
-                      <div className="ml-4 flex basis-1/2 flex-col items-center justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-10">
-                        <CheckBadgeIcon
-                          className="mx-auto h-12 w-12 text-gray-300"
-                          aria-hidden="true"
-                        />
-                        <div className="mt-4 flex text-sm font-semibold leading-6 text-green-600">
-                          <p className="pl-1">Successfully uploaded</p>
-                        </div>
-                      </div>
-                    </>
-                  )}
+                  {successScreenShot && <UploadProgress done={true} />}
                 </div>
 
                 <FormMessage />
               </FormItem>
             )}
           />
-          <FormField
-            control={form.control}
-            name="tags"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Tags</FormLabel>
-                <div className="flex w-full max-w-md space-x-2">
-                  <FormControl>
-                    <Input {...field} className="sm:max-w-md" />
-                  </FormControl>
-                </div>
-                <FormDescription>
-                  Tags must be seperated by commas.
-                </FormDescription>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="category"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Category</FormLabel>
-                <div className="flex w-full max-w-md space-x-2">
-                  <FormControl>
-                    <select
-                      className={cn(
-                        buttonVariants({ variant: "outline" }),
-                        "w-[200px] appearance-none bg-transparent font-normal"
-                      )}
-                      {...field}
-                    >
-                      <option value="Android">Android</option>
-                      <option value="Web">Web</option>
-                    </select>
-                  </FormControl>
-                  <ChevronDown className="absolute right-3 top-3 h-4 w-4 opacity-50" />
-                </div>
-                <FormDescription>
-                  Choose a category for your project
-                </FormDescription>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="components"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Components</FormLabel>
-                <div className="flex w-full max-w-md space-x-2">
-                  <FormControl>
-                    <Textarea className="resize-none" {...field} />
-                  </FormControl>
-                </div>
-                <FormDescription>
-                  All components must be seperated by commas.
-                </FormDescription>
 
-                <FormMessage />
-              </FormItem>
-            )}
+          {/* Project Tags ---------------------------------- */}
+
+          <ProjectEditorTitle
+            title="Tags"
+            description="You can add multiple tags."
+          />
+          <div className="flex w-full max-w-md flex-col">
+            {tagList.map((field, index) => (
+              <div className="flex w-full max-w-md flex-col">
+                <FormField
+                  control={form.control}
+                  key={field.id + index}
+                  name={`tags.${index}.name`}
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormControl>
+                        <div className="mt-2 flex flex-row space-x-2">
+                          <Input
+                            placeholder="Please provide a tag"
+                            className="w-full max-w-[340px]"
+                            {...field}
+                          />
+                          {index !== 0 && (
+                            <Button
+                              type="button"
+                              size="sm"
+                              variant="outline"
+                              className="mt-1 text-red-600 hover:text-gray-900"
+                              onClick={() => removeTagList(index)}
+                            >
+                              <RemoveIcon className="mr-2 h-4 w-4" />
+                              Remove
+                            </Button>
+                          )}
+                        </div>
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
+            ))}
+            <Button
+              type="button"
+              size="sm"
+              className="mt-2 w-full max-w-[340px]"
+              variant="outline"
+              onClick={() => addTagList({ name: "" })}
+            >
+              <AddIcon className="mr-2 h-4 w-4" />
+              Add
+            </Button>
+          </div>
+
+          {/* Project Categories ---------------------------------- */}
+
+          <ProjectEditorTitle
+            title="Categories"
+            description="You can choose multiple categories."
           />
           <FormField
             control={form.control}
-            name="libraries"
-            render={({ field }) => (
+            name="categories"
+            render={() => (
               <FormItem>
-                <FormLabel>Libraries</FormLabel>
-                <div className="flex w-full max-w-md space-x-2">
-                  <FormControl>
-                    <Textarea className="resize-none" {...field} />
-                  </FormControl>
-                </div>
-                <FormDescription>
-                  All libraries must be seperated by commas.
-                </FormDescription>
+                {projectCategories.map((item, idx) => (
+                  <FormField
+                    key={idx + item.label}
+                    control={form.control}
+                    name="categories"
+                    render={({ field }) => {
+                      return (
+                        <FormItem
+                          key={item.label + idx}
+                          className="flex flex-row items-start space-x-3 space-y-0"
+                        >
+                          <FormControl>
+                            <Checkbox
+                              checked={field.value?.includes(item.value)}
+                              onCheckedChange={(checked) => {
+                                return checked
+                                  ? field.onChange([
+                                      ...(field.value || []),
+                                      item.value,
+                                    ])
+                                  : field.onChange(
+                                      field.value?.filter(
+                                        (value) => value !== item.value
+                                      )
+                                    )
+                              }}
+                            />
+                          </FormControl>
+                          <FormLabel className="font-normal">
+                            {item.label}
+                          </FormLabel>
+                        </FormItem>
+                      )
+                    }}
+                  />
+                ))}
                 <FormMessage />
               </FormItem>
             )}
           />
-          <FormField
-            control={form.control}
-            name="backend"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Backend</FormLabel>
-                <div className="flex w-full max-w-md space-x-2">
-                  <FormControl>
-                    <Textarea className="resize-none" {...field} />
-                  </FormControl>
-                </div>
-                <FormDescription>
-                  All backend technologies must be seperated by commas.
-                </FormDescription>
-                <FormMessage />
-              </FormItem>
-            )}
+
+          {/* Project Features ---------------------------------- */}
+
+          <ProjectEditorTitle
+            title="Features"
+            description="You can add multiple features."
           />
+          <div className="flex w-full max-w-md flex-col">
+            {featureList.map((field, index) => (
+              <div
+                key={field.id + index + 1}
+                className="flex w-full max-w-md flex-col"
+              >
+                <FormField
+                  control={form.control}
+                  key={field.id + index}
+                  name={`features.${index}.title`}
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormControl>
+                        <div className="mt-2 flex flex-col">
+                          <p className="text-sm font-semibold">Title</p>
+                          <Input
+                            placeholder="Please provide a title"
+                            className="mt-1"
+                            {...field}
+                          />
+                        </div>
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  key={field.id + index + 1}
+                  name={`features.${index}.description`}
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormControl>
+                        <div className="mt-2 flex flex-col">
+                          <p className="text-sm font-semibold">Description</p>
+                          <Textarea
+                            placeholder="Please provide some descriptions"
+                            className="mt-1"
+                            {...field}
+                          />
+                        </div>
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                {index !== 0 && (
+                  <Button
+                    type="button"
+                    variant="outline"
+                    size="sm"
+                    className="mt-2 text-red-600 hover:text-gray-900"
+                    onClick={() => removeFeatureList(index)}
+                  >
+                    <RemoveIcon className="mr-2 h-4 w-4" />
+                    Remove
+                  </Button>
+                )}
+                <Separator className="mt-5" />
+              </div>
+            ))}
+
+            <Button
+              type="button"
+              size="sm"
+              variant="outline"
+              className="mt-2"
+              onClick={() => addFeatureList({ title: "", description: "" })}
+            >
+              <AddIcon className="mr-2 h-4 w-4" />
+              Add
+            </Button>
+          </div>
+
+          <ProjectEditorTitle
+            title="Published date"
+            description="Please choose a release date of your project. "
+          />
+
+          {/* Project release date ---------------------------------- */}
+
           <FormField
             control={form.control}
             name="publishedAt"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Published at:</FormLabel>
                 <div className="flex w-full max-w-md space-x-2">
                   <Popover>
                     <PopoverTrigger asChild>
@@ -670,14 +695,17 @@ const ProjectEditor: FC<ProjectEditorProps> = ({ project }) => {
                     </PopoverContent>
                   </Popover>
                 </div>
-                <FormDescription>Please pick a published date.</FormDescription>
                 <FormMessage />
               </FormItem>
             )}
           />
-          <Button type="submit">
+          <Button
+            type="submit"
+            className="w-full max-w-md bg-blue-600 hover:bg-blue-500"
+          >
             {isSaving && <SpinnerIcon className="mr-2 h-4 w-4 animate-spin" />}
-            Update project
+            {!isSaving && <UpdateIcon className="mr-2 h-4 w-4" />}
+            Update
           </Button>
         </form>
       </Form>

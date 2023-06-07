@@ -1,7 +1,6 @@
 "use client"
 
-import * as React from "react"
-import Link from "next/link"
+import { FC, useState } from "react"
 import { useRouter } from "next/navigation"
 import {
   AlertDialog,
@@ -13,6 +12,7 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog"
+import { ButtonProps } from "@/components/ui/button"
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -21,38 +21,46 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { toast } from "@/components/ui/use-toast"
-import { Project } from "@prisma/client"
 import {
   MoreVertical as ElipsisIcon,
   Loader2 as SpinnerIcon,
   Trash as TrashIcon,
 } from "lucide-react"
 
-async function deletePost(projectId: string) {
-  const response = await fetch(`/api/projects/${projectId}`, {
+async function deletePost(id: string, title: string, apiUrl: string) {
+  console.log("DELETE-RESPONSE", apiUrl + id)
+  const response = await fetch(apiUrl + id, {
     method: "DELETE",
   })
 
   if (!response?.ok) {
-    toast({
+    return toast({
       title: "Something went wrong.",
-      description: "Your project was not deleted. Please try again.",
+      description: `Your ${title} was not deleted. Please try again.`,
       variant: "destructive",
     })
   }
 
+  toast({
+    title: "Success",
+    description: `Your ${title} was deleted.`,
+  })
+
   return true
 }
 
-interface ProjectOperationsProps {
-  project: Pick<Project, "id" | "title">
+interface EditButtonProps extends ButtonProps {
+  id: string
+  title: string
+  apiUrl: string
+  editUrl: string
 }
 
-export default function ProjectOperations({ project }: ProjectOperationsProps) {
+const EditButton: FC<EditButtonProps> = ({ id, title, apiUrl, editUrl }) => {
   const router = useRouter()
-  const [showDeleteAlert, setShowDeleteAlert] = React.useState<boolean>(false)
-  const [isDeleteLoading, setIsDeleteLoading] = React.useState<boolean>(false)
-  const [showLoadingAlert, setShowLoadingAlert] = React.useState<boolean>(false)
+  const [showDeleteAlert, setShowDeleteAlert] = useState<boolean>(false)
+  const [isDeleteLoading, setIsDeleteLoading] = useState<boolean>(false)
+  const [showLoadingAlert, setShowLoadingAlert] = useState<boolean>(false)
 
   return (
     <>
@@ -66,7 +74,7 @@ export default function ProjectOperations({ project }: ProjectOperationsProps) {
             <a
               className="flex w-full"
               onClick={() => {
-                router.push(`/editor/project/${project.id}`)
+                router.push(editUrl + id)
                 setShowLoadingAlert(true)
               }}
             >
@@ -98,7 +106,7 @@ export default function ProjectOperations({ project }: ProjectOperationsProps) {
         <AlertDialogContent className="font-sans">
           <AlertDialogHeader>
             <AlertDialogTitle>
-              Are you sure you want to delete this project?
+              Are you sure, you want to delete this {title}?
             </AlertDialogTitle>
             <AlertDialogDescription>
               This action cannot be undone.
@@ -111,7 +119,7 @@ export default function ProjectOperations({ project }: ProjectOperationsProps) {
                 event.preventDefault()
                 setIsDeleteLoading(true)
 
-                const deleted = await deletePost(project.id)
+                const deleted = await deletePost(id, title, apiUrl)
 
                 if (deleted) {
                   setIsDeleteLoading(false)
@@ -134,3 +142,5 @@ export default function ProjectOperations({ project }: ProjectOperationsProps) {
     </>
   )
 }
+
+export default EditButton

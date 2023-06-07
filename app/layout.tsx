@@ -1,4 +1,5 @@
 import "@/styles/tailwind.css"
+
 import type { Metadata } from "next"
 import { Inter as FontSans } from "next/font/google"
 import localFont from "next/font/local"
@@ -164,6 +165,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
             {children}
             <VercelAnalytics />
             <Toaster />
+
             <TwIndicator />
           </MainWrapper>
         </ThemeProvider>

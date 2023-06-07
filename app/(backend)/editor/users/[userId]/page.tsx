@@ -1,6 +1,6 @@
 import Link from "next/link"
 import { redirect } from "next/navigation"
-import { UserEditor } from "@/components/editor/users"
+import { UserEditor } from "@/components/editor/user"
 import { buttonVariants } from "@/components/ui/button"
 import { Separator } from "@/components/ui/separator"
 import { authOptions } from "@/libs/auth"

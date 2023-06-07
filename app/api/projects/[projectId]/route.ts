@@ -1,34 +1,19 @@
 import { authOptions } from "@/libs/auth"
 import { db } from "@/libs/db"
+import {
+  projectPatchSchema,
+  projectRouteContextSchema,
+} from "@/libs/validations/project"
 import { getServerSession } from "next-auth"
 import * as z from "zod"
 
-const routeContextSchema = z.object({
-  params: z.object({
-    projectId: z.string(),
-  }),
-})
-
-const projectPatchSchema = z.object({
-  title: z.string(),
-  icon: z.string().url(),
-  url: z.string().url(),
-  screenshot: z.string().url(),
-  tags: z.string(),
-  category: z.enum(["Android", "Web"]).default("Android"),
-  components: z.string(),
-  libraries: z.string(),
-  backend: z.string(),
-  publishedAt: z.string(),
-})
-
 export async function DELETE(
   req: Request,
-  context: z.infer<typeof routeContextSchema>
+  context: z.infer<typeof projectRouteContextSchema>
 ) {
   try {
     // Validate the route params.
-    const { params } = routeContextSchema.parse(context)
+    const { params } = projectRouteContextSchema.parse(context)
 
     // Check if the user has access to this post.
     if (!(await verifyCurrentUserHasAccessToPost(params.projectId))) {
@@ -54,11 +39,11 @@ export async function DELETE(
 
 export async function PATCH(
   req: Request,
-  context: z.infer<typeof routeContextSchema>
+  context: z.infer<typeof projectRouteContextSchema>
 ) {
   try {
     // Validate route params.
-    const { params } = routeContextSchema.parse(context)
+    const { params } = projectRouteContextSchema.parse(context)
 
     // Check if the user has access to this post.
     if (!(await verifyCurrentUserHasAccessToPost(params.projectId))) {
@@ -67,6 +52,7 @@ export async function PATCH(
 
     // Get the request body and validate it.
     const json = await req.json()
+
     const body = projectPatchSchema.parse(json)
 
     // Update the post.
@@ -80,12 +66,38 @@ export async function PATCH(
         icon: body.icon,
         url: body.url,
         screenshot: body.screenshot,
-        tags: body.tags,
-        category: body.category,
-        components: body.components,
-        libraries: body.libraries,
-        backend: body.backend,
+        tags: {
+          deleteMany: {},
+          create: body.tags?.map((tag) => {
+            return {
+              name: tag.name,
+            }
+          }),
+        },
+        categories: {
+          set: [],
+          connectOrCreate: body.categories?.map((category) => {
+            return {
+              where: { title: category },
+              create: { title: category },
+            }
+          }),
+        },
+        features: {
+          deleteMany: {},
+          create: body.features?.map((feature) => {
+            return {
+              description: feature.description,
+              title: feature.title,
+            }
+          }),
+        },
         publishedAt: body.publishedAt,
+      },
+      include: {
+        tags: true,
+        categories: true,
+        features: true,
       },
     })
 
@@ -104,7 +116,7 @@ async function verifyCurrentUserHasAccessToPost(projectId: string) {
   const count = await db.project.count({
     where: {
       id: projectId,
-      userId: session?.user.id,
+      authorId: session?.user.id,
     },
   })
 

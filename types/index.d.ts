@@ -48,9 +48,31 @@ export type ImageAttributes = {
   description: string
 }
 
-export type NavItem = {
+// Dashboard (DB) - Admin Panel
+
+export type DBNavItem = {
   name: string
   href: string
+}
+
+export type DBItemType = {
+  title: string
+  description: string
+  baseUrl: string
+  pageUrl: string
+  empty: {
+    title: string
+    descripton: string
+  }
+  notFound: string
+  tableHeaders: string[]
+  apiUrl: string
+  editUrl: string
+}
+
+export type DBCategoryType = {
+  value: string
+  label: string
 }
 
 export type User = {

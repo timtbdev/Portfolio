@@ -13,13 +13,24 @@ async function main() {
       url: "https://github.com/timtbdev/Portfolio-App-1",
       screenshot:
         "https://timtb.dev/images/projects/portfolio-app-01/screen.png",
-      tags: "Java, XML, JavaScript",
-      components:
-        "Multiple Activities, Fragment, AppCompat, RecyclerView, ViewPager",
-      libraries: "Retrofit, OkHttp, Gson, Glide, Butterknife",
-      backend: "Firebase Cloud Firestore, Firebase Cloud Functions",
-      category: "Android",
-      publishedAt: new Date("2019-08-01"),
+      tags: [{ name: "Java" }, { name: "XML" }],
+      features: [
+        {
+          title: "Components",
+          description:
+            "Multiple Activities, Fragment, AppCompat, RecyclerView, ViewPager",
+        },
+        {
+          title: "Libraries",
+          description: "Retrofit, OkHttp, Gson, Glide, Butterknife",
+        },
+        {
+          title: "Backend",
+          description: "Firebase Cloud Firestore, Firebase Cloud Functions",
+        },
+      ],
+      categories: [{ title: "android" }, { title: "web" }],
+      publishedAt: new Date("2019-08-01").toISOString,
     },
     {
       title: "Portfolio App 2.0",
@@ -27,13 +38,25 @@ async function main() {
       url: "https://github.com/timtbdev/Portfolio-App-2",
       screenshot:
         "https://timtb.dev/images/projects/portfolio-app-02/screen.png",
-      tags: "Kotlin, XML, JavaScript",
-      components:
-        "Single Activity, Navigation, LiveData, ViewModel, DataBinding, Room, WorkManager, MotionLayout, Paging",
-      libraries:
-        "Koin, Kotlin Coroutines, Retrofit, OkHttp, Moshi, Coil, Leak Canary, Timber",
-      backend: "Firebase Cloud Firestore, Firebase Cloud Functions",
-      category: "Android",
+
+      tags: [{ name: "Kotlin" }, { name: "XML" }, { name: "JavaScript" }],
+      features: [
+        {
+          title: "Components",
+          description:
+            "Single Activity, Navigation, LiveData, ViewModel, DataBinding, Room, WorkManager, MotionLayout, Paging",
+        },
+        {
+          title: "Libraries",
+          description:
+            "Koin, Kotlin Coroutines, Retrofit, OkHttp, Moshi, Coil, Leak Canary, Timber",
+        },
+        {
+          title: "Backend",
+          description: "Firebase Cloud Firestore, Firebase Cloud Functions",
+        },
+      ],
+      categories: [{ title: "android" }, { title: "web" }],
       publishedAt: new Date("2019-10-01"),
     },
     {
@@ -41,15 +64,27 @@ async function main() {
       icon: "https://timtb.dev/images/projects/sign-app/icon.png",
       url: "https://github.com/timtbdev/sign-app",
       screenshot: "https://timtb.dev/images/projects/sign-app/screen.png",
-      tags: "Kotlin, XML, JavaScript",
-      components:
-        "Jetpack Compose, Kotlin, Next.js, TypeScript, Tailwind Css, Prisma, PlanetScale, NextAuth.js",
-      libraries:
-        "Jetpack Compose, Material Design 3, Next.js, Tailwind Css, Prisma, PlanetScale",
-      backend:
-        "Next.js, App Router, React Server Components, TypeScript, Vercel Edge Functions",
-      category: "Android",
-      publishedAt: new Date("2023-05-01"),
+
+      tags: [{ name: "Kotlin" }, { name: "XML" }, { name: "JavaScript" }],
+      features: [
+        {
+          title: "Components",
+          description:
+            "Jetpack Compose, Kotlin, Next.js, TypeScript, Tailwind Css, Prisma, PlanetScale, NextAuth.js",
+        },
+        {
+          title: "Libraries",
+          description:
+            "Jetpack Compose, Material Design 3, Next.js, Tailwind Css, Prisma, PlanetScale",
+        },
+        {
+          title: "Backend",
+          description:
+            "Next.js, App Router, React Server Components, TypeScript, Vercel Edge Functions",
+        },
+      ],
+      categories: [{ title: "android" }, { title: "web" }],
+      publishedAt: new Date("2023-05-01").toISOString,
     },
   ]
 
@@ -63,9 +98,26 @@ async function main() {
     },
   })
 
-  const projects = await prisma.project.createMany({
-    data,
-  })
+  // await Promise.all(data.map(async (item) => { 
+  //   await prisma.project.create({
+  //     data: {
+  //       title: item.title,
+  //       icon: item.icon,
+  //       url: item.url,
+  //       screenshot: item.screenshot,
+  //       tags: item.tags,
+  //       features: item.features,
+  //       categories: item.categories,
+  //       publishedAt: item.publishedAt
+  //     },
+  //     include: {
+  //       tags: true,
+  //       features: true,
+  //       categories: true
+  //     }
+  //   })
+  // }))
+
 }
 main()
   .then(() => prisma.$disconnect())

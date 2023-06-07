@@ -1,7 +1,7 @@
 import { ReactNode } from "react"
 import { Metadata } from "next"
 import { notFound } from "next/navigation"
-import DashBoardNav from "@/components/dashboard/dashboard-nav"
+import { DashBoardNav } from "@/components/dashboard/"
 import { Main, MainGrid } from "@/components/main"
 import { metaData } from "@/config/meta"
 import { getCurrentUser } from "@/libs/session"
