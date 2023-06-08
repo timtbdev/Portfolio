@@ -14,7 +14,7 @@ const clientCredentials = {
 
 export function initFirebase() {
   if (typeof window !== undefined) {
-    initializeApp(clientCredentials)
+    const firebaseApp = initializeApp(clientCredentials)
     console.log("Firebase has been init successfully")
   }
 }
@@ -79,4 +79,4 @@ export const toBase64 = (str: string) =>
     ? Buffer.from(str).toString("base64")
     : window.btoa(str)
 
-export const removeLastChar = (str: string) => str.slice(0,-1)
+export const removeLastChar = (str: string) => str.slice(0, -1)

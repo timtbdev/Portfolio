@@ -27,7 +27,7 @@ import { Textarea } from "@/components/ui/textarea"
 import UploadDragDropZone from "@/components/ui/upload-drag-drop-zone"
 import UploadProgress from "@/components/ui/upload-progress"
 import { toast } from "@/components/ui/use-toast"
-import { projectCategories } from "@/config/dashboard"
+import { dbProjects, projectCategories } from "@/config/dashboard"
 import { cn, initFirebase } from "@/libs/utils"
 import { projectSchema } from "@/libs/validations/project"
 import { zodResolver } from "@hookform/resolvers/zod"
@@ -53,11 +53,16 @@ import {
 } from "lucide-react"
 import { useDropzone } from "react-dropzone"
 import { useFieldArray, useForm } from "react-hook-form"
+import { v4 } from "uuid"
 import * as z from "zod"
 
 initFirebase()
 
 const storage = getStorage()
+
+function getStorageRef() {
+  return ref(storage, `projects/${v4()}`)
+}
 
 type Image = {
   imageFile: Blob
@@ -76,15 +81,6 @@ interface ProjectEditorProps {
 
 const ProjectEditor: FC<ProjectEditorProps> = ({ project }) => {
   const router = useRouter()
-
-  const storageRefIcon = ref(
-    storage,
-    `${project.id}-icon-${new Date().toISOString()}`
-  )
-  const storageRefScreenShot = ref(
-    storage,
-    `${project.id}-screenshot-${new Date().toISOString()}`
-  )
 
   const [iconUrl, setIconUrl] = useState<string>(
     project?.icon || "/images/not-found.jpg"
@@ -162,14 +158,12 @@ const ProjectEditor: FC<ProjectEditorProps> = ({ project }) => {
 
   const uploadImage = async ({ imageFile, type }: Image) => {
     try {
-      let storageRef = storageRefIcon
       if (type === "icon") {
         setLoadingIcon(true)
       } else {
         setLoadingScreenShot(true)
-        storageRef = storageRefScreenShot
       }
-      const uploadTask = uploadBytesResumable(storageRef, imageFile)
+      const uploadTask = uploadBytesResumable(getStorageRef(), imageFile)
       uploadTask.on(
         "state_changed",
         (snapshot) => {
@@ -195,6 +189,7 @@ const ProjectEditor: FC<ProjectEditorProps> = ({ project }) => {
               form.setValue("screenshot", downloadURL)
               setScreenShotUrl(downloadURL)
             }
+            console.log("File available at", downloadURL)
           })
         }
       )
@@ -279,7 +274,7 @@ const ProjectEditor: FC<ProjectEditorProps> = ({ project }) => {
       description: "Your project has been updated.",
     })
 
-    router.refresh()
+    router.push(dbProjects.baseUrl)
   }
 
   return (

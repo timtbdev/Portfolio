@@ -1,6 +1,3 @@
-import TableHeader from "@/components/ui/table-header"
-import { empty } from "@prisma/client/runtime"
-
 import { DBCategoryType, DBItemType, DBNavItem } from "types"
 
 export const dbNavigations: DBNavItem[] = [
@@ -8,7 +5,6 @@ export const dbNavigations: DBNavItem[] = [
   { name: "Projects", href: "/dashboard/projects" },
   { name: "Posts", href: "/dashboard/posts" },
   { name: "Pages", href: "/dashboard/pages" },
-  { name: "Contact", href: "/dashboard/socials" },
 ]
 
 export const dbProjects: DBItemType = {
@@ -88,19 +84,4 @@ export const dbPages: DBItemType = {
   tableHeaders: ["Title", "Page", "Published", "Actions"],
   apiUrl: "/api/pages/",
   editUrl: "/editor/pages/",
-}
-
-export const dbSocials: DBItemType = {
-  title: "Socials",
-  description: "All social addresses",
-  baseUrl: "/dashboard/socials/",
-  pageUrl: "?page=",
-  empty: {
-    title: "No Social addresses",
-    descripton: "Get started by creating an new social address.",
-  },
-  notFound: "This social address cound not be found. Please try again.",
-  tableHeaders: ["Title", "Link", "Actions"],
-  apiUrl: "/api/socials/",
-  editUrl: "/editor/socials/",
 }

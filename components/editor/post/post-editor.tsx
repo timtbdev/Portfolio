@@ -22,10 +22,11 @@ import { Textarea } from "@/components/ui/textarea"
 import UploadDragDropZone from "@/components/ui/upload-drag-drop-zone"
 import UploadProgress from "@/components/ui/upload-progress"
 import { toast } from "@/components/ui/use-toast"
-import { postCategories } from "@/config/dashboard"
+import { dbPosts, postCategories } from "@/config/dashboard"
 import { cn, initFirebase } from "@/libs/utils"
 import { postBodySchema, postPatchSchema } from "@/libs/validations/post"
 import EditorJS from "@editorjs/editorjs"
+import ImageTool from "@editorjs/image"
 import { zodResolver } from "@hookform/resolvers/zod"
 import {
   CategoryOnPost as Category,
@@ -40,13 +41,13 @@ import {
 } from "firebase/storage"
 import {
   Plus as AddIcon,
-  CalendarIcon,
   Trash as RemoveIcon,
   Loader2 as SpinnerIcon,
   Upload as UpdateIcon,
 } from "lucide-react"
 import { useDropzone } from "react-dropzone"
 import { useFieldArray, useForm } from "react-hook-form"
+import { v4 } from "uuid"
 import * as z from "zod"
 
 import "@/styles/editor.css"
@@ -55,7 +56,7 @@ initFirebase()
 
 const storage = getStorage()
 
-const storageRef = ref(storage, `post-image-${new Date().toISOString()}`)
+const storageRef = ref(storage, `posts/${v4()}`)
 
 type Image = {
   imageFile: Blob
@@ -167,6 +168,7 @@ const PostEditor: FC<PostEditorProps> = ({ post }) => {
   const initializeEditor = useCallback(async () => {
     const EditorJS = (await import("@editorjs/editorjs")).default
     const Header = (await import("@editorjs/header")).default
+    const Image = (await import("@editorjs/image")).default
     const Embed = (await import("@editorjs/embed")).default
     const Table = (await import("@editorjs/table")).default
     const List = (await import("@editorjs/list")).default
@@ -193,6 +195,37 @@ const PostEditor: FC<PostEditorProps> = ({ post }) => {
           inlineCode: InlineCode,
           table: Table,
           embed: Embed,
+
+          image: {
+            class: ImageTool,
+            config: {
+              /**
+               * Custom uploader
+               */
+              uploader: {
+                /**
+                 * Upload file to the server and return an uploaded image data
+                 * @param {File} file - file selected from the device or pasted by drag-n-drop
+                 * @return {Promise.<{success, file: {url}}>}
+                 */
+                async uploadByFile(file) {
+                  const uploadTask = uploadBytesResumable(storageRef, file)
+                  // your own uploading logic here
+                  return getDownloadURL(uploadTask.snapshot.ref).then(
+                    (downloadURL) => {
+                      return {
+                        success: 1,
+                        file: {
+                          url: downloadURL,
+                          // any other image data you want to store, such as width, height, color, extension, etc
+                        },
+                      }
+                    }
+                  )
+                },
+              },
+            },
+          },
         },
       })
     }
@@ -251,7 +284,7 @@ const PostEditor: FC<PostEditorProps> = ({ post }) => {
       description: "Your post has been updated.",
     })
 
-    router.refresh()
+    router.push(dbPosts.baseUrl)
   }
 
   return (

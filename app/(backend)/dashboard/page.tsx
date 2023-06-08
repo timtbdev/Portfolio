@@ -1,6 +1,6 @@
 import { redirect } from "next/navigation"
 import { Dashboard } from "@/components/dashboard"
-import { dbPages, dbPosts, dbProjects, dbSocials } from "@/config/dashboard"
+import { dbPages, dbPosts, dbProjects } from "@/config/dashboard"
 import { authOptions } from "@/libs/auth"
 import { db } from "@/libs/db"
 import { getCurrentUser } from "@/libs/session"
@@ -29,12 +29,9 @@ export default async function DashBoardPage() {
   // Pages
   const pageCount = await db.page.count()
 
-  // Socials
-  const socialCount = await db.social.count()
-
   return (
     <>
-      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
         <Dashboard
           url={dbProjects.baseUrl}
           title={dbProjects.title}
@@ -55,13 +52,6 @@ export default async function DashBoardPage() {
           count={pageCount}
           empty={dbPages.empty.title}
           description={dbPages.description}
-        />
-        <Dashboard
-          url={dbSocials.baseUrl}
-          title={dbSocials.title}
-          count={socialCount}
-          empty={dbSocials.empty.title}
-          description={dbSocials.description}
         />
       </div>
     </>

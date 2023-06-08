@@ -46,21 +46,8 @@ const ProfileMenu: FC<ProfileMenuProps> = ({ user }) => {
                     "block px-4 py-2 text-sm text-gray-700"
                   )}
                 >
-                  Your Profile
+                  Edit Profile
                 </Link>
-              )}
-            </Menu.Item>
-            <Menu.Item>
-              {({ active }) => (
-                <a
-                  href={`/editor/users/settings/${user.id}`}
-                  className={cn(
-                    active ? "bg-gray-100" : "",
-                    "block px-4 py-2 text-sm text-gray-700"
-                  )}
-                >
-                  Settings
-                </a>
               )}
             </Menu.Item>
             <Menu.Item>
