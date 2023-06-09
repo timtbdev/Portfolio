@@ -14,6 +14,7 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form"
+import FormTitle from "@/components/ui/form-title"
 import { Input } from "@/components/ui/input"
 import {
   Popover,
@@ -21,7 +22,6 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover"
 import { Progress } from "@/components/ui/progress"
-import ProjectEditorTitle from "@/components/ui/project-editor-title"
 import { Separator } from "@/components/ui/separator"
 import { Textarea } from "@/components/ui/textarea"
 import UploadDragDropZone from "@/components/ui/upload-drag-drop-zone"
@@ -283,7 +283,7 @@ const ProjectEditor: FC<ProjectEditorProps> = ({ project }) => {
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
           {/* Project Title ---------------------------------- */}
 
-          <ProjectEditorTitle
+          <FormTitle
             title="Project title"
             description="Please provide a unique title for your project."
           />
@@ -304,7 +304,7 @@ const ProjectEditor: FC<ProjectEditorProps> = ({ project }) => {
 
           {/* Upload - Icon ---------------------------------- */}
 
-          <ProjectEditorTitle
+          <FormTitle
             title="Project icon"
             description="Please drag and drop a file to upload"
           />
@@ -367,10 +367,7 @@ const ProjectEditor: FC<ProjectEditorProps> = ({ project }) => {
 
           {/* Project Url */}
 
-          <ProjectEditorTitle
-            title="Url"
-            description="Please provide a valid url."
-          />
+          <FormTitle title="Url" description="Please provide a valid url." />
           <FormField
             control={form.control}
             name="url"
@@ -392,7 +389,7 @@ const ProjectEditor: FC<ProjectEditorProps> = ({ project }) => {
 
           {/* Upload - Screenshot ---------------------------------- */}
 
-          <ProjectEditorTitle
+          <FormTitle
             title="Project screenshot"
             description="Please drag and drop a file to upload"
           />
@@ -458,10 +455,7 @@ const ProjectEditor: FC<ProjectEditorProps> = ({ project }) => {
 
           {/* Project Tags ---------------------------------- */}
 
-          <ProjectEditorTitle
-            title="Tags"
-            description="You can add multiple tags."
-          />
+          <FormTitle title="Tags" description="You can add multiple tags." />
           <div className="flex w-full max-w-md flex-col">
             {tagList.map((field, index) => (
               <div className="flex w-full max-w-md flex-col">
@@ -512,7 +506,7 @@ const ProjectEditor: FC<ProjectEditorProps> = ({ project }) => {
 
           {/* Project Categories ---------------------------------- */}
 
-          <ProjectEditorTitle
+          <FormTitle
             title="Categories"
             description="You can choose multiple categories."
           />
@@ -564,7 +558,7 @@ const ProjectEditor: FC<ProjectEditorProps> = ({ project }) => {
 
           {/* Project Features ---------------------------------- */}
 
-          <ProjectEditorTitle
+          <FormTitle
             title="Features"
             description="You can add multiple features."
           />
@@ -642,7 +636,7 @@ const ProjectEditor: FC<ProjectEditorProps> = ({ project }) => {
             </Button>
           </div>
 
-          <ProjectEditorTitle
+          <FormTitle
             title="Published date"
             description="Please choose a release date of your project. "
           />

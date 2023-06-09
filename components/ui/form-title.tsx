@@ -2,15 +2,12 @@ import { FC } from "react"
 
 import { Separator } from "./separator"
 
-interface ProjectEditorTitleProps {
+interface FormTitleProps {
   title: string
   description: string
 }
 
-const ProjectEditorTitle: FC<ProjectEditorTitleProps> = ({
-  title,
-  description,
-}) => {
+const FormTitle: FC<FormTitleProps> = ({ title, description }) => {
   return (
     <div className="flex flex-col space-y-2">
       <p className="text-md font-semibold">{title}</p>
@@ -20,4 +17,4 @@ const ProjectEditorTitle: FC<ProjectEditorTitleProps> = ({
   )
 }
 
-export default ProjectEditorTitle
+export default FormTitle

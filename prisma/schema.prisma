@@ -147,9 +147,8 @@ model Social {
   id          String   @id @default(cuid())
   title       String
   description String?
-  icon        String?
   address     String?
-  order       Int?
+  url         String?
   createdAt   DateTime @default(now()) @map(name: "created_at")
   updatedAt   DateTime @default(now()) @map(name: "updated_at")
   author      User     @relation(fields: [authorId], references: [id], onDelete: Cascade)

@@ -85,3 +85,18 @@ export const dbPages: DBItemType = {
   apiUrl: "/api/pages/",
   editUrl: "/editor/pages/",
 }
+
+export const dbUser: DBItemType = {
+  title: "Profile",
+  description: "Personal information",
+  baseUrl: "/dashboard",
+  pageUrl: "?user=",
+  empty: {
+    title: "No Profile",
+    descripton: "Please contact your admin.",
+  },
+  notFound: "This page cound not be found. Please try again.",
+  tableHeaders: ["Name", "Email", "Social accounts", "Actions"],
+  apiUrl: "/api/users/",
+  editUrl: "/editor/users/",
+}

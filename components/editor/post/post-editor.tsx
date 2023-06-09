@@ -14,9 +14,9 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form"
+import FormTitle from "@/components/ui/form-title"
 import { Input } from "@/components/ui/input"
 import { Progress } from "@/components/ui/progress"
-import ProjectEditorTitle from "@/components/ui/project-editor-title"
 import { Switch } from "@/components/ui/switch"
 import { Textarea } from "@/components/ui/textarea"
 import UploadDragDropZone from "@/components/ui/upload-drag-drop-zone"
@@ -293,7 +293,7 @@ const PostEditor: FC<PostEditorProps> = ({ post }) => {
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
           {/* Post Title ---------------------------------- */}
 
-          <ProjectEditorTitle
+          <FormTitle
             title="Post title"
             description="Please provide a unique title."
           />
@@ -314,7 +314,7 @@ const PostEditor: FC<PostEditorProps> = ({ post }) => {
 
           {/* Post Description ---------------------------------- */}
 
-          <ProjectEditorTitle
+          <FormTitle
             title="Post description"
             description="Please provide a short description for your post."
           />
@@ -339,7 +339,7 @@ const PostEditor: FC<PostEditorProps> = ({ post }) => {
 
           {/* Upload - Image ---------------------------------- */}
 
-          <ProjectEditorTitle
+          <FormTitle
             title="Post image"
             description="Please drag and drop a file to upload"
           />
@@ -403,7 +403,7 @@ const PostEditor: FC<PostEditorProps> = ({ post }) => {
 
           {/* Image caption ---------------------------------- */}
 
-          <ProjectEditorTitle
+          <FormTitle
             title="Image Caption"
             description="Please provide caption for your image."
           />
@@ -424,10 +424,7 @@ const PostEditor: FC<PostEditorProps> = ({ post }) => {
 
           {/* Project Tags ---------------------------------- */}
 
-          <ProjectEditorTitle
-            title="Tags"
-            description="You can add multiple tags."
-          />
+          <FormTitle title="Tags" description="You can add multiple tags." />
           <div className="flex w-full max-w-md flex-col">
             {tagList.map((field, index) => (
               <div className="flex w-full max-w-md flex-col">
@@ -478,7 +475,7 @@ const PostEditor: FC<PostEditorProps> = ({ post }) => {
 
           {/* Project Categories ---------------------------------- */}
 
-          <ProjectEditorTitle
+          <FormTitle
             title="Categories"
             description="You can choose multiple categories."
           />
@@ -530,7 +527,7 @@ const PostEditor: FC<PostEditorProps> = ({ post }) => {
 
           {/* Content ---------------------------------- */}
 
-          <ProjectEditorTitle
+          <FormTitle
             title="Content"
             description="Please provide a content for your fost"
           />
@@ -549,7 +546,7 @@ const PostEditor: FC<PostEditorProps> = ({ post }) => {
 
           {/* Draft ---------------------------------- */}
 
-          <ProjectEditorTitle
+          <FormTitle
             title="Publish"
             description="Please choose status of your post."
           />

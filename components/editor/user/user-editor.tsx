@@ -3,7 +3,7 @@
 import { FC, useCallback, useState } from "react"
 import Image from "next/image"
 import { useRouter } from "next/navigation"
-import { Button } from "@/components/ui/button"
+import { Button, buttonVariants } from "@/components/ui/button"
 import {
   Form,
   FormControl,
@@ -12,62 +12,66 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form"
+import FormTitle from "@/components/ui/form-title"
 import { Input } from "@/components/ui/input"
 import { Progress } from "@/components/ui/progress"
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
+import { Separator } from "@/components/ui/separator"
+import { Textarea } from "@/components/ui/textarea"
+import UploadDragDropZone from "@/components/ui/upload-drag-drop-zone"
+import UploadProgress from "@/components/ui/upload-progress"
 import { toast } from "@/components/ui/use-toast"
 import { cn, initFirebase } from "@/libs/utils"
-import {
-  CheckBadgeIcon,
-  CloudArrowUpIcon,
-  DocumentArrowDownIcon,
-  PhotoIcon,
-} from "@heroicons/react/24/solid"
+import { userPatchSchema } from "@/libs/validations/user"
 import { zodResolver } from "@hookform/resolvers/zod"
+import { Social, User } from "@prisma/client"
 import {
   getDownloadURL,
   getStorage,
   ref,
   uploadBytesResumable,
 } from "firebase/storage"
-import { Loader2 as SpinnerIcon } from "lucide-react"
+import {
+  Plus as AddIcon,
+  CalendarIcon,
+  ChevronDown,
+  Trash as RemoveIcon,
+  Loader2 as SpinnerIcon,
+  Upload as UpdateIcon,
+} from "lucide-react"
 import { useDropzone } from "react-dropzone"
-import { useForm } from "react-hook-form"
+import { useFieldArray, useForm } from "react-hook-form"
+import { v4 } from "uuid"
 import * as z from "zod"
 
 initFirebase()
 
 const storage = getStorage()
 
-const storageRef = ref(storage, `user-${new Date().toISOString()}`)
+const storageRef = ref(storage, `user/${v4()}`)
 type Image = {
   imageFile: Blob
 }
 
-const userPatchSchema = z.object({
-  name: z.string().min(3, { message: "Name must be at least 3 characters." }),
-  email: z.string().email({ message: "Please enter a valid email." }),
-  image: z.string().url({ message: "Please provide a valid image url." }),
-})
-
 type FormData = z.infer<typeof userPatchSchema>
 
 interface UserEditorProps {
-  userId: string
-  userName?: string | null
-  userEmail?: string | null
-  userImage?: string | null
+  user: User & {
+    socials: Social[]
+  }
 }
 
-const UserEditor: FC<UserEditorProps> = ({
-  userId,
-  userName = "",
-  userEmail = "",
-  userImage = "",
-}) => {
+const UserEditor: FC<UserEditorProps> = ({ user }) => {
   const router = useRouter()
 
   const [imageUrl, setImageUrl] = useState<string>(
-    userImage || "/images/not-found.jpg"
+    user.image || "/images/not-found.jpg"
   )
 
   let [progress, setProgress] = useState<number>(0)
@@ -129,10 +133,24 @@ const UserEditor: FC<UserEditorProps> = ({
   const form = useForm<FormData>({
     resolver: zodResolver(userPatchSchema),
     defaultValues: {
-      name: userName || "",
-      email: userEmail || "",
-      image: userImage || "",
+      name: user.name || "",
+      email: user.email || "",
+      image: user.image || "",
+      socials:
+        user.socials.length > 0
+          ? user.socials.map((social) => ({
+              title: social.title,
+              description: social.description ? social.description : "",
+              url: social.url ? social.url : "",
+              address: social.address ? social.address : "",
+            }))
+          : [{ title: "email", description: "", url: "", address: "" }],
     },
+  })
+
+  const { fields, append, remove } = useFieldArray({
+    name: "socials",
+    control: form.control,
   })
 
   const [isSaving, setIsSaving] = useState<boolean>(false)
@@ -140,7 +158,7 @@ const UserEditor: FC<UserEditorProps> = ({
   async function onSubmit(data: FormData) {
     setIsSaving(true)
 
-    const response = await fetch(`/api/users/${userId}`, {
+    const response = await fetch(`/api/users/${user.id}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -149,6 +167,7 @@ const UserEditor: FC<UserEditorProps> = ({
         name: data.name,
         email: data.email,
         image: data.image,
+        socials: data.socials,
       }),
     })
 
@@ -158,28 +177,33 @@ const UserEditor: FC<UserEditorProps> = ({
       console.log("Network Response", response)
       return toast({
         title: "Something went wrong.",
-        description: "Your information was not updated. Please try again.",
+        description: "Your profile was not updated. Please try again.",
         variant: "destructive",
       })
     }
 
     toast({
-      description: "Your information has been updated.",
+      description: "Your profile has been updated.",
     })
 
-    router.refresh()
+    router.push("/dashboard")
   }
 
   return (
     <>
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+          {/* Name */}
+
+          <FormTitle
+            title="Name"
+            description="Please provide your full name."
+          />
           <FormField
             control={form.control}
             name="name"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Name</FormLabel>
                 <div className="flex w-full max-w-md space-x-2">
                   <FormControl>
                     <Input {...field} />
@@ -189,26 +213,22 @@ const UserEditor: FC<UserEditorProps> = ({
               </FormItem>
             )}
           />
+
+          {/* Profile image */}
+
+          <FormTitle
+            title="Profile Image"
+            description="Please upload a your profile image."
+          />
           <FormField
             control={form.control}
             name="image"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Image</FormLabel>
                 <div className="flex w-full max-w-xl flex-row">
                   <FormControl className="basis-3/4">
-                    <Input {...field} disabled />
+                    <Input {...field} disabled className="hidden" />
                   </FormControl>
-                  <Button
-                    onClick={open}
-                    className={cn(
-                      "dropzone_button ml-2 basis-1/4",
-                      { hidden: loading },
-                      { hidden: success }
-                    )}
-                  >
-                    Choose a file
-                  </Button>
                 </div>
 
                 {/* Uploader */}
@@ -236,63 +256,32 @@ const UserEditor: FC<UserEditorProps> = ({
                   >
                     <input hidden {...getInputProps()} />
                     {isDragActive ? (
-                      <div className="text-center">
-                        <DocumentArrowDownIcon
-                          className="mx-auto h-12 w-12 text-gray-300"
-                          aria-hidden="true"
-                        />
-                        <div className="mt-4 flex text-sm leading-6 text-gray-600">
-                          <p className="pl-1">Drop your file here.</p>
-                        </div>
-                      </div>
+                      <UploadDragDropZone active={true} />
                     ) : (
-                      <div className="text-center">
-                        <PhotoIcon
-                          className="mx-auto h-12 w-12 text-gray-300"
-                          aria-hidden="true"
-                        />
-                        <div className="mt-4 flex text-sm leading-6 text-gray-600">
-                          <p className="pl-1">Drag and drop a file here.</p>
-                        </div>
-                        <p className="text-xs leading-5 text-gray-600">
-                          PNG, JPG, GIF up to 10MB
-                        </p>
-                      </div>
+                      <UploadDragDropZone active={false} />
                     )}
                   </div>
                   {/* Upload progress */}
                   {loading && (
                     <>
-                      <div className="ml-4 flex basis-1/2 flex-col items-center justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-10">
-                        <CloudArrowUpIcon
-                          className="mx-auto h-12 w-12 text-gray-300"
-                          aria-hidden="true"
-                        />
+                      <UploadProgress>
                         <Progress value={progress} className="w-[60%]" />
-                        <div className="mt-4 flex text-sm font-semibold leading-6 text-slate-600">
-                          <p className="pl-1">Uploading ...</p>
-                        </div>
-                      </div>
+                      </UploadProgress>
                     </>
                   )}
-                  {success && (
-                    <>
-                      <div className="ml-4 flex basis-1/2 flex-col items-center justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-10">
-                        <CheckBadgeIcon
-                          className="mx-auto h-12 w-12 text-gray-300"
-                          aria-hidden="true"
-                        />
-                        <div className="mt-4 flex text-sm font-semibold leading-6 text-green-600">
-                          <p className="pl-1">Successfully uploaded</p>
-                        </div>
-                      </div>
-                    </>
-                  )}
+                  {success && <UploadProgress done={true} />}
                 </div>
 
                 <FormMessage />
               </FormItem>
             )}
+          />
+
+          {/* Email */}
+
+          <FormTitle
+            title="Email"
+            description="Please provide a valid email."
           />
           <FormField
             control={form.control}
@@ -310,8 +299,148 @@ const UserEditor: FC<UserEditorProps> = ({
             )}
           />
 
-          <Button type="submit">
+          {/* Social accounts ---------------------------------- */}
+
+          <FormTitle
+            title="Social accounts"
+            description="You can add multiple social accounts."
+          />
+          <div className="flex w-full max-w-md flex-col">
+            {fields.map((field, index) => (
+              <div
+                key={field.id + index + 1}
+                className="flex w-full max-w-md flex-col"
+              >
+                <FormField
+                  control={form.control}
+                  key={field.id + index + 1}
+                  name={`socials.${index}.title`}
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Title</FormLabel>
+                      <Select
+                        onValueChange={field.onChange}
+                        defaultValue={field.value}
+                      >
+                        <FormControl>
+                          <SelectTrigger>
+                            <SelectValue placeholder="Select an social account to display on contact page." />
+                          </SelectTrigger>
+                        </FormControl>
+                        <SelectContent className="font-sans">
+                          <SelectItem value="email">Email</SelectItem>
+                          <SelectItem value="github">Github</SelectItem>
+                          <SelectItem value="twitter">Twitter</SelectItem>
+                        </SelectContent>
+                      </Select>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  key={field.id + index + 1}
+                  name={`socials.${index}.description`}
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormControl>
+                        <div className="mt-2 flex flex-col">
+                          <p className="text-sm font-semibold">Description</p>
+                          <Textarea
+                            placeholder="Please provide some descriptions"
+                            className="mt-1"
+                            {...field}
+                          />
+                        </div>
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  key={field.id + index}
+                  name={`socials.${index}.url`}
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormControl>
+                        <div className="mt-2 flex flex-col">
+                          <p className="text-sm font-semibold">Url</p>
+                          <Input
+                            placeholder="Please provide a valid url."
+                            className="mt-1"
+                            {...field}
+                          />
+                        </div>
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+                <FormField
+                  control={form.control}
+                  key={field.id + index}
+                  name={`socials.${index}.address`}
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormControl>
+                        <div className="mt-2 flex flex-col">
+                          <p className="text-sm font-semibold">
+                            Social account address
+                          </p>
+                          <Input
+                            placeholder="Please provide an social acount address."
+                            className="mt-1"
+                            {...field}
+                          />
+                        </div>
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                {index !== 0 && (
+                  <Button
+                    type="button"
+                    variant="outline"
+                    size="sm"
+                    className="mt-2 text-red-600 hover:text-gray-900"
+                    onClick={() => remove(index)}
+                  >
+                    <RemoveIcon className="mr-2 h-4 w-4" />
+                    Remove
+                  </Button>
+                )}
+                <Separator className="mt-5" />
+              </div>
+            ))}
+
+            <Button
+              type="button"
+              size="sm"
+              variant="outline"
+              className="mt-2"
+              onClick={() =>
+                append({
+                  title: "email",
+                  description: "Please follow me on ....",
+                  url: "",
+                  address: "",
+                })
+              }
+            >
+              <AddIcon className="mr-2 h-4 w-4" />
+              Add
+            </Button>
+          </div>
+
+          <Button
+            type="submit"
+            className="w-full max-w-md bg-blue-600 hover:bg-blue-500"
+          >
             {isSaving && <SpinnerIcon className="mr-2 h-4 w-4 animate-spin" />}
+            {!isSaving && <UpdateIcon className="mr-2 h-4 w-4" />}
             Update
           </Button>
         </form>
