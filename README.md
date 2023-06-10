@@ -2,8 +2,6 @@
 
 Simple and minimal portfolio built using Shadcn Taxonomy & UI, and Next.js 13, TailwindCss, NextAuth, Prisma ORM, Vercel Postgres, Contenlayer, Framer Motion.
 
-<img width="880" alt="header" src="https://github.com/timtbdev/Portfolio/assets/25026241/e37e401c-e3ac-4674-b9d0-526e2cd8787b">
-
 ## Frontend - [Demo](https://timtb.dev)
 
 https://github.com/timtbdev/Portfolio/assets/25026241/a01b5068-0bdc-4349-ad66-14a06a6fbda7
