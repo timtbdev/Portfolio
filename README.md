@@ -1,21 +1,24 @@
-# Simple portfolio website
+# Simple and minimal portfolio
 
-An open source application built using everything new in Next.js 13.
+Simple and minimal portfolio built using Shadcn Taxonomy & UI, and Next.js 13, TailwindCss, NextAuth, Prisma ORM, Vercel Postgres, Contenlayer, Framer Motion.
 
-> **Warning**
-> This app is still in progress.
+<img width="880" alt="header" src="https://github.com/timtbdev/Portfolio/assets/25026241/e37e401c-e3ac-4674-b9d0-526e2cd8787b">
 
-## 🌍 Frontend - [Homepage](https://timtb.dev)
+## Frontend - [Demo](https://timtb.dev)
 
-  <img width="1069" alt="Screenshot 2023-05-16 at 3 20 27 PM" src="https://github.com/timtbdev/Portfolio/assets/25026241/cbe64e2a-26ce-49b0-9d82-a60d9901e120">
+https://github.com/timtbdev/Portfolio/assets/25026241/a01b5068-0bdc-4349-ad66-14a06a6fbda7
 
-## 🧰 Backend - [Dashboard](https://timtb.dev/dashboard)
+## Backend - [Demo](https://timtb.dev/dashboard)
 
-  <img width="1256" alt="Screenshot 2023-05-16 at 3 19 46 PM" src="https://github.com/timtbdev/Portfolio/assets/25026241/45549bc7-045a-4b25-a475-5caf9031939e">
+https://github.com/timtbdev/Portfolio/assets/25026241/044e4d21-4aad-4f5a-bef5-a1c055b65dfa
 
-## 📱 Mobile - [Homepage](https://timtb.dev)
+## 📱 Mobile - [Demo](https://timtb.dev)
+
+https://github.com/timtbdev/Portfolio/assets/25026241/912a673c-ae98-4f82-8730-f52b9939d30f
 
 ## 📊 Google Lighthouse performance statistics
+
+<img width="992" alt="Screenshot 2023-06-10 at 10 00 18 PM" src="https://github.com/timtbdev/Portfolio/assets/25026241/ac4eacfb-d3e7-4afe-a092-d8c5d16a0a34">
 
 ## 📚 Features
 
@@ -32,7 +35,7 @@ An open source application built using everything new in Next.js 13.
 - Database on [Vercel/Postgres](https://vercel.com/docs/storage/vercel-postgres/)
 - Open Graph Image Generation using [Vercel/Og](https://vercel.com/docs/concepts/functions/edge-functions/og-image-generation)
 - Image Upload using [ReactDropZone](https://react-dropzone.js.org/) and [Cloud Storage for Firebase](https://firebase.google.com/products/storage)
-- UI Components built using [Radix UI](https://www.radix-ui.com/) and [Headless UI](https://headlessui.com/), [Shadcn UI](https://ui.shadcn.com/)
+- UI Components built using [Shadcn UI](https://ui.shadcn.com/), [Radix UI](https://www.radix-ui.com/) and [Headless UI](https://headlessui.com/), [Shadcn Taxonomy](https://github.com/shadcn/taxonomy)
 - Pages and blogs are using [MDX](https://mdxjs.com/) and [Contentlayer](https://www.contentlayer.dev/)
 - Sending emails using [NodeMailer](https://nodemailer.com) and [React Email](https://https://react.email/), [Gmail](https://gmail.com)
 - Styled using [Tailwind CSS](https://tailwindcss.com/)
