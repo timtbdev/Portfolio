@@ -26,7 +26,7 @@ export default async function ProjectPage({ searchParams }: ProjectPageProps) {
   }
 
   const totalProjects = await db.project.count()
-  const perPage = 1
+  const perPage = 5
   const totalPages = Math.ceil(totalProjects / perPage)
   const page =
     typeof searchParams.page === "string" &&

@@ -54,7 +54,9 @@ initFirebase()
 
 const storage = getStorage()
 
-const storageRef = ref(storage, `projects/${v4()}`)
+function getStorageRef() {
+  return ref(storage, `projects/${v4()}`)
+}
 
 type Image = {
   imageFile: Blob
@@ -152,7 +154,7 @@ const ProjectEditor: FC<ProjectEditorProps> = ({ project }) => {
       } else {
         setLoadingScreenShot(true)
       }
-      const uploadTask = uploadBytesResumable(storageRef, imageFile)
+      const uploadTask = uploadBytesResumable(getStorageRef(), imageFile)
       uploadTask.on(
         "state_changed",
         (snapshot) => {
