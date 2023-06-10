@@ -1,6 +1,6 @@
 import { redirect } from "next/navigation"
 import { Dashboard } from "@/components/dashboard"
-import { dbPages, dbPosts, dbProjects } from "@/config/dashboard"
+import { dbContents, dbPosts, dbProjects } from "@/config/dashboard"
 import { authOptions } from "@/libs/auth"
 import { db } from "@/libs/db"
 import { getCurrentUser } from "@/libs/session"
@@ -26,8 +26,8 @@ export default async function DashBoardPage() {
     },
   })
 
-  // Pages
-  const pageCount = await db.page.count()
+  // Contents
+  const contentCount = await db.content.count()
 
   return (
     <>
@@ -47,11 +47,11 @@ export default async function DashBoardPage() {
           description={dbPosts.description}
         />
         <Dashboard
-          url={dbPages.baseUrl}
-          title={dbPages.title}
-          count={pageCount}
-          empty={dbPages.empty.title}
-          description={dbPages.description}
+          url={dbContents.baseUrl}
+          title={dbContents.title}
+          count={contentCount}
+          empty={dbContents.empty.title}
+          description={dbContents.description}
         />
       </div>
     </>

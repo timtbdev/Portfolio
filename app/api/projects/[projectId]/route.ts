@@ -66,11 +66,15 @@ export async function PATCH(
         icon: body.icon,
         url: body.url,
         screenshot: body.screenshot,
+        components: body.components,
+        libraries: body.libraries,
+        backend: body.backend,
         tags: {
-          deleteMany: {},
-          create: body.tags?.map((tag) => {
+          set: [],
+          connectOrCreate: body.tags?.map((tag) => {
             return {
-              name: tag.name,
+              where: { name: tag },
+              create: { name: tag },
             }
           }),
         },
@@ -83,21 +87,12 @@ export async function PATCH(
             }
           }),
         },
-        features: {
-          deleteMany: {},
-          create: body.features?.map((feature) => {
-            return {
-              description: feature.description,
-              title: feature.title,
-            }
-          }),
-        },
+
         publishedAt: body.publishedAt,
       },
       include: {
         tags: true,
         categories: true,
-        features: true,
       },
     })
 

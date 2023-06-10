@@ -4,16 +4,16 @@ export const dbNavigations: DBNavItem[] = [
   { name: "Dashboard", href: "/dashboard" },
   { name: "Projects", href: "/dashboard/projects" },
   { name: "Posts", href: "/dashboard/posts" },
-  { name: "Pages", href: "/dashboard/pages" },
+  { name: "Contents", href: "/dashboard/contents" },
 ]
 
 export const dbProjects: DBItemType = {
   title: "Projects",
-  description: "All projects",
+  description: "List of projects",
   baseUrl: "/dashboard/projects/",
   pageUrl: "?page=",
   empty: {
-    title: "No Projects",
+    title: "No Project",
     descripton: "Get started by creating a new project.",
   },
   notFound: "This project cound not be found. Please try again.",
@@ -37,7 +37,7 @@ export const projectCategories: DBCategoryType[] = [
   },
 ]
 
-export const postCategories: DBCategoryType[] = [
+export const categories: DBCategoryType[] = [
   {
     value: "android",
     label: "Android",
@@ -56,13 +56,44 @@ export const postCategories: DBCategoryType[] = [
   },
 ]
 
+export const tags: DBCategoryType[] = [
+  {
+    value: "java",
+    label: "Java",
+  },
+  {
+    value: "Kotlin",
+    label: "Kotlin",
+  },
+  {
+    value: "xml",
+    label: "XML",
+  },
+  {
+    value: "javascript",
+    label: "JavaScript",
+  },
+  {
+    value: "react",
+    label: "React",
+  },
+  {
+    value: "nextjs",
+    label: "NextJs",
+  },
+  {
+    value: "tailwindcss",
+    label: "TailwindCss",
+  },
+]
+
 export const dbPosts: DBItemType = {
   title: "Posts",
-  description: "All posts",
+  description: "List of posts",
   baseUrl: "/dashboard/posts/",
   pageUrl: "?page=",
   empty: {
-    title: "No Posts",
+    title: "No Post",
     descripton: "Get started by creating a new post.",
   },
   notFound: "This post cound not be found. Please try again.",
@@ -71,19 +102,19 @@ export const dbPosts: DBItemType = {
   editUrl: "/editor/posts/",
 }
 
-export const dbPages: DBItemType = {
-  title: "Pages",
-  description: "All pages",
-  baseUrl: "/dashboard/pages/",
-  pageUrl: "?page=",
+export const dbContents: DBItemType = {
+  title: "Contents",
+  description: "List of contents",
+  baseUrl: "/dashboard/contents/",
+  pageUrl: "?content=",
   empty: {
-    title: "No Pages",
-    descripton: "Get started by creating a new page.",
+    title: "No Content",
+    descripton: "Get started by creating a new content.",
   },
-  notFound: "This page cound not be found. Please try again.",
-  tableHeaders: ["Title", "Page", "Published", "Actions"],
-  apiUrl: "/api/pages/",
-  editUrl: "/editor/pages/",
+  notFound: "This content cound not be found. Please try again.",
+  tableHeaders: ["Title", "Type", "Updated", "Actions"],
+  apiUrl: "/api/contents/",
+  editUrl: "/editor/contents/",
 }
 
 export const dbUser: DBItemType = {

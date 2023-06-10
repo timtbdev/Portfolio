@@ -35,20 +35,6 @@ export async function PATCH(
         name: body.name,
         email: body.email,
         image: body.image,
-        socials: {
-          deleteMany: {},
-          create: body.socials?.map((social) => {
-            return {
-              title: social.title,
-              description: social.description,
-              url: social.url,
-              address: social.address,
-            }
-          }),
-        },
-      },
-      include: {
-        socials: true,
       },
     })
 

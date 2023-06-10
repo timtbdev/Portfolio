@@ -1,11 +1,26 @@
 import { FC } from "react"
-import { Feature } from "@prisma/client"
+import { Project } from "@prisma/client"
+import { v4 } from "uuid"
+
+import { Feature } from "types"
 
 interface ProjectFeaturesProps {
-  features: Feature[]
+  project: Pick<Project, "components" | "libraries" | "backend">
 }
 
-const ProjectFeatures: FC<ProjectFeaturesProps> = ({ features }) => {
+const ProjectFeatures: FC<ProjectFeaturesProps> = ({ project }) => {
+  const features: Feature[] = [
+    {
+      title: "Components",
+      description: project.components ? project.components : "",
+    },
+    {
+      title: "Libraries",
+      description: project.libraries ? project.libraries : "",
+    },
+    { title: "Backend", description: project.backend ? project.backend : "" },
+  ]
+
   return (
     <>
       <div className="relative p-3">
@@ -14,8 +29,8 @@ const ProjectFeatures: FC<ProjectFeaturesProps> = ({ features }) => {
             Features
           </div>
 
-          {features.map((feature, idx) => (
-            <div key={idx + feature.title} className="flex flex-col gap-1.5">
+          {features.map((feature) => (
+            <div key={v4()} className="flex flex-col gap-1.5">
               <p className="text-lg font-semibold leading-6 text-slate-800 dark:text-slate-200">
                 {feature.title}
               </p>

@@ -22,31 +22,22 @@ import { Textarea } from "@/components/ui/textarea"
 import UploadDragDropZone from "@/components/ui/upload-drag-drop-zone"
 import UploadProgress from "@/components/ui/upload-progress"
 import { toast } from "@/components/ui/use-toast"
-import { dbPosts, postCategories } from "@/config/dashboard"
+import { categories, dbPosts, tags } from "@/config/dashboard"
 import { cn, initFirebase } from "@/libs/utils"
 import { postBodySchema, postPatchSchema } from "@/libs/validations/post"
 import EditorJS from "@editorjs/editorjs"
 import ImageTool from "@editorjs/image"
 import { zodResolver } from "@hookform/resolvers/zod"
-import {
-  CategoryOnPost as Category,
-  Post,
-  TagOnPost as Tag,
-} from "@prisma/client"
+import { Category, Post, Tag } from "@prisma/client"
 import {
   getDownloadURL,
   getStorage,
   ref,
   uploadBytesResumable,
 } from "firebase/storage"
-import {
-  Plus as AddIcon,
-  Trash as RemoveIcon,
-  Loader2 as SpinnerIcon,
-  Upload as UpdateIcon,
-} from "lucide-react"
+import { Loader2 as SpinnerIcon, Upload as UpdateIcon } from "lucide-react"
 import { useDropzone } from "react-dropzone"
-import { useFieldArray, useForm } from "react-hook-form"
+import { useForm } from "react-hook-form"
 import { v4 } from "uuid"
 import * as z from "zod"
 
@@ -88,12 +79,7 @@ const PostEditor: FC<PostEditorProps> = ({ post }) => {
     uploadImage({ imageFile: file })
   }, [])
 
-  const {
-    getRootProps,
-    getInputProps,
-    isDragActive,
-    open: open,
-  } = useDropzone({
+  const { getRootProps, getInputProps, isDragActive, open } = useDropzone({
     accept: {
       "image/png": [".png"],
       "image/jpg": [".jpg"],
@@ -122,10 +108,10 @@ const PostEditor: FC<PostEditorProps> = ({ post }) => {
         },
         () => {
           getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-            setLoading(false)
-            setSuccess(true)
             form.setValue("image", downloadURL)
             setImageUrl(downloadURL)
+            setLoading(false)
+            setSuccess(true)
           })
         }
       )
@@ -142,22 +128,16 @@ const PostEditor: FC<PostEditorProps> = ({ post }) => {
       description: post?.description || "",
       image: post?.image || "",
       imageCaption: post?.imageCaption || "",
-      tags: post?.tags?.length > 0 ? post.tags : [{ name: "" }],
+      tags:
+        post?.tags?.length > 0
+          ? post.tags.map((tag) => tag.name)
+          : ["java", "xml"],
       categories:
         post?.categories?.length > 0
           ? post.categories.map((category) => category.title)
           : ["android", "nextjs"],
       published: post?.published || false,
     },
-  })
-
-  const {
-    fields: tagList,
-    append: addTagList,
-    remove: removeTagList,
-  } = useFieldArray({
-    name: "tags",
-    control: form.control,
   })
 
   const [isSaving, setIsSaving] = useState<boolean>(false)
@@ -298,6 +278,7 @@ const PostEditor: FC<PostEditorProps> = ({ post }) => {
             description="Please provide a unique title."
           />
           <FormField
+            key={v4}
             control={form.control}
             name="title"
             render={({ field }) => (
@@ -319,6 +300,7 @@ const PostEditor: FC<PostEditorProps> = ({ post }) => {
             description="Please provide a short description for your post."
           />
           <FormField
+            key={v4()}
             control={form.control}
             name="description"
             render={({ field }) => (
@@ -351,7 +333,19 @@ const PostEditor: FC<PostEditorProps> = ({ post }) => {
               <FormItem>
                 <div className="flex w-full max-w-xl flex-row">
                   <FormControl className="basis-3/4">
-                    <Input {...field} disabled className="hidden" />
+                    <div className="flex w-full max-w-xl flex-row">
+                      <Input {...field} disabled />
+                      <Button
+                        onClick={open}
+                        className={cn(
+                          "ml-2 basis-1/4",
+                          { hidden: loading },
+                          { hidden: success }
+                        )}
+                      >
+                        Select
+                      </Button>
+                    </div>
                   </FormControl>
                 </div>
 
@@ -422,56 +416,55 @@ const PostEditor: FC<PostEditorProps> = ({ post }) => {
             )}
           />
 
-          {/* Project Tags ---------------------------------- */}
+          {/* Post Tags ---------------------------------- */}
 
-          <FormTitle title="Tags" description="You can add multiple tags." />
-          <div className="flex w-full max-w-md flex-col">
-            {tagList.map((field, index) => (
-              <div className="flex w-full max-w-md flex-col">
-                <FormField
-                  control={form.control}
-                  key={field.id + index}
-                  name={`tags.${index}.name`}
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormControl>
-                        <div className="mt-2 flex flex-row space-x-2">
-                          <Input
-                            placeholder="Please provide a tag"
-                            className="w-full max-w-[340px]"
-                            {...field}
-                          />
-                          {index !== 0 && (
-                            <Button
-                              type="button"
-                              size="sm"
-                              variant="outline"
-                              className="mt-1 text-red-600 hover:text-gray-900"
-                              onClick={() => removeTagList(index)}
-                            >
-                              <RemoveIcon className="mr-2 h-4 w-4" />
-                              Remove
-                            </Button>
-                          )}
-                        </div>
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-              </div>
-            ))}
-            <Button
-              type="button"
-              size="sm"
-              className="mt-2 w-full max-w-[340px]"
-              variant="outline"
-              onClick={() => addTagList({ name: "" })}
-            >
-              <AddIcon className="mr-2 h-4 w-4" />
-              Add
-            </Button>
-          </div>
+          <FormTitle title="Tags" description="You can choose multiple tags." />
+          <FormField
+            key={v4()}
+            control={form.control}
+            name="tags"
+            render={() => (
+              <FormItem>
+                {tags.map((tag) => (
+                  <FormField
+                    key={v4()}
+                    control={form.control}
+                    name="tags"
+                    render={({ field }) => {
+                      return (
+                        <FormItem
+                          key={v4()}
+                          className="flex flex-row items-start space-x-3 space-y-0"
+                        >
+                          <FormControl>
+                            <Checkbox
+                              checked={field.value?.includes(tag.value)}
+                              onCheckedChange={(checked) => {
+                                return checked
+                                  ? field.onChange([
+                                      ...(field.value || []),
+                                      tag.value,
+                                    ])
+                                  : field.onChange(
+                                      field.value?.filter(
+                                        (value) => value !== tag.value
+                                      )
+                                    )
+                              }}
+                            />
+                          </FormControl>
+                          <FormLabel className="font-normal">
+                            {tag.label}
+                          </FormLabel>
+                        </FormItem>
+                      )
+                    }}
+                  />
+                ))}
+                <FormMessage />
+              </FormItem>
+            )}
+          />
 
           {/* Project Categories ---------------------------------- */}
 
@@ -480,19 +473,20 @@ const PostEditor: FC<PostEditorProps> = ({ post }) => {
             description="You can choose multiple categories."
           />
           <FormField
+            key={v4()}
             control={form.control}
             name="categories"
             render={() => (
               <FormItem>
-                {postCategories.map((item, idx) => (
+                {categories.map((item) => (
                   <FormField
-                    key={idx + item.label}
+                    key={v4()}
                     control={form.control}
                     name="categories"
                     render={({ field }) => {
                       return (
                         <FormItem
-                          key={item.label + idx}
+                          key={v4()}
                           className="flex flex-row items-start space-x-3 space-y-0"
                         >
                           <FormControl>
@@ -541,7 +535,7 @@ const PostEditor: FC<PostEditorProps> = ({ post }) => {
           </p>
           <div
             id="editor"
-            className="min-h-[500px] w-full max-w-3xl rounded-md border-dashed border-slate-500 bg-gray-50 text-left"
+            className="min-h-[500px] w-full max-w-3xl rounded-md border-dashed border-slate-500 bg-gray-50 p-5 text-left"
           />
 
           {/* Draft ---------------------------------- */}

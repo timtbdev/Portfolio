@@ -26,11 +26,10 @@ export const postPatchSchema = z.object({
   content: z.any().optional(),
   published: z.boolean().default(false).optional(),
   tags: z
-    .array(
-      z.object({
-        name: z.string().min(3, "Tag must be at least 3 characters"),
-      })
-    )
+    .array(z.string())
+    .refine((value) => value.some((item) => item), {
+      message: "You have to select at least one item.",
+    })
     .optional(),
   categories: z
     .array(z.string())

@@ -15,9 +15,6 @@ async function getUser(userId: User["id"]) {
     where: {
       id: userId,
     },
-    include: {
-      socials: true,
-    },
   })
 }
 

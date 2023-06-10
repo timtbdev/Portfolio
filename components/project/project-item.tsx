@@ -11,14 +11,13 @@ import {
   ProjectScreenShot,
 } from "./sub-components"
 
-import {Project, Feature, CategoryOnProject as Category, TagOnProject as Tag} from "@prisma/client"
-import { empty } from "@prisma/client/runtime"
+import {Project, Category, Tag} from "@prisma/client"
+import {v4} from "uuid"
 
 interface ProjectProps {
   project: (Project & {
     tags: Tag[],
     categories: Category[],
-    features: Feature[]
 }),
   line: boolean
 }
@@ -36,11 +35,11 @@ const Project: FC<ProjectProps> = ({
         {/* Body */}
         <ProjectDate year={formatYearMonth(project.publishedAt)} />
         <ProjectLine />
-        <ProjectBrowser key={project.id} url={project.url ? project.url : ""}>
+        <ProjectBrowser key={v4()} url={project.url ? project.url : ""}>
           <ProjectContainer>
             <div className="overflow-hidden">
               <ProjectHeader title={project.title} tags={project?.tags ? project?.tags : []} icon={project.icon ? project.icon : ""} />
-              <ProjectFeatures features={project.features} />
+              <ProjectFeatures project={project} />
             </div>
             <ProjectScreenShot screenshot={project.screenshot ? project.screenshot : ""} />
           </ProjectContainer>

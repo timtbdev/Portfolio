@@ -1,6 +1,7 @@
 import { FC } from "react"
 import Image from "next/image"
-import { TagOnProject as Tag } from "@prisma/client"
+import { Tag } from "@prisma/client"
+import { v4 } from "uuid"
 
 interface ProjectHeaderProps {
   title: string
@@ -31,7 +32,7 @@ const ProjectHeader: FC<ProjectHeaderProps> = ({ title, tags, icon }) => {
             <p className="mt-2">
               {tags.map((tag) => (
                 <span
-                  key={tag.id}
+                  key={v4()}
                   className="mr-1 inline-flex items-center rounded-full bg-gray-50 px-2 py-1 text-sm font-medium text-slate-500 ring-1 ring-inset ring-gray-500/10 dark:bg-slate-700/30 dark:ring-white/10"
                 >
                   {tag.name}

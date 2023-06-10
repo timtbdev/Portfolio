@@ -2,60 +2,58 @@
 
 import { FC } from "react"
 import {
-  ProjectCreateButton,
-  ProjectEditButton,
-} from "@/components/editor/project/"
+  ContentCreateButton,
+  ContentEditButton,
+} from "@/components/editor/content"
 import Paging from "@/components/ui/paging"
 import TableBody from "@/components/ui/table-body"
 import TableBodyHead from "@/components/ui/table-body-head"
 import TableHeader from "@/components/ui/table-header"
-import { dbProjects } from "@/config"
+import { dbContents } from "@/config"
 import { formatYearMonth } from "@/libs/utils"
-import { Category, Project } from "@prisma/client"
+import { Content } from "@prisma/client"
 import { v4 } from "uuid"
 
-interface ProjectTableProps {
-  projects: (Pick<Project, "id" | "title" | "publishedAt"> & {
-    categories: Category[]
-  })[]
+interface ContentTableProps {
+  contents: Pick<Content, "id" | "title" | "type" | "updatedAt">[]
   page: number
   perPage: number
-  totalProjects: number
+  totalContents: number
   totalPages: number
 }
 
-const ProjectTable: FC<ProjectTableProps> = ({
-  projects,
+const ContentTable: FC<ContentTableProps> = ({
+  contents,
   page,
   perPage,
   totalPages,
-  totalProjects,
+  totalContents,
 }) => {
   return (
     <>
       <div className="px-4 sm:px-6 lg:px-8">
         <TableHeader
-          title={dbProjects.title}
-          description={dbProjects.description}
+          title={dbContents.title}
+          description={dbContents.description}
         >
-          <ProjectCreateButton />
+          <ContentCreateButton />
         </TableHeader>
         <TableBody>
-          <TableBodyHead headers={dbProjects.tableHeaders} />
+          <TableBodyHead headers={dbContents.tableHeaders} />
           <tbody className="divide-y divide-gray-200 bg-white">
-            {projects.map((project) => (
+            {contents.map((content, idx) => (
               <tr key={v4()}>
                 <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">
-                  {project.title}
+                  {content.title}
                 </td>
                 <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                  {project.categories?.map((category) => category.title)}
+                  {content.type}
                 </td>
                 <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                  {formatYearMonth(project.publishedAt)}
+                  {formatYearMonth(content.updatedAt)}
                 </td>
                 <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
-                  <ProjectEditButton project={project} />
+                  <ContentEditButton content={content} />
                 </td>
               </tr>
             ))}
@@ -64,14 +62,14 @@ const ProjectTable: FC<ProjectTableProps> = ({
         <Paging
           page={page}
           perPage={perPage}
-          totalItems={totalProjects}
+          totalItems={totalContents}
           totalPages={totalPages}
-          baseUrl={dbProjects.baseUrl}
-          pageUrl={dbProjects.pageUrl}
+          baseUrl={dbContents.baseUrl}
+          pageUrl={dbContents.pageUrl}
         />
       </div>
     </>
   )
 }
 
-export default ProjectTable
+export default ContentTable

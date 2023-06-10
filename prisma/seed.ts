@@ -17,21 +17,10 @@ async function main() {
       screenshot:
         "https://timtb.dev/images/projects/portfolio-app-01/screen.png",
       tags: [{ name: "Java" }, { name: "XML" }],
-      features: [
-        {
-          title: "Components",
-          description:
-            "Multiple Activities, Fragment, AppCompat, RecyclerView, ViewPager",
-        },
-        {
-          title: "Libraries",
-          description: "Retrofit, OkHttp, Gson, Glide, Butterknife",
-        },
-        {
-          title: "Backend",
-          description: "Firebase Cloud Firestore, Firebase Cloud Functions",
-        },
-      ],
+      components:
+        "Multiple Activities, Fragment, AppCompat, RecyclerView, ViewPager",
+      libraries: "Retrofit, OkHttp, Gson, Glide, Butterknife",
+      backend: "Firebase Cloud Firestore, Firebase Cloud Functions",
       categories: [{ title: "android" }, { title: "web" }],
       publishedAt: new Date("2019-08-01"),
     },
@@ -42,23 +31,12 @@ async function main() {
       screenshot:
         "https://timtb.dev/images/projects/portfolio-app-02/screen.png",
 
-      tags: [{ name: "Kotlin" }, { name: "XML" }, { name: "JavaScript" }],
-      features: [
-        {
-          title: "Components",
-          description:
-            "Single Activity, Navigation, LiveData, ViewModel, DataBinding, Room, WorkManager, MotionLayout, Paging",
-        },
-        {
-          title: "Libraries",
-          description:
-            "Koin, Kotlin Coroutines, Retrofit, OkHttp, Moshi, Coil, Leak Canary, Timber",
-        },
-        {
-          title: "Backend",
-          description: "Firebase Cloud Firestore, Firebase Cloud Functions",
-        },
-      ],
+      tags: [{ name: "kotlin" }, { name: "xml" }, { name: "javascript" }],
+      components:
+        "Single Activity, Navigation, LiveData, ViewModel, DataBinding, Room, WorkManager, MotionLayout, Paging",
+      libraries:
+        "Koin, Kotlin Coroutines, Retrofit, OkHttp, Moshi, Coil, Leak Canary, Timber",
+      backend: "Firebase Cloud Firestore, Firebase Cloud Functions",
       categories: [{ title: "android" }, { title: "web" }],
       publishedAt: new Date("2019-10-01"),
     },
@@ -69,23 +47,12 @@ async function main() {
       screenshot: "https://timtb.dev/images/projects/sign-app/screen.png",
 
       tags: [{ name: "Kotlin" }, { name: "XML" }, { name: "JavaScript" }],
-      features: [
-        {
-          title: "Components",
-          description:
-            "Jetpack Compose, Kotlin, Next.js, TypeScript, Tailwind Css, Prisma, PlanetScale, NextAuth.js",
-        },
-        {
-          title: "Libraries",
-          description:
-            "Jetpack Compose, Material Design 3, Next.js, Tailwind Css, Prisma, PlanetScale",
-        },
-        {
-          title: "Backend",
-          description:
-            "Next.js, App Router, React Server Components, TypeScript, Vercel Edge Functions",
-        },
-      ],
+      components:
+        "Jetpack Compose, Kotlin, Next.js, TypeScript, Tailwind Css, Prisma, PlanetScale, NextAuth.js",
+      libraries:
+        "Jetpack Compose, Material Design 3, Next.js, Tailwind Css, Prisma, PlanetScale",
+      backend:
+        "Next.js, App Router, React Server Components, TypeScript, Vercel Edge Functions",
       categories: [{ title: "android" }, { title: "web" }],
       publishedAt: new Date("2023-05-01"),
     },
@@ -111,15 +78,11 @@ async function main() {
           icon: item.icon,
           url: item.url,
           screenshot: item.screenshot,
+          components: item.components,
+          libraries: item.libraries,
+          backend: item.backend,
           tags: {
-            createMany: {
-              data: item.tags,
-            },
-          },
-          features: {
-            createMany: {
-              data: item.features,
-            },
+            create: item.tags,
           },
           categories: {
             create: item.categories,
@@ -128,7 +91,6 @@ async function main() {
         },
         include: {
           tags: true,
-          features: true,
           categories: true,
         },
       })

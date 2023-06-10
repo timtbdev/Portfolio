@@ -1,29 +1,29 @@
 import { authOptions } from "@/libs/auth"
 import { db } from "@/libs/db"
 import {
-  postPatchSchema,
-  postRouteContextSchema,
-} from "@/libs/validations/post"
+  contentPatchSchema,
+  contentRouteContextSchema,
+} from "@/libs/validations/content"
 import { getServerSession } from "next-auth"
 import * as z from "zod"
 
 export async function DELETE(
   req: Request,
-  context: z.infer<typeof postRouteContextSchema>
+  context: z.infer<typeof contentRouteContextSchema>
 ) {
   try {
     // Validate the route params.
-    const { params } = postRouteContextSchema.parse(context)
+    const { params } = contentRouteContextSchema.parse(context)
 
     // Check if the user has access to this post.
-    if (!(await verifyCurrentUserHasAccessToPost(params.postId))) {
+    if (!(await verifyCurrentUserHasAccessToPost(params.contentId))) {
       return new Response(null, { status: 403 })
     }
 
     // Delete the project.
-    await db.post.delete({
+    await db.content.delete({
       where: {
-        id: params.postId as string,
+        id: params.contentId as string,
       },
     })
 
@@ -39,57 +39,33 @@ export async function DELETE(
 
 export async function PATCH(
   req: Request,
-  context: z.infer<typeof postRouteContextSchema>
+  context: z.infer<typeof contentRouteContextSchema>
 ) {
   try {
     // Validate route params.
-    const { params } = postRouteContextSchema.parse(context)
+    const { params } = contentRouteContextSchema.parse(context)
 
     // Check if the user has access to this post.
-    if (!(await verifyCurrentUserHasAccessToPost(params.postId))) {
+    if (!(await verifyCurrentUserHasAccessToPost(params.contentId))) {
       return new Response(null, { status: 403 })
     }
 
     // Get the request body and validate it.
     const json = await req.json()
-    console.log("Post-Api", JSON.stringify(json))
-    const body = postPatchSchema.parse(json)
+    const body = contentPatchSchema.parse(json)
 
     // Update the post.
     // TODO: Implement sanitization for content.
-    await db.post.update({
+    await db.content.update({
       where: {
-        id: params.postId,
+        id: params.contentId,
       },
       data: {
         title: body.title,
         description: body.description,
         image: body.image,
         imageCaption: body.imageCaption,
-        content: body.content,
-        published: body.published,
-        tags: {
-          set: [],
-          connectOrCreate: body.tags?.map((tag) => {
-            return {
-              where: { name: tag },
-              create: { name: tag },
-            }
-          }),
-        },
-        categories: {
-          set: [],
-          connectOrCreate: body.categories?.map((category) => {
-            return {
-              where: { title: category },
-              create: { title: category },
-            }
-          }),
-        },
-      },
-      include: {
-        tags: true,
-        categories: true,
+        type: body.type,
       },
     })
 
@@ -103,11 +79,11 @@ export async function PATCH(
   }
 }
 
-async function verifyCurrentUserHasAccessToPost(postId: string) {
+async function verifyCurrentUserHasAccessToPost(contentId: string) {
   const session = await getServerSession(authOptions)
-  const count = await db.post.count({
+  const count = await db.content.count({
     where: {
-      id: postId,
+      id: contentId,
       authorId: session?.user.id,
     },
   })

@@ -81,3 +81,8 @@ export type User = {
   email: string
   image: string
 }
+
+type Feature = {
+  title: string
+  description?: string
+}

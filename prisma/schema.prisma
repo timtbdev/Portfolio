@@ -14,35 +14,24 @@ datasource db {
 }
 
 model Project {
-  id          String              @id @default(cuid())
+  id          String     @id @default(cuid())
   title       String
   icon        String?
   url         String?
   screenshot  String?
-  tags        TagOnProject[]
-  features    Feature[]
-  categories  CategoryOnProject[]
-  publishedAt DateTime            @default(now()) @map(name: "published_at") @db.Date
-  createdAt   DateTime            @default(now()) @map(name: "created_at")
-  updatedAt   DateTime            @default(now()) @updatedAt @map(name: "updated_at")
-  author      User                @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  tags        Tag[]
+  categories  Category[]
+  components  String?    @db.Text
+  libraries   String?    @db.Text
+  backend     String?    @db.Text
+  publishedAt DateTime   @default(now()) @map(name: "published_at") @db.Date
+  createdAt   DateTime   @default(now()) @map(name: "created_at")
+  updatedAt   DateTime   @default(now()) @updatedAt @map(name: "updated_at")
+  author      User       @relation(fields: [authorId], references: [id], onDelete: Cascade)
   authorId    String
 
   @@index([authorId])
   @@map("projects")
-}
-
-model Feature {
-  id          String   @id @default(cuid())
-  title       String
-  description String   @db.Text
-  createdAt   DateTime @default(now()) @map(name: "created_at")
-  updatedAt   DateTime @default(now()) @updatedAt @map(name: "updated_at")
-  project     Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
-  projectId   String
-
-  @@index([projectId])
-  @@map("features")
 }
 
 model User {
@@ -55,105 +44,64 @@ model User {
   createdAt DateTime  @default(now()) @map(name: "created_at")
   updatedAt DateTime  @updatedAt @map(name: "updated_at")
   posts     Post[]
-  pages     Page[]
-  socials   Social[]
+  contents  Content[]
 
   @@map(name: "users")
 }
 
 model Post {
-  id           String           @id @default(cuid())
+  id           String     @id @default(cuid())
   title        String
-  description  String?          @db.Text
+  description  String?    @db.Text
   image        String?
   imageCaption String?
   content      Json?
-  published    Boolean          @default(false)
-  createdAt    DateTime         @default(now()) @map(name: "created_at")
-  updatedAt    DateTime         @default(now()) @map(name: "updated_at")
-  author       User             @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  published    Boolean    @default(false)
+  createdAt    DateTime   @default(now()) @map(name: "created_at")
+  updatedAt    DateTime   @default(now()) @map(name: "updated_at")
+  author       User       @relation(fields: [authorId], references: [id], onDelete: Cascade)
   authorId     String
-  tags         TagOnPost[]
-  categories   CategoryOnPost[]
+  tags         Tag[]
+  categories   Category[]
 
   @@index([authorId])
   @@map(name: "posts")
 }
 
-model TagOnPost {
-  id        String   @id @default(cuid())
-  name      String
-  createdAt DateTime @default(now()) @map(name: "created_at")
-  updatedAt DateTime @default(now()) @map(name: "updated_at")
-  post      Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
-  postId    String
+model Tag {
+  id        String    @id @default(cuid())
+  name      String    @unique
+  createdAt DateTime  @default(now()) @map(name: "created_at")
+  updatedAt DateTime  @default(now()) @map(name: "updated_at")
+  projects  Project[]
+  posts     Post[]
 
-  @@index([postId])
-  @@map(name: "tags_on_posts")
+  @@map(name: "tags")
 }
 
-model TagOnProject {
-  id        String   @id @default(cuid())
-  name      String
-  createdAt DateTime @default(now()) @map(name: "created_at")
-  updatedAt DateTime @default(now()) @map(name: "updated_at")
-  project   Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
-  projectId String
+model Category {
+  id        String    @id @default(cuid())
+  title     String    @unique
+  createdAt DateTime  @default(now()) @map(name: "created_at")
+  updatedAt DateTime  @default(now()) @map(name: "updated_at")
+  projects  Project[]
+  posts     Post[]
 
-  @@index([projectId])
-  @@map(name: "tags_on_projects")
+  @@map(name: "categories")
 }
 
-model CategoryOnProject {
-  id        String   @id @default(cuid())
-  title     String   @unique
-  createdAt DateTime @default(now()) @map(name: "created_at")
-  updatedAt DateTime @default(now()) @map(name: "updated_at")
-
-  projects Project[]
-
-  @@map(name: "categories_on_project")
-}
-
-model CategoryOnPost {
-  id        String   @id @default(cuid())
-  title     String   @unique
-  createdAt DateTime @default(now()) @map(name: "created_at")
-  updatedAt DateTime @default(now()) @map(name: "updated_at")
-
-  posts Post[]
-
-  @@map(name: "categories_on_post")
-}
-
-model Page {
-  id        String   @id @default(cuid())
-  title     String
-  image     String?
-  type      String   @default("about")
-  order     Int?
-  content   Json?
-  published Boolean  @default(false)
-  createdAt DateTime @default(now()) @map(name: "created_at")
-  updatedAt DateTime @default(now()) @map(name: "updated_at")
-  author    User     @relation(fields: [authorId], references: [id], onDelete: Cascade)
-  authorId  String
+model Content {
+  id           String   @id @default(cuid())
+  title        String
+  image        String?
+  imageCaption String?
+  type         String?
+  description  String?  @db.Text
+  createdAt    DateTime @default(now()) @map(name: "created_at")
+  updatedAt    DateTime @default(now()) @map(name: "updated_at")
+  author       User     @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  authorId     String
 
   @@index([authorId])
-  @@map(name: "pages")
-}
-
-model Social {
-  id          String   @id @default(cuid())
-  title       String
-  description String?
-  address     String?
-  url         String?
-  createdAt   DateTime @default(now()) @map(name: "created_at")
-  updatedAt   DateTime @default(now()) @map(name: "updated_at")
-  author      User     @relation(fields: [authorId], references: [id], onDelete: Cascade)
-  authorId    String
-
-  @@index([authorId])
-  @@map(name: "socials")
+  @@map(name: "contents")
 }
